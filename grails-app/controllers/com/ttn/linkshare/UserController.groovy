@@ -3,7 +3,7 @@ package com.ttn.linkshare
 import com.ttn.linkShare.User
 
 class UserController {
-
+def tagService
     static beforeInterceptor = {
         if (!User.findByUsername(session['username'])?.admin) {
             flash.error = "not allowed"
@@ -24,4 +24,9 @@ class UserController {
         }
 
     }
+
+    def taglib(){
+        tagService.topPost()
+    }
+
 }

@@ -7,6 +7,6 @@
 </head>
 
 <body>
-    mera ${user.username} dashboard
+      <>
 </body>
 </html>

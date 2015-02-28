@@ -37,13 +37,13 @@
             <a href="#" title="send invitation"><img src="${resource(dir: 'images', file: "send.png")}"></a>
             <a href="#" title="user Profile"><img src="${resource(dir: 'images', file: "User.png")}"></a>
                    <label class="user">${session['username']}</label>
-           <div class="list">
+           <div class="mylist" style="display: inline-block">
 
             <a href="#">Profile</a>
             <a href="#">Users</a>
             <a href="#">Topics</a>
             <a href="#">Posts</a>
-            <g:link href="${createLink(controller:'login',action: 'logout')}" title="logout">Logout</g:link>
+            <a href="${createLink(controller:'login',action: 'logout')}" title="logout">Logout</a>
            </div>
 
     </div>

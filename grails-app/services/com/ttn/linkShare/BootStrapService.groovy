@@ -64,9 +64,10 @@ class BootStrapService {
         LinkResource linkResource
         DocumentResource documentResource
         topicList.each { Topic topic ->
-            5.times {
-                linkResource = new LinkResource(discription: "link user name${topic.user.username}", user: topic.user.id, topic: topic.id, url: "http://www.contentquality.com/mynewtester/cynthia.exe?Url1=http://domain.tld/&rptmode=2")
-                documentResource = new DocumentResource(discription: "path${topic.user.username}", user: topic.user.id, topic: topic.id, filePath: "/file/kavita/bora")
+            2.times {
+                linkResource = new LinkResource(description: "linkResource is created  by user name${topic.user.username}", user: topic.user.id, topic: topic.id,
+                        url: "http://www.contentquality.com/mynewtester/cynthia.exe?Url1=http://domain.tld/&rptmode=2")
+                documentResource = new DocumentResource(description: "DocumentResource is createdby${topic.user.username}", user: topic.user.id, topic: topic.id, filePath: "/file/kavita/bora")
                 linkResource.save(failOnError: true)
                 documentResource.save(failOnError: true)
                 linkResources.add(linkResource);
@@ -77,7 +78,7 @@ class BootStrapService {
     }
 
     List<ReadingItem> createReadingItem(List<Resource> resourceList) {
-        List<ReadingItem> readingItems =[]
+        List<ReadingItem> readingItems = []
         ReadingItem readItem
         resourceList.each {
             it.each {
