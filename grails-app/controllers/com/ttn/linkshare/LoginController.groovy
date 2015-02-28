@@ -6,20 +6,28 @@ import org.springframework.web.multipart.MultipartFile
 
 class LoginController {
 
+    def login() {}
+
     def loginHandler(UserCO userCO) {
+        if (session.getAttribute("username")) {
+            redirect(controller: 'user', action: 'dashBoard')
+            return
+        }
         User user = User.findByEmailAndPassword(userCO.email, userCO.password)
         if (user) {
             session["username"] = user.username
             redirect(controller: 'user', action: 'dashBoard')
+            return
         } else {
             flash.error = "User not Found."
-            redirect(controller: "dashboard", action: "index")
+            redirect(controller: "login", action: "login")
+            return
         }
     }
 
     def registerHandler(UserCO userCO) {
         MultipartFile file = userCO.photo
-        if(!userCO.validate()) {
+        if (!userCO.validate()) {
             log.error("UserCO validation failed.")
             redirect(controller: 'dashboard', action: 'index', params: ['name': "kindly enter valid data CO FAIL"])
         }
@@ -49,5 +57,11 @@ class LoginController {
             log.error("User validation failed.")
             redirect(controller: 'dashboard', action: 'index', params: ['name': "kindly enter valid data"])
         }
+    }
+
+    def logout() {
+        session.invalidate()
+        redirect(controller: 'login', action: 'login')
+        return
     }
 }

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Dash Board</title>
+
+    <meta name="layout" content="header"/>
+    <title>Dashboard</title>
 </head>
 
 <body>

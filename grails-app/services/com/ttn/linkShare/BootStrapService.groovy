@@ -22,7 +22,7 @@ class BootStrapService {
         User user
         2.times {
             user = new User(username: "kavita${it}", email: "kavita${it}@gmail.com ", password: "1234", firstName: "kavita $it", lastName: "bora", admin: true, active: true, photo: "kavita${it}.jpeg")
-            user.confirmPassword = "1234"
+//            user.confirmPassword = "1234"
             if (user.save(failOnError: true)) {
                 users.add(user)
             } else {

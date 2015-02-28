@@ -98,6 +98,14 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
+simian {
+    reportsDir = "target/simian-reports"
+    fileDir = "."
+    cludesFiles = [includes  : "**/*.groovy **/*.java"
+                   , excludes: "**/*Spec.groovy **/Config.groovy **/ApplicationResources.groovy"]
+    methodParams = [threshold: 4]
+}
+
 
 // log4j configuration
 log4j = {
@@ -118,4 +126,5 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
 }
