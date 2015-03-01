@@ -10,6 +10,8 @@ class User {
     String photo
     Boolean admin
     Boolean active
+    String name
+    static  transients =['name']
     //String confirmPassword
 
 //    static transients = ['confirmPassword']
@@ -28,4 +30,9 @@ class User {
         photo nullable: true
 
     }
+    String getName(){
+        return "${firstName} ${lastName}"
+    }
+
+
 }

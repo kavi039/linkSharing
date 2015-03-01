@@ -17,17 +17,15 @@
     <div class="row" style="margin-top:5%">
         <div class="col-md-7">
             <%--recentshare--%>
-
-            <ls:recentShare/>
-        </div>
+            <div class="row">
+                <ls:recentShare/>
+            </div>
             <%--recentshare--%>
-        <%--toppost--%>
+            <%--toppost--%>
             <div class="row">
                 <div class="header">
                     <h4>Top Post</h4>
-                    <select name="date" style="display: inline-block;
-                    margin-left: 87%;
-                    margin-top: -2%;">
+                    <select name="date" style="display: inline-block; margin-left: 87%; margin-top: -2%;">
                         <option>Today</option>
                         <option>1week</option>
                         <option>1year</option>
@@ -35,8 +33,9 @@
                     </select>
 
                 </div>
-            <ls:topPost/>
-                <%--toppost--%>
+                <ls:topPost/>
+            </div>
+            <%--toppost--%>
         </div>
 
         <div class="col-md-5">

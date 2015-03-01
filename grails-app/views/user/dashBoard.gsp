@@ -7,6 +7,16 @@
 </head>
 
 <body>
-      <>
+<div class="container" >
+    <!--left side-->
+<ls:user/>
+
+
+</div>
+    </div>
+    <!--left side-->
+    <div class="col-md-5">
+    </div>
+</div>
 </body>
 </html>

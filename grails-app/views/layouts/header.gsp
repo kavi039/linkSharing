@@ -11,8 +11,8 @@
     <title><g:layoutTitle default="Grails"/></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
     <link href="${resource(dir:'/css',file: 'style.css' )}" rel="stylesheet"/>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <g:layoutHead/>
 </head>
@@ -23,11 +23,14 @@
         <h1>LinkSharing</h1>
         </div>
     <div class="col-md-3">
-<g:form name="search" class="form-group">
-    <g:textField name="text" class="form-control" placeholder="search"/>
+<g:form name="search" class="form-group" controller="search" action="search">
+    <g:textField name="searchText" class="form-control" placeholder="search"/>
     <g:submitButton name="finder" value="search" class="btn btn-default"/>
 </g:form>
 </div>
+    %{--<div>--}%
+        %{--<g:select name="name" from="${topicList}" optionValue="name"> </g:select>--}%
+    %{--</div>--}%
 
    <div class="col-md-7">
                <g:if test="${session['username']}">
