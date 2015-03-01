@@ -1,4 +1,4 @@
-<div class="col-md-7" style="border: solid ;margin-top: 5%">
+
 
         <div class="col-md-4" >
             <img src="${resource(dir: "images", file: "Create.png")}">
@@ -25,4 +25,3 @@
 
 
     </div>
-</div>

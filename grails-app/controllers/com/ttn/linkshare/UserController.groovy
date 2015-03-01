@@ -1,5 +1,6 @@
 package com.ttn.linkshare
 
+import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 
 class UserController {
@@ -15,7 +16,8 @@ def tagService
     def dashBoard() {
         String username = session.getAttribute("username")
         User user = User.findByUsername(username)
-        [user: user]
+        List<Topic> topicList = Topic.list(max: 5, offset: 0)
+        [user: user, topicList: topicList]
     }
 
     def list() {
