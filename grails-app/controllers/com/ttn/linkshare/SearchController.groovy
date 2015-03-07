@@ -5,11 +5,14 @@ import com.ttn.linkShare.enums.Visibility
 
 class SearchController {
 
-    def searchService
+    def searchService,tagService
 
     def search(String searchText) {
         Visibility visibility = session.getAttribute("username") ? null : Visibility.PUBLIC
         List<Resource> resourceList = searchService.fetchAllResourceByNameLikeAndVisibility(searchText, visibility, params?.max ?: 10, params?.offset ?: 0)
         render view: "search", model: [resourceList: resourceList]
+    }
+    def test(){
+      tagService.userSubscribedTopic("kavita0")
     }
 }

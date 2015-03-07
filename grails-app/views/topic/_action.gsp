@@ -1,5 +1,5 @@
 <div class="row">
-<g:select name="seriousness" from="${com.ttn.linkShare.enums.Seriousness.values()}"/>
+<g:select name="seriousness" from="${com.ttn.linkShare.enums.Seriousness.values()}" value="${topic.subscriptions.seriousness}"/>
 <g:if test="${isAdminOrCreator}">
     <g:select name="visibility" from="${com.ttn.linkShare.enums.Visibility.values()}" value="${topic.visibility}"/>
 </g:if>

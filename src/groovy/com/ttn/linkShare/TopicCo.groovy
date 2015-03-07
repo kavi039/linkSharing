@@ -1,17 +1,13 @@
 package com.ttn.linkShare
 
 import com.ttn.linkShare.enums.Visibility
+import grails.validation.Validateable
 
-class Topic {
-
+@Validateable
+class TopicCo {
+    User user
     String name
     Visibility visibility
-    Date dateCreated
-    Date lastUpdated
-
-    static hasMany = [subscriptions: Subscription, resources: Resource]
-    static belongsTo = [user: User]
-
     static constraints = {
         name blank: false, unique: true
         visibility blank: false

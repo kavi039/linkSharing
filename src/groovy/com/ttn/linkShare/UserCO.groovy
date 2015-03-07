@@ -3,9 +3,7 @@ package com.ttn.linkShare
 import grails.validation.Validateable
 import org.springframework.web.multipart.MultipartFile
 
-/**
- * Created by intelligrape on 28/2/15.
- */
+
 @Validateable
 class UserCO {
 
@@ -20,18 +18,19 @@ class UserCO {
     String confirmPassword
     MultipartFile photo
 
-    static constraint = {
+    static constraints = {
         password(validator: { val, obj ->
-            print("password : ${val.equals(obj.confirmPassword) == true ? true : false}")
-            val.equals(obj.confirmPassword) == true ? true : false
+            val.equals(obj.confirmPassword)
         })
+        email email: true
         email(validator: { value, object ->
             print("email: ${User.findByEmail(value) ? false : true}")
             User.findByEmail(value) ? false : true
         })
+
         username(validator: { value, object ->
             print("username: ${User.findByUsername(value) ? false : true}")
-            User.findByUsername(value) ? true : false
+            User.findByUsername(value) ? false:true
         })
     }
 

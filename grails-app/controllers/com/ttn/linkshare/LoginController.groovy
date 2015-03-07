@@ -6,15 +6,18 @@ import org.springframework.web.multipart.MultipartFile
 
 class LoginController {
 
-    def login() {}
+    def login() {
+        println "in **********LoginHandler"
+    }
 
     def loginHandler(UserCO userCO) {
+        println "in **********LoginHandler"
         if (session.getAttribute("username")) {
             redirect(controller: 'user', action: 'dashBoard')
             return
         }
         User user = User.findByEmailAndPassword(userCO.email, userCO.password)
-        if (user) {
+        if (user?.active) {
             session["username"] = user.username
             redirect(controller: 'user', action: 'dashBoard')
             return
@@ -25,43 +28,15 @@ class LoginController {
         }
     }
 
-    def registerHandler(UserCO userCO) {
-        MultipartFile file = userCO.photo
-        if (!userCO.validate()) {
-            log.error("UserCO validation failed.")
-            redirect(controller: 'dashboard', action: 'index', params: ['name': "kindly enter valid data CO FAIL"])
-        }
-        String name = file.getOriginalFilename()
-        String filePath = '/home/intelligrape/Project/linkShare/photo/' + userCO.username + name.substring(name.lastIndexOf('.'))
-        println "filePath: $filePath"
-        File photoFile = new File(filePath)
-        photoFile.createNewFile()
-        println photoFile.canonicalPath
-        file.transferTo(photoFile)
-
-        User user = new User(firstName: userCO.firstName, lastName: userCO.lastName, email: userCO.email, password: userCO.password, username: userCO.username, photo: photoFile.canonicalPath)
-        if (user.validate()) {
-            try {
-                if (user.save()) {
-                    session['username'] = user.username
-                    redirect(controller: 'user', action: 'dashBoard')
-                } else {
-                    log.error("User not Saved")
-                    redirect(controller: 'dashboard', action: 'index', params: ['name': "kindly enter valid data"])
-                }
-            } catch (Exception ex) {
-                log.error("User not Saved")
-                redirect(controller: 'dashboard', action: 'index', params: ['name': "Unique failed."])
-            }
-        } else {
-            log.error("User validation failed.")
-            redirect(controller: 'dashboard', action: 'index', params: ['name': "kindly enter valid data"])
-        }
-    }
-
     def logout() {
         session.invalidate()
         redirect(controller: 'login', action: 'login')
 
     }
+    def changePassword(){
+
+    }
+
+
+
 }

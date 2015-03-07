@@ -8,20 +8,21 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="header"/>
     <title>Search Result</title>
 </head>
 
 <body>
-<div>
-    <div class="header">
-        <h4>Search Result</h4>
-    </div>
+<div class="container">
+<div class="panel-default">
+    <div class="panel-heading">Search Result</div>
+    <div class="panel-body">
     <g:each in="${resourceList}" var="resourceInstance">
-        <div class="row">
             <g:render template="../resource/display" model="[resourceInstance: resourceInstance]"/>
-        </div>
+
     </g:each>
-</div>
+
+        </div>
+    </div>
+    </div>
 </body>
 </html>

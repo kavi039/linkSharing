@@ -18,26 +18,66 @@ class TagService {
     }
 
     def topPost() {
-        List<Resource> resources = Resource.createCriteria().list {
+        List<Resource> resources = Resource.createCriteria().list(max: 4) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
-        }
-        List<Resource> resourceList = ResourceRating.createCriteria().list(max: 4) {
-            projections {
-                property("resource")
-            }
-            inList("resource", resources)
             order("score", "desc")
         }
-        return resourceList
+        return resources
     }
 
     def userSubscription(String username) {
         User user = User.findByUsername(username)
-        Long totalSuscription = Subscription.countByUser(user)
+
+        Long totalSubscription = Subscription.countByUser(user)
         Long totalTopic = Topic.countByUser(user)
-        Map m = [user: user, totalSubscription: totalSuscription, totalTopic: totalTopic]
+        Map m = [user: user, totalSubscription: totalSubscription, totalTopic: totalTopic]
         return m
     }
+
+    def userSubscribedTopic(String username) {
+        User user = User.findByUsername(username)
+
+        List<Topic> topicLists=Subscription.createCriteria().list(max:5) {
+            projections {
+                property('topic')
+            }
+
+            eq('user',user)
+        }
+
+    /* List<Topic> topicList = Resource.createCriteria().list(sort: 'dateCreated', order: 'desc') {
+            projections {
+                property('topic')
+            }
+            'topic' {
+                eq('user', user)
+            }
+        }
+        if (topicList) {
+            List<Topic> topicLists = Subscription.createCriteria().list(max: 5) {
+                projections {
+                    property('topic')
+                }
+                inList('topic', topicList)
+            }
+            return topicLists
+            println "****************************"
+            println topicLists.size()
+        }
+
+*/
+     return  topicLists
+
+    }
+  def inbox(User user){
+      List<Resource> resourceList=Resource.createCriteria().list (max:5){
+          eq('isRead',false)
+      }
+
+  }
+
+
+
 }

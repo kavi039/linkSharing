@@ -7,16 +7,13 @@ class User {
     String password
     String firstName
     String lastName
-    String photo
+    String photoPath
     Boolean admin
     Boolean active
     String name
     static  transients =['name']
-    //String confirmPassword
 
-//    static transients = ['confirmPassword']
-
-    static hasMany = [topics: Topic, resourceRatings: ResourceRating];
+    static hasMany = [topics:  Topic];
 
 
     static constraints = {
@@ -27,7 +24,7 @@ class User {
         password size: 4..10
         admin nullable: true
         active nullable: true
-        photo nullable: true
+        photoPath nullable: true
 
     }
     String getName(){

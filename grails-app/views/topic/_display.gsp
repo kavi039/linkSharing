@@ -1,8 +1,8 @@
 <div class="row" style="margin-top: 20px">
     %{--<div class="row">--}%
-    <div >
+    <div>
         <div class="col-md-3">
-            <img src="${resource(dir: '/images', file: 'Create.png')}"/>
+            <img src="${resource(dir: '/images', file: '')}"/>
         </div>
 
         <div class="col-md-3">
@@ -28,8 +28,9 @@
 
     <div class="row">
         <div class="col-md-3"></div>
+
         <div class="col-md-9">
-        <ls:subscriptionActions topic="${topic}"/>
+            <ls:subscriptionActions topic="${topic}"/>
         </div>
     </div>
 </div>

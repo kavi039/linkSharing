@@ -1,10 +1,10 @@
 package linkshare
 
+import com.ttn.linkShare.DocumentResource
 import com.ttn.linkShare.Resource
 import com.ttn.linkShare.Subscription
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
-import com.ttn.linkShare.enums.Visibility
 
 class ApplicationTagLib {
 
@@ -41,6 +41,34 @@ class ApplicationTagLib {
         User currentUser = User.findByUsername(session['username'])
         Boolean isAdminOrCreator = ((topic.user == currentUser) || currentUser.admin)
         out << render(template: "/topic/action", model: [topic: topic, isAdminOrCreator: isAdminOrCreator])
+
+    }
+
+    def isAdmin = { attr ->
+        User user = User.findByUsername(attr.username)
+        Boolean isadmin = user.admin ? true : false
+        out << render(template: "/admin/isAdmin", model: [isAdmin: isadmin])
+
+    }
+
+    def userSubscription = { attr ->
+        User user = User.findByUsername(session['username'])
+        println "in application tag library"
+        out << render(template: '/topic/subscription', model: [topicList: tagService.userSubscribedTopic(user.username)])
+
+    }
+    def inbox = { attr ->
+        User user = User.findByUsername(session['username'])
+        out << render(template: '/user/inbox', model: [unreadResource: tagService.inbox(user)])
+
+    }
+    def resourceType = { attr ->
+        DocumentResource isDocument = DocumentResource.findById(attr.type)
+        out << render(template: '/user/isDocOrLink', model: [type: isDocument])
+    }
+    def markasRead={attr->
+        Resource resource=Resource.findByIdAndIsRead(attr.type,true)
+        out<<render(template: '/user/isRead',model: [type:resource])
 
     }
 

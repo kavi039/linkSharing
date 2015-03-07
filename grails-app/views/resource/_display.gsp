@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <img src="${resource(dir: 'images', file: 'Create.png')}"/>
+    <img src="${resource(dir: 'images', file: '')}"/>
 </div>
 
 <div class="col-md-8">
@@ -8,4 +8,5 @@
     <p>${"@${resourceInstance.user.firstName}"}</p>
     <p>${resourceInstance.description}</p>
     <a href="#" style="display:block;">ViewPosts</a>
+    <hr>
 </div>

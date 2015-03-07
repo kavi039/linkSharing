@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 class SearchService {
 
     def serviceMethod(String searchText, Boolean isUserLoggedIn) {
-        List<Topic> topicList = isUserLoggedIn ? Topic.findAllByNameLike("%$searchText%") : Topic.findAllByNameLikeAndVisibility("%$searchText%", Visibility.PUBLIC)
+        List< Topic> topicList = isUserLoggedIn ? Topic.findAllByNameLike("%$searchText%") : Topic.findAllByNameLikeAndVisibility("%$searchText%", Visibility.PUBLIC)
         return topicList
     }
 

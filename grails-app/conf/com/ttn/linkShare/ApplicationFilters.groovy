@@ -5,7 +5,8 @@ class ApplicationFilters {
     def filters = {
         all(controller: '*', action: '*') {
             before = {
-                log.info("params :${params-params.get("passsword")}")
+                 println("***********in all")
+                log.info("params :${params - params?.get("passsword")}")
 
             }
             after = { Map model ->
@@ -16,31 +17,23 @@ class ApplicationFilters {
             }
         }
 
-      secureAction(controller:'login',action: 'login|loginhandler|registerhandler', invert: true) {
+        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
 
-     before = {
-           if (!session.getAttribute('username')) {
-                flash.error = "Please login "
-              //   redirect(controller: "login", action: "login")
-                 return
-              }
-           }
-       }
-       // actionExcludeAction(controllerName:'login',actionExclude: 'login',action: "*"){
-        //    before = {
-           //     if (!session.getAttribute('username')) {
-                //    flash.error = "Please login "
-                    // redirect(controller: "login", action: "login")
-               //     return
-               //}
-         //   }
-       // }
+            before = {
+                if (!session.getAttribute('username')) {
+                    println "************in secure filter"
+                    flash.error = "Please login "
+//                    redirect(controller: "login", action: "login")
+                    return
+                }
+            }
+        }
 
-        isAdmin(controller: 'user', action: 'list') {
+        isAdmin(controller: 'user', action: 'listOfUser') {
             before = {
                 if (!User.findByUsername(session['username'])?.admin) {
                     flash.error = "Permission denied"
-                  //  redirect(controller: 'user', action: 'dashBoard')
+                    redirect(controller:'user',action: 'dashBoard')
                     return
                 }
             }
