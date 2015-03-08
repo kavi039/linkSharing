@@ -20,7 +20,7 @@
 <body>
 <div class="container col-md-12" style="border: solid;border-radius: 5px">
     <div class="col-md-2">
-        <h1>LinkSharing</h1>
+       <a href="${createLink(controller:'user',action: 'dashBoard')}"> <h1>LinkSharing</h1></a>
     </div>
     <div class="col-md-3" >
         <g:form name="search" class="form-group" controller="search" action="search">

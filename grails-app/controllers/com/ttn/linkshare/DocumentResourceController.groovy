@@ -6,7 +6,7 @@ class DocumentResourceController {
     def documentResourceService
 
     def saveDocument(DocumentCO documentCO) {
-     Boolean b=   documentResourceService.save(documentCO)
+     Boolean b= documentResourceService.save(documentCO,"${session['username']}")
         if(b)
         {
             flash.error="document added"

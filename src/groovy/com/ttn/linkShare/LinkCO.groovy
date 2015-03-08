@@ -13,8 +13,8 @@ class LinkCO {
     Topic topic
 
     static constraints={
-       url url: true,blank: false
-
+        url url: true,blank: false
+        score nullable: true
     }
 
 }

@@ -1,21 +1,3 @@
-<g:each in="${unreadResource}" var="resourceInstance">
-    <div class="col-md-4">
-        <img src="${resource(dir: 'images', file: '')}"/>
-    </div>
-
-    <div class="col-md-8">
-        <a href="#" style="display:block;">${resourceInstance.topic.name}</a>
-
-        <p>${resourceInstance.user.name}</p>
-
-        <p>${"@${resourceInstance.user.firstName}"}</p>
-
-        <p>${resourceInstance.description}</p>
-
-        <ls:resourceType type="${resourceInstance.id}"/>
-        <ls:markasRead type="${resourceInstance.id}"/>
-        <a href="#" style="display:inline-block;">ViewPosts</a>
-        <hr>
-    </div>
-
+<g:each in="${resourceList}" var="resourceInstance">
+    <g:render template="../resource/displayInInbox" model="[resourceInstance: resourceInstance]" />
 </g:each>

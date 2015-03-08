@@ -38,46 +38,37 @@ class TagService {
 
     def userSubscribedTopic(String username) {
         User user = User.findByUsername(username)
-
-        List<Topic> topicLists=Subscription.createCriteria().list(max:5) {
-            projections {
-                property('topic')
-            }
-
-            eq('user',user)
-        }
-
-    /* List<Topic> topicList = Resource.createCriteria().list(sort: 'dateCreated', order: 'desc') {
-            projections {
-                property('topic')
-            }
-            'topic' {
-                eq('user', user)
-            }
-        }
-        if (topicList) {
-            List<Topic> topicLists = Subscription.createCriteria().list(max: 5) {
+        List<Topic> topicLists = Topic.createCriteria().list(max: 5, offset: 0) {
+            'subscriptions' {
                 projections {
                     property('topic')
                 }
-                inList('topic', topicList)
+                eq('user', user)
             }
-            return topicLists
-            println "****************************"
-            println topicLists.size()
+            'resources' {
+                order('dateCreated', 'desc')
+            }
         }
 
-*/
-     return  topicLists
-
+        return topicLists
     }
-  def inbox(User user){
-      List<Resource> resourceList=Resource.createCriteria().list (max:5){
-          eq('isRead',false)
-      }
 
-  }
+    def userTopicSubscribed(String username) {
+        User user = User.findByUsername(username)
+        List<Topic> topicList = Subscription.createCriteria().list {
+            projections {
+                property('topic')
+            }
+            eq('user', user)
+        }
+        return topicList
+    }
 
-
-
+    List<Resource> inbox(User user) {
+        List<Resource> resourceList = Resource.createCriteria().list(max: 5) {
+            eq('isRead', false)
+            eq('user', user)
+        }
+        resourceList
+    }
 }

@@ -13,7 +13,7 @@ class UserService {
             MultipartFile file = userco.photo
             String name = file.getOriginalFilename()
             if (name) {
-                String filePath = '/home/intelligrape/Project/linkShare/web-app/images/Userfolder/' + userco.username
+                String filePath = '/home/intelligrape/Project/Userfolder/' + userco.username
             File  photoFileDir = new File(filePath)
                 photoFileDir.mkdirs()
                 photoFile=new File("$photoFileDir/$name")
@@ -35,9 +35,7 @@ class UserService {
         }
     }
 
-    def delete(User user) {
 
-    }
 
     def update(User user) {
 

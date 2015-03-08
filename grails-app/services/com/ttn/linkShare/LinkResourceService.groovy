@@ -5,20 +5,20 @@ import grails.transaction.Transactional
 @Transactional
 class LinkResourceService {
 
-    def save(LinkCO linkCO) {
+    def save(LinkCO linkCO,String username) {
         linkCO.topic = Topic.findByName(linkCO.name)
 
-        println ">>>>>>>>>>>>>>>>>>>>>>>>in save"+linkCO.name
-          linkCO.user = linkCO.topic.user
+          linkCO.user =User.findByUsername(username)
           linkCO.isRead=true
         if(!linkCO.validate())
         {
+            linkCO.errors.allErrors.each {println(it)}
             return false
         }
         else{
 
             LinkResource linkResource=new  LinkResource(linkCO.properties)
-           if( linkResource.save(failOnError: true))
+           if( linkResource.save(flush: true, failOnError: true))
            {
                return true
            }

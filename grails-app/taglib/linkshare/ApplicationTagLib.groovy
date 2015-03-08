@@ -5,6 +5,7 @@ import com.ttn.linkShare.Resource
 import com.ttn.linkShare.Subscription
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
+import com.ttn.linkShare.enums.Seriousness
 
 class ApplicationTagLib {
 
@@ -38,38 +39,42 @@ class ApplicationTagLib {
 
     def subscriptionActions = { attr ->
         Topic topic = attr.topic
-        User currentUser = User.findByUsername(session['username'])
+        User currentUser = User.findByUsername("${session['username']}")
         Boolean isAdminOrCreator = ((topic.user == currentUser) || currentUser.admin)
-        out << render(template: "/topic/action", model: [topic: topic, isAdminOrCreator: isAdminOrCreator])
+        Seriousness seriousness = topic?.subscriptions?.find { it.user == currentUser }?.seriousness
+        out << render(template: "/topic/action", model: [topic: topic, isAdminOrCreator: isAdminOrCreator, seriousness: seriousness])
 
     }
 
     def isAdmin = { attr ->
         User user = User.findByUsername(attr.username)
-        Boolean isadmin = user.admin ? true : false
+        Boolean isadmin = user.admin
         out << render(template: "/admin/isAdmin", model: [isAdmin: isadmin])
 
     }
 
     def userSubscription = { attr ->
-        User user = User.findByUsername(session['username'])
-        println "in application tag library"
+        User user = User.findByUsername("${session['username']}")
+        println "in application tag library, uesr: ${user.username}"
         out << render(template: '/topic/subscription', model: [topicList: tagService.userSubscribedTopic(user.username)])
-
     }
+
     def inbox = { attr ->
-        User user = User.findByUsername(session['username'])
-        out << render(template: '/user/inbox', model: [unreadResource: tagService.inbox(user)])
-
+        User user = User.findByUsername("${session['username']}")
+        out << render(template: '/user/inbox', model: [resourceList: tagService.inbox(user)])
     }
+
     def resourceType = { attr ->
         DocumentResource isDocument = DocumentResource.findById(attr.type)
         out << render(template: '/user/isDocOrLink', model: [type: isDocument])
     }
-    def markasRead={attr->
-        Resource resource=Resource.findByIdAndIsRead(attr.type,true)
-        out<<render(template: '/user/isRead',model: [type:resource])
+
+    def markAsRead = { attr ->
+        Resource resource = Resource.findByIdAndIsRead(attr.type, true)
+        out << render(template: '/user/isRead', model: [type: resource])
+    }
+    def subscriptionTopic = { attr ->
+        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])
 
     }
-
 }

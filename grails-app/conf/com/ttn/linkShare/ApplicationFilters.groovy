@@ -5,7 +5,7 @@ class ApplicationFilters {
     def filters = {
         all(controller: '*', action: '*') {
             before = {
-                 println("***********in all")
+                 println("*********** In all, params: ${params}")
                 log.info("params :${params - params?.get("passsword")}")
 
             }
@@ -17,14 +17,13 @@ class ApplicationFilters {
             }
         }
 
-        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
-
+//        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
+        secureAction(controller: '*',action: '*', actionExclude: "login|loginHandler") {
             before = {
                 if (!session.getAttribute('username')) {
-                    println "************in secure filter"
+                    println "************in secure filter ${controllerName}/${actionName}"
                     flash.error = "Please login "
-//                    redirect(controller: "login", action: "login")
-                    return
+                    redirect(controller: "login", action: "login")
                 }
             }
         }
