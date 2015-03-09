@@ -10,21 +10,7 @@
 <div class="container">
     <!--left side-->
     <div class="row" style="margin-top:10%">
-        <div id="showPop" style="display: none">
 
-            <g:render template="/sendInvitation/send"></g:render>
-        </div>
-
-        <div id="createTopic" style="display: none">
-            <g:render template="/topic/createTopic"></g:render>
-        </div>
-
-        <div id="documentShare" style="display: none">
-            <g:render template="/topic/documentShare"></g:render>
-        </div>
-    <div id="linkShare" style="display: none">
-        <g:render template="/topic/shareLink"></g:render>
-    </div>
         <span style="color:red"><g:message message="${flash.error}"></g:message></span>
 
         <div class="col-md-5">

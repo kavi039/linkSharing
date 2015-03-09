@@ -11,7 +11,7 @@ class TopicService {
             User user = User.findByUsername(username)
             topicCo.user = user
             Topic topic = new Topic(topicCo.properties)
-            Subscription subscription=new Subscription(seriousness:Seriousness.VERYSERIOUS,topic: topic,user:user)
+            Subscription subscription=new Subscription(seriousness:Seriousness.CASUAL,topic: topic,user:user)
            if(topic.save() &&subscription.save())
            {
             return  true

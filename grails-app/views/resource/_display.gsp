@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <img src="${resource(dir: 'images', file: '')}"/>
+    <img src="${createLink(controller: 'image',action: 'renderImage',params: [id:resourceInstance.user.id])}"/>
 </div>
 
 <div class="col-md-8">

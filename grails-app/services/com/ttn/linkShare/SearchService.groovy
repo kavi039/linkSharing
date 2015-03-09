@@ -5,15 +5,16 @@ import grails.transaction.Transactional
 
 @Transactional
 class SearchService {
+    def tagService
 
     def serviceMethod(String searchText, Boolean isUserLoggedIn) {
-        List< Topic> topicList = isUserLoggedIn ? Topic.findAllByNameLike("%$searchText%") : Topic.findAllByNameLikeAndVisibility("%$searchText%", Visibility.PUBLIC)
+        List<Topic> topicList = isUserLoggedIn ? Topic.findAllByNameLike("%$searchText%") : Topic.findAllByNameLikeAndVisibility("%$searchText%", Visibility.PUBLIC)
         return topicList
     }
 
     def fetchAllResourceByNameLikeAndVisibility(String nameLike, Visibility visibility, Long max = 10, Long offset = 0) {
         List<Resource> resourceList
-        if(visibility) {
+        if (visibility) {
             resourceList = Resource.createCriteria().list(max: max, offset: offset) {
                 'topic' {
                     eq("visibility", visibility)
@@ -25,4 +26,17 @@ class SearchService {
         }
         resourceList
     }
+
+    List<Topic> topicListByName(String name,String username) {
+        println "name: $name"
+        println "name: $name"
+        println "name: $name"
+        println "name: $name"
+        List<Topic> topicList = tagService.userTopicSubscribed(username)
+        println topicList*.name
+        topicList.findAll {
+            it?.name?.contains(name)
+        }
+    }
+
 }

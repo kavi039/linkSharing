@@ -36,7 +36,7 @@ class TagService {
         return m
     }
 
-    def userSubscribedTopic(String username) {
+    List<Topic> userSubscribedTopic(String username) {
         User user = User.findByUsername(username)
         List<Topic> topicLists = Topic.createCriteria().list(max: 5, offset: 0) {
             'subscriptions' {

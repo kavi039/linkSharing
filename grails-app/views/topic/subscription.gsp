@@ -13,12 +13,12 @@
             %{--Topic"${topic.name}"--}%
             Topics
             <div style="float: right">
-                <g:textField name="searchText" placeholder="search"/>
-                <input type name="finder" value="search" id="topicFindSubmitButton"/>
+                <g:textField name="searchText" placeholder="search" id="topicResult"/>
+                <input type="button" name="finder" value="search" id="topicFindSubmitButton"/>
             </div>
         </div>
 
-        <div class="topicListDiv">
+        <div id="topicListDiv">
             <ls:subscriptionTopic/>
         </div>
     </div>
@@ -53,7 +53,6 @@
         jQuery.ajax({
             data: {id: topicId},
             url: "${createLink(controller: "topic", action: "resourceListByTopic")}"
-
         }).done(function (data) {
             jQuery('#topicName').html(topicName);
             jQuery('#topicResourceDiv').html(data);
@@ -63,6 +62,17 @@
     $(document).ready(function () {
         jQuery('.topicToResource:first').click();
     });
+
+    $(document).on('click', '#topicFindSubmitButton', function () {
+        var searchKey = jQuery('#topicResult').val();
+        jQuery.ajax({
+            data: {name: searchKey},
+            url: "${createLink(controller: "search", action: "topicListByName")}"
+        }).done(function (data) {
+            jQuery('#topicListDiv').html(data);
+        });
+    });
+
 
 
 </script>

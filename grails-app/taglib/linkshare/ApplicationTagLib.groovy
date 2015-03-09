@@ -77,4 +77,5 @@ class ApplicationTagLib {
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])
 
     }
+
 }

@@ -33,7 +33,7 @@ class TopicController {
     }
 
     def resourceListByTopic(Long id) {
-        Set<Resource> resourceList = Topic.get(id)?.resources?.sort{it.dateCreated}?.reverse()
+        Set<Resource> resourceList = Topic.get(id).resources
         render (template: "../user/inbox", model: [resourceList: resourceList])
     }
 }

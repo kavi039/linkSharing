@@ -30,27 +30,26 @@ class UserService {
                 return false
             }
         } else {
-
+          userco.errors.getAllErrors().each {println it}
             return false
         }
     }
 
 
 
-    def update(User user) {
+    def update(Long id) {
+       User user=User.get(id)
+        println (user.name)
+        Boolean active=!user.active
+        user.properties=[active:active]
+        user.save(flush: true)
+        return active
 
     }
 
     def listingUser(String key){
         List<User> userList
-        if(key.equals('Alluser'))
-        {
-            userList=User.list()
-        }
-        else {
-            Boolean b = key.equals('Active')
-             userList=User.findAllByActive(b)
-        }
+
 
       return  userList
 

@@ -8,7 +8,7 @@ class SendInvitationService {
         mailService.sendMail {
             to email
             subject sub
-            html "http://localhost:8080${url}"
+            html "${url}"
 
         }
     }

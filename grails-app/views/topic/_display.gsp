@@ -2,7 +2,7 @@
     %{--<div class="row">--}%
     <div>
         <div class="col-md-3">
-            <img src="${resource(dir: '/images', file: '')}"/>
+            <img src="${createLink(controller: 'image',action: 'renderImage',params:[id:topic.user.id])}"/>
         </div>
 
         <div class="col-md-3">

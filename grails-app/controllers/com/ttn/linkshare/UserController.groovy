@@ -19,17 +19,30 @@ class UserController {
     def registerHandler(UserCO userCO) {
         if (userService.register(userCO)) {
             session['username'] = userCO.username
-            redirect(controller: 'user', action: 'dashBoard')
+            redirect(controller: 'user',action: 'dashBoard')
         } else {
             flash.error = "Kindly enter valid data"
             redirect(controller: "login", action: "login")
         }
+
     }
 
     def show() {
         String key = params.user
       render template: 'userInfo',model:[userList: userService.listingUser(key)]
 
+    }
+    def updateUser(Long userId){
+        User user=User.get( userId)
+      Boolean result=  userService.update(userId)
+        if(result)
+        {
+            render "true"
+        }
+        else
+        {
+            render "false"
+        }
     }
 
 
