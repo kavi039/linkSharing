@@ -3,14 +3,8 @@
 <head>
     <title><g:layoutTitle default="Grails"/></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
     <link href="${resource(dir: '/css', file: 'style.css')}" rel="stylesheet"/>
-    <script src="${resource(dir: "/js",file: 'jquery.min.js')}"></script>
-    <script src="${resource(dir: "/js",file: 'myJquery.js')}"></script>
-    <script src="${resource(dir: "/js",file: 'bootstrap.min.js')}"></script>
-    <script src="${resource(dir: "/js",file: 'bootstrap.js')}"></script>
 
     <g:layoutHead/>
 
@@ -41,8 +35,18 @@
 
 
 </div>
+<script src="${resource(dir: "/js",file: 'jquery.min.js')}"></script>
+<script src="${resource(dir: "/js",file: 'bootstrap.min.js')}"></script>
+<script src="${resource(dir: "/js",file: 'bootstrap.js')}"></script>
+<script src="${resource(dir: "/js",file: 'myJquery.js')}"></script>
 
 <g:layoutBody/>
-
+<script>
+    var MarkAsRead,MarkAsUnread,ResourceByList;
+   $(document).ready(function(){
+      MarkAsUnread= "${createLink(controller: "readingItem", action: "markAsUnRead")}" ;
+       MarkAsRead= "${createLink(controller: "readingItem", action: "markAsRead")}";
+   });
+</script>
 </body>
 </html>

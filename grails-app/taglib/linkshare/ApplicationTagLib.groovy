@@ -71,7 +71,7 @@ class ApplicationTagLib {
 
     def markAsRead = { attr ->
         Resource resource = Resource.findByIdAndIsRead(attr.type, true)
-        out << render(template: '/user/isRead', model: [type: resource])
+        out << render(template: '/user/isRead', model: [type: resource,resourceId:attr.type])
     }
     def subscriptionTopic = { attr ->
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])

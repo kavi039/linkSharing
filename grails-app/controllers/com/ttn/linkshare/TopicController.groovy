@@ -11,7 +11,7 @@ class TopicController {
     def show() {
 
         println params.name
-        render view: 'show', model: [topic: Topic.findByName(params.name)]
+        render view: 'topicShow', model: [topic: Topic.findByName(params.name)]
     }
 
     def create() {

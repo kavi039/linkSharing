@@ -5,7 +5,7 @@ class ApplicationFilters {
     def filters = {
         all(controller: '*', action: '*') {
             before = {
-                 println("*********** In all, params: ${params}")
+              //   println("*********** In all, params: ${params}")
                 log.info("params :${params - params?.get("passsword")}")
 
             }

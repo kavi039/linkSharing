@@ -22,7 +22,8 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">Subscription
-                    <a href="${createLink(controller: 'topic',action: 'subscription')}" style="float: right">View All</a>
+                    <a href="${createLink(controller: 'topic', action: 'subscription')}"
+                       style="float: right">View All</a>
                 </div>
 
                 <div class="panel-body">
@@ -53,4 +54,5 @@
 </div>
 
 </body>
+
 </html>

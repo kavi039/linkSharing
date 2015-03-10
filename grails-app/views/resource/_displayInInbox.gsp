@@ -11,8 +11,9 @@
 
     <p>${resourceInstance.description}</p>
 
-    <ls:resourceType type="${resourceInstance.id}"/>
+    <ls:resourceType type="${resourceInstance.id}" />
     <ls:markAsRead type="${resourceInstance.id}"/>
     <a href="#" style="display:inline-block;">ViewPosts</a>
     <hr/>
+
 </div>
