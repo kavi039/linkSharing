@@ -20,7 +20,7 @@ class TopicController {
 
     def saveTopic(TopicCo topicCO) {
 
-        if (topicService.create(topicCO, session['username'])) {
+        if (topicService.create(topicCO, ""+session['username'])) {
             flash.error = "Topic created"
         } else {
             flash.error = "Topic Not Created"

@@ -8,7 +8,7 @@
 
 <div class="mylist" style="display: inline-block">
 
-    <a href="#">Profile</a>
+    <a href="${createLink(controller: 'user',action: 'editProfilePage')}">Profile</a>
     <g:if test="${isAdmin}">
         <a href="${createLink(controller: 'user',action: 'listOfUser')}">Users</a>
         <a href="${createLink(controller:'topic',action: 'subscription')}">Topics</a>

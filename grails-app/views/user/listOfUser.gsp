@@ -23,10 +23,19 @@
         <div id="data">
 
         </div>
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li class="disabled"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+
     </div>
 </div>
-</div>
-</div>
+
 <script>
     $(document).on('click', '#userFindButton', function () {
         var userStatus = $('#userStatus').val();
@@ -54,15 +63,15 @@
         // alert(">>>>>>>>>>>>>>>>"+userId+"____"+userStatus);
         jQuery.ajax({
             data: {userId: userId},
-            url: "${createLink(controller: 'user',action:"updateUser")}"
+            url: "${createLink(controller: 'user',action:"updateUserByActivation")}"
         }).done(function (data) {
             if (data == "true") {
                 obj.val('Deactivated');
-                $('#'+userId).html("true");
+                $('#'+userId).html("Activated");
             }
             else {
                 obj.val('Activated');
-                $('#'+userId).html("false");
+                $('#'+userId).html("Deactivated");
             }
 
         });

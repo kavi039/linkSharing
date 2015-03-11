@@ -55,7 +55,7 @@ class TagService {
 
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
-        List<Topic> topicList = Subscription.createCriteria().list {
+        List<Topic> topicList = Subscription.createCriteria().list(max:2,offset:0) {
             projections {
                 property('topic')
             }
@@ -71,4 +71,12 @@ class TagService {
         }
         resourceList
     }
+ List<Topic>  topicCreatedByUser(String username){
+     User user=User.findByUsername(username)
+     List<Topic> topicList=Topic.createCriteria().list(max:4,offset:0){
+         eq('user',user)
+         order("dateCreated",'desc')
+     }
+      return  topicList
+ }
 }

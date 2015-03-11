@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo.user.id])}"
+    <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo?.user?.id])}"
          style="height: 100px;width: 50px"/>
 
 </div>

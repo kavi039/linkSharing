@@ -13,7 +13,6 @@ class UserCO {
     String firstName
     String lastName
     String photoPath
-    Boolean admin
     Boolean active
     String confirmPassword
     MultipartFile photo

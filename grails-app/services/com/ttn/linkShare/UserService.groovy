@@ -7,52 +7,94 @@ import javax.jws.soap.SOAPBinding
 
 @Transactional
 class UserService {
+    def mailService
     Boolean register(UserCO userco) {
-        File photoFile = null
         if (userco.validate()) {
-            MultipartFile file = userco.photo
-            String name = file.getOriginalFilename()
-            if (name) {
-                String filePath = '/home/intelligrape/Project/Userfolder/' + userco.username
-            File  photoFileDir = new File(filePath)
-                photoFileDir.mkdirs()
-                photoFile=new File("$photoFileDir/$name")
-                photoFile.createNewFile()
-                file.transferTo(photoFile)
-            }
-           userco.photoPath = photoFile?.canonicalPath
-            userco.admin=false
-            userco.active=true
-            User user=new User(userco.properties)
+            uploadPhoto(userco)
+            userco.active = true
+            User user = new User(userco.properties)
             if (user.save(failOnError: true)) {
                 return true
             } else {
                 return false
             }
         } else {
-          userco.errors.getAllErrors().each {println it}
+            userco.errors.getAllErrors().each { println it }
             return false
         }
     }
 
 
-
-    def update(Long id) {
-       User user=User.get(id)
-        println (user.name)
-        Boolean active=!user.active
-        user.properties=[active:active]
+    def updateByActivation(Long id) {
+        User user = User.get(id)
+        println(user.name)
+        Boolean active = !user.active
+        user.properties = [active: active]
         user.save(flush: true)
         return active
 
     }
 
-    def listingUser(String key){
-        List<User> userList
+//    def listingUser(String key) {
+//        List<User> userList
+//        return userList
+//    }
 
-
-      return  userList
-
+    def uploadPhoto(def userCO) {
+        File photoFile = null
+        MultipartFile file = userCO.photo
+        String name = file.getOriginalFilename()
+        if (name) {
+            String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
+            File photoFileDir = new File(filePath)
+            photoFileDir.mkdirs()
+            photoFile = new File("$photoFileDir/$name")
+            photoFile.createNewFile()
+            file.transferTo(photoFile)
+        }
+        userCO.photoPath = photoFile?.canonicalPath
 
     }
+
+
+    def updateProfile(UserUpdateCO userUpdateCO, String username) {
+        User user = User.findByUsername(username)
+        println("user name *****${user}")
+        userUpdateCO.id = user.id
+        uploadPhoto(userUpdateCO)
+        if (userUpdateCO.validate()) {
+            user.properties = [firstName: userUpdateCO.firstName, lastName: userUpdateCO.lastName, username: userUpdateCO.lastName, photoPath: userUpdateCO.photoPath]
+            user.save(flush: true) ? true : false
+        } else {
+            userUpdateCO.errors.allErrors.each { println(">>>$it") }
+            return false
+        }
+    }
+
+    def updatePassword(UserPasswordCO userPasswordCO,String username) {
+        User user=User.findByUsername(username)
+        if(userPasswordCO.validate()) {
+            user.properties = [userPasswordCO.properties]
+         if( user.save(flush: true))
+         {
+             println("passsword change")
+             sendEmailToUser(user)
+             return true
+         }
+            else{
+             return false
+         }
+            }
+        else{
+            return  false
+        }
+
+    }
+     def sendEmailToUser(User user){
+      mailService.sendMail {
+          to user.email
+          subject "password change"
+          html "<h1>${user.password}</h1>"
+      }
+     }
 }

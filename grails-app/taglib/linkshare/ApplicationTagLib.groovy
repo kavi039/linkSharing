@@ -47,7 +47,7 @@ class ApplicationTagLib {
     }
 
     def isAdmin = { attr ->
-        User user = User.findByUsername(attr.username)
+        User user = User.findByUsername("${attr.username}")
         Boolean isadmin = user.admin
         out << render(template: "/admin/isAdmin", model: [isAdmin: isadmin])
 
@@ -75,6 +75,10 @@ class ApplicationTagLib {
     }
     def subscriptionTopic = { attr ->
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])
+
+    }
+    def topicCreatedByUSer={attr->
+        out<< render(template: '/topic/topicSubscription', model: [topicList: tagService.topicCreatedByUser("${session['username']}")])
 
     }
 
