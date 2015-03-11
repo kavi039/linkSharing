@@ -7,11 +7,11 @@
 
         <div class="col-md-3">
             <div class="row">
-                <a href="#">${topic.name}</a>
+                <a href="#">${topic?.name}</a>
             </div>
 
             <div class="row">
-                @${topic.user.firstName}
+                @${topic?.user?.firstName}
             </div>
         </div>
 

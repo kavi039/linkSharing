@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body"  id="inbox">
                     <ls:inbox/>
                 </div>
             </div>

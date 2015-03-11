@@ -8,9 +8,9 @@ class ReadingItemController {
         readingItemService.updateResource(resourceId)
        render "Mark as Unread"
     }
-    def markAsUnRead(Long resourceId){
-        readingItemService.updateResource(resourceId)
-      render "Mark as read"
-    }
+//    def markAsUnRead(Long resourceId){
+//        readingItemService.updateResource(resourceId)
+//      render "Mark as read"
+//    }
 
 }

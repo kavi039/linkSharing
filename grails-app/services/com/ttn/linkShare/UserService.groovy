@@ -74,11 +74,10 @@ class UserService {
     def updatePassword(UserPasswordCO userPasswordCO,String username) {
         User user=User.findByUsername(username)
         if(userPasswordCO.validate()) {
-            user.properties = [userPasswordCO.properties]
+            user.properties = [password:userPasswordCO.password]
          if( user.save(flush: true))
          {
              println("passsword change")
-             sendEmailToUser(user)
              return true
          }
             else{

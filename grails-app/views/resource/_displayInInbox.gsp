@@ -1,3 +1,4 @@
+<div class="col-md-12">
 <div class="col-md-4">
     <img src="${createLink(controller:'image',action: 'renderImage',params:[id:resourceInstance.user.id])}"/>
 </div>
@@ -16,4 +17,5 @@
     <a href="#" style="display:inline-block;">ViewPosts</a>
     <hr/>
 
+</div>
 </div>

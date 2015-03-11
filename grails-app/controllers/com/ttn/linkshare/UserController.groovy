@@ -1,5 +1,6 @@
 package com.ttn.linkshare
 
+import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 import com.ttn.linkShare.UserCO
 import com.ttn.linkShare.UserPasswordCO
@@ -7,6 +8,7 @@ import com.ttn.linkShare.UserUpdateCO
 
 class UserController {
     def userService
+    def tagService
 
 
     def dashBoard() {
@@ -70,5 +72,14 @@ class UserController {
             redirect(controller: 'user', action: 'editProfilePage')
         }
     }
+
+def test(){
+   List<Topic> topicList=  tagService.trendingTopic("${session.getAttribute('username')}")
+    println("*********************************************")
+    topicList.each {
+        println(it.name)
+    }
+}
+
 
 }

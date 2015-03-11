@@ -17,18 +17,20 @@ $(document).ready(function () {
         var obj = $(this);
         var url;
         var resourceId = $(this).data('resource-id');
-        if (obj.text() == "Mark as Unread") {
-            url = MarkAsUnread;
-        }
-        else {
+      //  if (obj.text() == "Mark as Unread") {
+           // url = MarkAsUnread;
+      //  }
+       // else {
             url=MarkAsRead;
-        }
+       // }
         $.ajax({
             data: {resourceId: resourceId},
             url: url
         }).done(function (data) {
-            alert(data);
-            obj.text(data);
+            //$('#inbox').html(data)
+            obj.parent().parent().slideUp(500).detach();
+           // alert(data);
+           // obj.text(data);
         });
     });
 

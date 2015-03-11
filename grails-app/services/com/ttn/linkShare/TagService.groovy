@@ -79,4 +79,21 @@ class TagService {
      }
       return  topicList
  }
+    List<Topic> trendingTopic(String username) {
+        User user = User.findByUsername(username)
+
+        println("**********$user")
+        List<Topic> topicList = Topic.createCriteria().list(max: 5) {
+
+            eq('user',user)
+            'resources'{
+                groupProperty('topic')
+                order(count('topic'),'desc')
+            }
+
+
+        }
+
+    }
+
 }
