@@ -40,14 +40,20 @@ class TopicController {
         render(template: "../user/inbox", model: [resourceList: resourceList])
     }
 
-    def topicSubscription(Long topicId,Seriousness seriousness) {
-        println "innn         >$topicId"
-        Boolean isSubscribed = topicService.topicSubscription(topicId,seriousness, "${session['username']}")
+    def topicSubscription(Long topicId, String seriousness) {
+        Boolean isSubscribed = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
         if (isSubscribed) {
-            return  true
+            println "subdgfyewf cjhv rj $isSubscribed"
+            render true
         } else {
-            return false
+            render false
         }
+
+    }
+    def topicUnSubscription(Long topicId){
+        println"*************$topicId"
+     topicService.topicUnSubscription(topicId,"${session['username']}")
+        render true
 
     }
 

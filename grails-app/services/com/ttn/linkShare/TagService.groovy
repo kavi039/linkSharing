@@ -87,11 +87,12 @@ class TagService {
             projections {
                 groupProperty("topic")
                 count("topic", "topicCount")
-                order("topicCount", "desc")
+
             }
-//            'topic'{
-//                property('visibility',Visibility.PUBLIC)
-//            }
+            'topic'{
+                eq('visibility',Visibility.PUBLIC)
+            }
+            order("topicCount", "desc")
         }
         objectList.collect(topicList) {
             it[0]

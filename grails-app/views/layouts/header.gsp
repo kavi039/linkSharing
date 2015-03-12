@@ -47,6 +47,7 @@
       MarkAsUnread= "${createLink(controller: "readingItem", action: "markAsUnRead")}" ;
        MarkAsRead= "${createLink(controller: "readingItem", action: "markAsRead")}";
        Subscription="${createLink(controller: "topic",action: 'topicSubscription')}"
+       UnSubscription="${createLink(controller: "topic",action: 'topicUnSubscription')}"
    });
 </script>
 </body>

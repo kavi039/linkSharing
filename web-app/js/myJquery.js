@@ -29,21 +29,39 @@ $(document).ready(function () {
         });
     });
     $(".subscription").on('click',function(){
+        var text1;
+        var sendData;
         var objAnchor=$(this);
         var topicId=objAnchor.data('topic-id')
         var objSelect=$('#'+topicId)
-        var url=Subscription;
-        var seriouness=objSelect.val()
-        //alert(">>>>>>>"+topicId+">>>>"+seriouness+">>>>"+url);
-        //$.ajax({
-        //    data:{topicId:topicId,seriousness:seriouness},
-        //    url:url
-        //}).done(function(data){
-        //    if(!data=="false")
-        //    {
-        //     alert(data)
-        //    }
-        //});
+        var url;
+        var seriouness=objSelect.val();
+        if(objAnchor.text()=="Subscribed"){
+            url= Subscription;
+            text1="UnSubscribed";
+            sendData={topicId:topicId,seriousness:seriouness}
+
+        }
+        else{
+            url=UnSubscription;
+            text1="Subscribed";
+            sendData={topicId:topicId};
+
+        }
+        $.ajax({
+            data:sendData,
+            url:url
+        }).done(function(data){
+            if(data=="true")
+            {
+             objSelect.val(seriouness);
+              objSelect.toggle();
+               objAnchor.text(text1);
+            }
+            else{
+                alert("Subscription not possible");
+            }
+        });
     });
 
 

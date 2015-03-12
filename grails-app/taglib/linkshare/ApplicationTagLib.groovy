@@ -87,7 +87,9 @@ class ApplicationTagLib {
     }
     def isSubscribed={attr->
         User user=User.findByUsername("${session['username']}")
-        Boolean isSubscribed=Subscription.findByUserAndTopic(user,attr.topic)?true:false
-     out<<render(template: '/topic/isSubscribed',model:[isSubscribed:!isSubscribed,topicId:attr.topic.id])
+       if(Topic.findByIdAndUserNotEqual(attr.topic.id,user)) {
+            Boolean isSubscribe = Subscription.findByTopic(attr.topic) ? true : false
+            out << render(template: '/topic/isSubscribed', model: [isSubscribed: isSubscribe, topicId: attr.topic.id])
+        }
     }
 }
