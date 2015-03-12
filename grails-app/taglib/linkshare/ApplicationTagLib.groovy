@@ -81,5 +81,13 @@ class ApplicationTagLib {
         out<< render(template: '/topic/topicSubscription', model: [topicList: tagService.topicCreatedByUser("${session['username']}")])
 
     }
+    def trendingTopic={attr->
+        out<<render(template: '/topic/topicSubscription',model:[topicList: tagService.trendingTopic()])
 
+    }
+    def isSubscribed={attr->
+        User user=User.findByUsername("${session['username']}")
+        Boolean isSubscribed=Subscription.findByUserAndTopic(user,attr.topic)?true:false
+     out<<render(template: '/topic/isSubscribed',model:[isSubscribed:!isSubscribed,topicId:attr.topic.id])
+    }
 }

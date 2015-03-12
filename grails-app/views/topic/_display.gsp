@@ -1,36 +1,59 @@
-<div class="row" style="margin-top: 20px">
-    %{--<div class="row">--}%
-    <div>
-        <div class="col-md-3">
-            <img src="${createLink(controller: 'image',action: 'renderImage',params:[id:topic.user.id])}"/>
-        </div>
-
-        <div class="col-md-3">
-            <div class="row">
-                <a href="#">${topic?.name}</a>
-            </div>
-
-            <div class="row">
-                @${topic?.user?.firstName}
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <p>Subscription</p>
-            <ls:subscriptionCount topic="${topic}"/>
-        </div>
-
-        <div class="col-md-3">
-            <p>Post</p>
-            <ls:postCount topic="${topic}"/>
-        </div>
+<div class="media">
+    <div class="media-left">
+        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: topic.user.id])}" height="100px"
+             width="100px"/>
     </div>
 
-    <div class="row">
-        <div class="col-md-3"></div>
+    <div class="media-body">
+        <h4 class="media-heading"><a href="#">${topic?.name}</a></h4>
+        <span>@${topic?.user?.firstName}</span>
+        <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>
 
-        <div class="col-md-9">
-            <ls:subscriptionActions topic="${topic}"/>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <p>Subscription</p>
+                <ls:subscriptionCount topic="${topic}"/>
+            </div>
+
+            <div class="col-md-6">
+                <p>Post</p>
+                <ls:postCount topic="${topic}"/>
+            </div>
         </div>
+
+        <div style="float: right"><ls:subscriptionActions topic="${topic}"/></div>
+
     </div>
 </div>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

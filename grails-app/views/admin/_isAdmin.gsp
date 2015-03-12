@@ -32,6 +32,8 @@
 <div id="linkShare" style="display: none">
     <g:render template="/topic/shareLink"></g:render>
 </div>
+<div id="trendingTopic" style="display: none ;border: solid;border-radius: 10px">
+    <ls:trendingTopic/>
 
 
 

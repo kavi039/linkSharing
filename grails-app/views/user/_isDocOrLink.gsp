@@ -1,7 +1,7 @@
 
 <g:if test="${type}">
-<a href="#" style="display:inline-block;">Downloads</a>
+<a href="#">Downloads</a>
 </g:if>
 <g:else>
-<a href="#" style="display:inline-block;">ViewFull site</a>
+<a href="#">ViewFull site</a>
 </g:else>

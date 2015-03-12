@@ -8,8 +8,13 @@ class SendInvitationController {
         String  address=params.get("email")
         String sub= "${params.get("topic")} invitation"
 
-        sendInvitationService.sendInvitation(address,sub,url)
-
-
+      if(sendInvitationService.sendInvitation(address,sub,url))
+      {
+          flash.message="message send"
+      }
+      else{
+          flash.message="message has not send"
+      }
+        redirect(controller:'user',action: 'dashBoard')
     }
 }

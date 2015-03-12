@@ -56,15 +56,16 @@ class UserController {
     def updateUserProfile(UserUpdateCO userUpdateCO) {
         Boolean userStatus = userService.updateProfile(userUpdateCO, "${session['username']}")
         if (userStatus) {
-            session['username']=userUpdateCO.username
-            redirect(controller: 'user', action: 'editProfilePage')
+            session['username'] = userUpdateCO.username
+           redirect(controller: 'user', action: 'editProfilePage')
         } else {
-            flash.error = "updation not possible"
+                flash.error="Updation is not done"
             redirect(controller: 'user', action: 'editProfilePage')
         }
     }
-    def updateUserPassword(UserPasswordCO userPasswordCO){
-        Boolean userStatus=userService.updatePassword(userPasswordCO,"${session['username']}")
+
+    def updateUserPassword(UserPasswordCO userPasswordCO) {
+        Boolean userStatus = userService.updatePassword(userPasswordCO, "${session['username']}")
         if (userStatus) {
             redirect(controller: 'user', action: 'editProfilePage')
         } else {
@@ -73,13 +74,7 @@ class UserController {
         }
     }
 
-def test(){
-   List<Topic> topicList=  tagService.trendingTopic("${session.getAttribute('username')}")
-    println("*********************************************")
-    topicList.each {
-        println(it.name)
-    }
-}
+
 
 
 }

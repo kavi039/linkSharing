@@ -9,5 +9,4 @@
         <g:render template="../topic/display" model="[topic: topic]"/>
 
     </div>
-    <hr>
 </g:each>

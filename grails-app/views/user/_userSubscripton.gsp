@@ -1,27 +1,39 @@
-<div class="col-md-4">
-    <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo?.user?.id])}"
-         style="height: 100px;width: 50px"/>
+<div class="media">
+    <div class="media-left">
+        <img src="${createLink(controller: 'image',action: 'renderImage',params:[id:userInfo.user?.id])}" height="100px" width="100px"/>
+    </div>
+    <div class="media-body" >
+        <h4 class="media-heading"><a href="#">${userInfo?.user?.getName()}</a></h4>
+        <span>${"@${userInfo?.user?.username}"}</span>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <p>Subscription</p>
+                ${userInfo?.totalSubscription}
+            </div>
 
+            <div class="col-md-6">
+                <p>Topic</p>
+                ${userInfo?.totalTopic}
+            </div>
+        </div>
+
+    </div>
 </div>
-
-<div class="col-md-8">
-    <p>
-
-    <h1>${userInfo?.user?.getName()}</h1></p>
-<p>${"@${userInfo?.user?.username}"}</p>
-
-<div class="col-md-4">
-    <p>Subscription</p>
-
-    <p>${userInfo?.totalSubscription}</p>
-</div>
-
-<div class="col-md-4">
-
-    <p>Topic</p>
-
-    <p>${userInfo?.totalTopic}</p>
-</div>
+<hr>
 
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

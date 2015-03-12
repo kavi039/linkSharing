@@ -55,7 +55,7 @@ class TagService {
 
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
-        List<Topic> topicList = Subscription.createCriteria().list(max:2,offset:0) {
+        List<Topic> topicList = Subscription.createCriteria().list(max: 2, offset: 0) {
             projections {
                 property('topic')
             }
@@ -71,29 +71,31 @@ class TagService {
         }
         resourceList
     }
- List<Topic>  topicCreatedByUser(String username){
-     User user=User.findByUsername(username)
-     List<Topic> topicList=Topic.createCriteria().list(max:4,offset:0){
-         eq('user',user)
-         order("dateCreated",'desc')
-     }
-      return  topicList
- }
-    List<Topic> trendingTopic(String username) {
+
+    List<Topic> topicCreatedByUser(String username) {
         User user = User.findByUsername(username)
-
-        println("**********$user")
-        List<Topic> topicList = Topic.createCriteria().list(max: 5) {
-
-            eq('user',user)
-            'resources'{
-                groupProperty('topic')
-                order(count('topic'),'desc')
-            }
-
-
+        List<Topic> topicList = Topic.createCriteria().list(max: 4, offset: 0) {
+            eq('user', user)
+            order("dateCreated", 'desc')
         }
-
+        return topicList
     }
 
+    def trendingTopic() {
+        List<Topic> topicList = []
+        List<Object> objectList = Resource.createCriteria().list(max: 5, offset: 0) {
+            projections {
+                groupProperty("topic")
+                count("topic", "topicCount")
+                order("topicCount", "desc")
+            }
+//            'topic'{
+//                property('visibility',Visibility.PUBLIC)
+//            }
+        }
+        objectList.collect(topicList) {
+            it[0]
+        }
+        return topicList
+    }
 }

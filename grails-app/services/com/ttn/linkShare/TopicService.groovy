@@ -21,4 +21,18 @@ class TopicService {
             return false
         }
 }
+    Boolean topicSubscription(Long topicId,Seriousness seriousness,String username){
+            if(topicId!=null&&seriousness!=null) {
+                User user = User.findByUsername(username)
+                Topic topic = Topic.findById(topicId)
+                Subscription subscription = new Subscription(user: user, topic: topic, seriousness: subscriptionCO.seriousness)
+                subscription.save(flush: true) ? true : false
+            }
+    else
+            {
+                return false
+            }
+    }
+
+
 }

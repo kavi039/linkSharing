@@ -8,6 +8,7 @@ import javax.jws.soap.SOAPBinding
 @Transactional
 class UserService {
     def mailService
+
     Boolean register(UserCO userco) {
         if (userco.validate()) {
             uploadPhoto(userco)
@@ -63,7 +64,7 @@ class UserService {
         userUpdateCO.id = user.id
         uploadPhoto(userUpdateCO)
         if (userUpdateCO.validate()) {
-            user.properties = [firstName: userUpdateCO.firstName, lastName: userUpdateCO.lastName, username: userUpdateCO.lastName, photoPath: userUpdateCO.photoPath]
+            user.properties = [firstName: userUpdateCO.firstName, lastName: userUpdateCO.lastName, username: userUpdateCO.username, photoPath: userUpdateCO.photoPath]
             user.save(flush: true) ? true : false
         } else {
             userUpdateCO.errors.allErrors.each { println(">>>$it") }
@@ -71,29 +72,27 @@ class UserService {
         }
     }
 
-    def updatePassword(UserPasswordCO userPasswordCO,String username) {
-        User user=User.findByUsername(username)
-        if(userPasswordCO.validate()) {
-            user.properties = [password:userPasswordCO.password]
-         if( user.save(flush: true))
-         {
-             println("passsword change")
-             return true
-         }
-            else{
-             return false
-         }
+    def updatePassword(UserPasswordCO userPasswordCO, String username) {
+        User user = User.findByUsername(username)
+        if (userPasswordCO.validate()) {
+            user.properties = [password: userPasswordCO.password]
+            if (user.save(flush: true)) {
+                sendEmailToUser(user)
+                return true
+            } else {
+                return false
             }
-        else{
-            return  false
+        } else {
+            return false
         }
 
     }
-     def sendEmailToUser(User user){
-      mailService.sendMail {
-          to user.email
-          subject "password change"
-          html "<h1>${user.password}</h1>"
-      }
-     }
+
+    def sendEmailToUser(User user) {
+        mailService.sendMail {
+            to user.email
+            subject "password change"
+            html "<h1>${user.password}</h1>"
+        }
+    }
 }
