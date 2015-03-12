@@ -40,7 +40,7 @@ class TopicService {
        Topic topic=Topic.get(topicId)
       Subscription subscription= Subscription.findByTopicAndUser(topic,user)
        println("**********"+subscription)
-       subscription.delete(flush: true)
+       subscription?.delete(flush: true)
        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+Subscription.findByTopicAndUser(topic,user))
    }
 

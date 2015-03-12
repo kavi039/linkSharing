@@ -1,7 +1,6 @@
 package com.ttn.linkshare
 
 import com.ttn.linkShare.Resource
-import com.ttn.linkShare.SubscriptionCO
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.TopicCo
 import com.ttn.linkShare.enums.Seriousness
@@ -50,9 +49,10 @@ class TopicController {
         }
 
     }
-    def topicUnSubscription(Long topicId){
-        println"*************$topicId"
-     topicService.topicUnSubscription(topicId,"${session['username']}")
+
+    def topicUnSubscription(Long topicId) {
+        println "*************$topicId"
+        topicService.topicUnSubscription(topicId, "${session['username']}")
         render true
 
     }
