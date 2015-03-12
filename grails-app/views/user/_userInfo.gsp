@@ -1,19 +1,21 @@
+
+
 <div class="table-responsive">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>userName</th>
-            <th>Email</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Active</th>
-            <th>Manage</th>
-        </tr>
-        </thead>
+   <table class="table">
+       <thead>
+       <tr>
+           <th>id</th>
+           <th>userName</th>
+           <th>Email</th>
+           <th>FirstName</th>
+           <th>LastName</th>
+           <th>Active</th>
+           <th>Manage</th>
+       </tr>
+       </thead>
 
 
-        <tbody>
+       <tbody>
         <g:each in="${userList}" var="user">
             <tr>
                 <td>${user.id}</td>

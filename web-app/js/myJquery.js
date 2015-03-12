@@ -62,6 +62,9 @@ $(document).ready(function () {
             }
         });
     });
+   $('.caret').on('click',function(){
+      $('.dropdown-menu').toggle();
+   });
 
 
 });

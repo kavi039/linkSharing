@@ -1,6 +1,6 @@
 <div class="media">
     <div class="media-left">
-        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: topic.user.id])}" height="100px"
+        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: topic?.user?.id])}" height="100px"
              width="100px"/>
     </div>
 

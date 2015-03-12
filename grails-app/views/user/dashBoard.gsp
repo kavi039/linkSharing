@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <!--left side-->
-    <div class="row" style="margin-top:10%">
+    <div class="row" >
 
         <span style="color:red"><g:message message="${flash.error}"></g:message></span>
     <span style="color:red"><g:message message="${flash.message}"></g:message></span>

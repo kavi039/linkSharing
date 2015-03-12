@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-    <div class="row" style="margin-top: 10%">
+    <div class="row" >
 
         <div class="col-md-7">
             <%--recentshare--%>

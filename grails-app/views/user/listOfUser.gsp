@@ -23,15 +23,15 @@
         <div id="data">
 
         </div>
-        <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li class="disabled"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
+        %{--<ul class="pagination">--}%
+            %{--<li><a href="#">&laquo;</a></li>--}%
+            %{--<li class="active"><a href="#">1</a></li>--}%
+            %{--<li class="disabled"><a href="#">2</a></li>--}%
+            %{--<li><a href="#">3</a></li>--}%
+            %{--<li><a href="#">4</a></li>--}%
+            %{--<li><a href="#">5</a></li>--}%
+            %{--<li><a href="#">&raquo;</a></li>--}%
+        %{--</ul>--}%
 
     </div>
 </div>
@@ -50,11 +50,11 @@
             $('#data').html(data);
         });
     });
-    $(document).ready(function () {
-        $('').click(function () {
-
-        })
-    });
+//    $(document).ready(function () {
+//        $('').click(function () {
+//
+//        })
+//    });
 
 
     $(document).on('click', '.setActiveOrDeactive', function () {
@@ -67,11 +67,11 @@
         }).done(function (data) {
             if (data == "true") {
                 obj.val('Deactivated');
-                $('#'+userId).html("Activated");
+                obj.parent().prev().html("Activated");
             }
             else {
                 obj.val('Activated');
-                $('#'+userId).html("Deactivated");
+               obj.parent().prev().html("Deactivated");
             }
 
         });
