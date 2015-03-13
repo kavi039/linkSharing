@@ -15,13 +15,13 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <p>Subscription</p>
-                ${com.ttn.linkShare.Subscription.countByUser(topic.user)}
+                ${com.ttn.linkShare.Subscription?.countByUser(topic.user)}
 
             </div>
 
             <div class="col-md-6">
                 <p>Post</p>
-                ${topic.resources.size()}
+                ${topic?.resources?.size()}
 
             </div>
         </div>

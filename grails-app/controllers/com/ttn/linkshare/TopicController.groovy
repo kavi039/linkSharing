@@ -28,13 +28,12 @@ class TopicController {
 
     def saveTopic(TopicCo topicCO) {
 
-        if (topicService.create(topicCO, "" + session['username'])) {
-            // flash.error = "Topic created"
-            println "******" + Topic.findAllByName(topicCO.name)
+        if (topicService.create(topicCO,"${session['username']}")) {
+            flash.error = "Topic created"
+            //redirect(controller: "user" ,action: "dashBoard")
             render(view: "/topic/topicShow", model: [topicName:topicCO.name])
-            return
         } else {
-            // flash.error = "Topic Not Created"
+            flash.error = "Topic Not Created"
             redirect(controller: "user", action: "dashBoard")
         }
 

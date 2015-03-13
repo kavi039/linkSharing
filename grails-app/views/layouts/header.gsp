@@ -27,26 +27,12 @@
         </ul>
 </nav>
 <g:if test="${session['username']}">
-<div id="showPop" style="display: none;height: 400px;width: 400px;margin: 0 auto;">
-
     <g:render template="/sendInvitation/send"></g:render>
-</div>
-
-<div id="createTopic" style="display: none;height: 400px;width: 400px;margin: 0 auto">
     <g:render template="/topic/createTopic"></g:render>
-</div>
-
-<div id="documentShare" style="display: none;height: 400px;width: 400px;margin: 0 auto">
     <g:render template="/topic/documentShare"></g:render>
-</div>
-
-<div id="linkShare" style="display: none;width: 500px;margin: 0 auto;">
     <g:render template="/topic/shareLink"></g:render>
-</div>
+   <g:render template="/topic/trendingtopic"></g:render>
 
-<div id="trendingTopic" style="display: none;width: 600px;margin: 0 auto;background-color:#ebebeb;border-radius: 5%">
-    <ls:trendingTopic/>
-</div>
 </g:if>
 
 

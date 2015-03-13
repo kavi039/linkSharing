@@ -15,7 +15,6 @@
                 <div class="panel-heading">Topic<span style="color:#006dcc">(${topicName})</span></div>
 
                 <div class="panel-body">
-
                     <g:render template="/topic/display" model="[topic: Topic.findByName(topicName)]"></g:render>
                 </div>
             </div>

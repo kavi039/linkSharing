@@ -1,18 +1,18 @@
 $(document).ready(function () {
     $("a[title='sendInvitation']").on('click', function () {
-        $("#showPop").toggle()
+        $("#sendInvitation").modal();
     });
     $("a[title='comment']").on('click', function () {
-        $("#createTopic").toggle()
+        $("#comment").modal();
     })
     $("a[title='document']").on('click', function () {
-        $("#documentShare").toggle();
+        $("#documentShare").modal();
     })
     $("a[title='linkresource']").on('click', function () {
-        $("#linkShare").toggle();
+        $("#linkShare").modal();
     });
     $("a[title='trendingTopic']").on('click', function () {
-        $("#trendingTopic").toggle();
+        $("#trendingTopic").modal();
     });
 
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
             url: url
         }).done(function (data) {
             if (data == "true") {
-                objSelect.val(seriouness);
+                //objSelect.val(seriouness);
                 objSelect.toggle();
                 objAnchor.text(text1);
             }
@@ -62,15 +62,18 @@ $(document).ready(function () {
             }
         });
     });
-   $('.caret').on('click',function(){
-      $('.dropdown-menu').toggle();
-   });
-
+    $('.caret').on('click', function () {
+        $('.dropdown-menu').toggle();
+    });
+    //$(".glyphicon glyphicon-edit")
 });
 
 
 
 
+function editTopic( topicId){
+    alert(topicId);
+}
 
 
 

@@ -12,12 +12,24 @@ class TopicService {
             topicCo.user = user
             Topic topic = new Topic(topicCo.properties)
             Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
-            if (topic.save() && subscription.save()) {
+            if (topic.save() && subscription.save())
+            {
+                println "is    save*******************************"
                 return true
             }
+            else {
+                topic.errors.allErrors.each {
+                    println  it
+                }
+                println "is   not save*******************************"
+                return false
+            }
+
         } else {
+            println "is   not validate*******************************"
             return false
         }
+
     }
 
     Boolean topicSubscription(Long topicId, String seriousness, String username) {

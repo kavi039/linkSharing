@@ -27,20 +27,11 @@ class ApplicationTagLib {
         out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username, Topic.findByName(attr.topic))])
     }
 
-//    def subscriptionCount = { attr ->
-//        Topic topic = attr.topic
-//        out << Subscription.countByTopic(topic)
-//    }
-//
-//    def postCount = { attr ->
-//        Topic topic = attr.topic
-//        out << Resource.countByTopic(topic)
-//    }
 
     def subscriptionActions = { attr ->
         Topic topic = attr.topic
         User currentUser = User.findByUsername("${session['username']}")
-        Boolean isAdminOrCreator = ((topic.user == currentUser) || currentUser.admin)
+        Boolean isAdminOrCreator = ((topic.user.equals(currentUser)) || currentUser.admin)
         Seriousness seriousness = topic?.subscriptions?.find { it.user == currentUser }?.seriousness
         out << render(template: "/topic/action", model: [topic: topic, isAdminOrCreator: isAdminOrCreator, seriousness: seriousness])
 
@@ -52,11 +43,10 @@ class ApplicationTagLib {
         out << render(template: "/admin/isAdmin", model: [isAdmin: isadmin])
 
     }
-
     def userSubscription = { attr ->
         User user = User.findByUsername("${session['username']}")
         println "in application tag library, uesr: ${user.username}"
-        out << render(template: '/topic/subscription', model: [topicList: tagService.userSubscribedTopic(user.username)])
+        out << render(template: '/topic/subscription', model: [topicList: tagService.userTopicSubscribed(user.username)])
     }
 
     def inbox = { attr ->

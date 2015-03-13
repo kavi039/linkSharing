@@ -1,16 +1,14 @@
-
-
 <%@ page import="com.ttn.linkShare.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>EditProfilePage</title>
-        <meta name="layout" content="header"/>
+    <meta name="layout" content="header"/>
 </head>
 
 <body>
 <div class="container">
 
-    <div class="row" >
+    <div class="row">
 
         <span style="color:red"><g:message message="${flash.error}"></g:message></span>
 
@@ -34,6 +32,7 @@
                 </div>
             </div>
         </div>
+</div>
 
         <div class="col-md-7">
             <div class="panel panel-default">

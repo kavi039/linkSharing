@@ -7,6 +7,6 @@
 </head>
 
 <body>
-<h1>Sorry can't not proceed ur request</h1>
+<h1>Sorry can not proceed your  request</h1>
 </body>
 </html>
