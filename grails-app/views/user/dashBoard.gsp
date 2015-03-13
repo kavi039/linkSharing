@@ -9,14 +9,15 @@
 <body>
 <div class="container">
     <!--left side-->
-    <div class="row" >
+    <div class="row">
 
         <span style="color:red"><g:message message="${flash.error}"></g:message></span>
-    <span style="color:red"><g:message message="${flash.message}"></g:message></span>
+        <span style="color:red"><g:message message="${flash.message}"></g:message></span>
+
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <ls:user/>
+                    <ls:user username="${session['username']}" topic="${null}"/>
                 </div>
             </div>
 

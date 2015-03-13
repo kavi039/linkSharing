@@ -27,13 +27,21 @@ class TagService {
         return resources
     }
 
-    def userSubscription(String username) {
-        User user = User.findByUsername(username)
+    def userSubscriptionByCurrentUserOrByTopic(String username, Topic topic) {
+        List<User> userList = []
+        if (username) {
+            userList = User.findAllByUsername(username)
+        } else {
+            userList = Subscription.createCriteria().list(max: 5) {
+                projections {
+                    property('user')
+                }
+                eq('topic', topic)
+            }
 
-        Long totalSubscription = Subscription.countByUser(user)
-        Long totalTopic = Topic.countByUser(user)
-        Map m = [user: user, totalSubscription: totalSubscription, totalTopic: totalTopic]
-        return m
+
+        }
+        return userList
     }
 
     List<Topic> userSubscribedTopic(String username) {
@@ -89,8 +97,8 @@ class TagService {
                 count("topic", "topicCount")
 
             }
-            'topic'{
-                eq('visibility',Visibility.PUBLIC)
+            'topic' {
+                eq('visibility', Visibility.PUBLIC)
             }
             order("topicCount", "desc")
         }
@@ -99,4 +107,14 @@ class TagService {
         }
         return topicList
     }
+
+    def displayResourcesOfTopic(Topic topic) {
+        List<Resource>resourceList=Resource.createCriteria().list(max:5){
+            eq('topic',topic)
+            eq('isRead',false)
+        }
+        return  resourceList
+
+    }
+
 }

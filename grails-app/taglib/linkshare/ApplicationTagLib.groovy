@@ -24,18 +24,18 @@ class ApplicationTagLib {
     }
 
     def user = { attr ->
-        out << render(template: "/user/userSubscripton", model: [userInfo: tagService.userSubscription(session['username'])])
+        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username, Topic.findByName(attr.topic))])
     }
 
-    def subscriptionCount = { attr ->
-        Topic topic = attr.topic
-        out << Subscription.countByTopic(topic)
-    }
-
-    def postCount = { attr ->
-        Topic topic = attr.topic
-        out << Resource.countByTopic(topic)
-    }
+//    def subscriptionCount = { attr ->
+//        Topic topic = attr.topic
+//        out << Subscription.countByTopic(topic)
+//    }
+//
+//    def postCount = { attr ->
+//        Topic topic = attr.topic
+//        out << Resource.countByTopic(topic)
+//    }
 
     def subscriptionActions = { attr ->
         Topic topic = attr.topic
@@ -71,25 +71,29 @@ class ApplicationTagLib {
 
     def markAsRead = { attr ->
         Resource resource = Resource.findByIdAndIsRead(attr.type, true)
-        out << render(template: '/user/isRead', model: [type: resource,resourceId:attr.type])
+        out << render(template: '/user/isRead', model: [type: resource, resourceId: attr.type])
     }
     def subscriptionTopic = { attr ->
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])
 
     }
-    def topicCreatedByUSer={attr->
-        out<< render(template: '/topic/topicSubscription', model: [topicList: tagService.topicCreatedByUser("${session['username']}")])
+    def topicCreatedByUSer = { attr ->
+        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.topicCreatedByUser("${session['username']}")])
 
     }
-    def trendingTopic={attr->
-        out<<render(template: '/topic/topicSubscription',model:[topicList: tagService.trendingTopic()])
+    def trendingTopic = { attr ->
+        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.trendingTopic()])
 
     }
-    def isSubscribed={attr->
-        User user=User.findByUsername("${session['username']}")
-       if(Topic.findByIdAndUser(attr.topic.id,user)==null) {
-            Boolean isSubscribe = Subscription.findByTopicAndUser(attr.topic,user) ? true : false
+    def isSubscribed = { attr ->
+        User user = User.findByUsername("${session['username']}")
+        if (Topic.findByIdAndUser(attr.topic?.id, user) == null) {
+            Boolean isSubscribe = Subscription.findByTopicAndUser(attr.topic, user) ? true : false
             out << render(template: '/topic/isSubscribed', model: [isSubscribed: isSubscribe, topicId: attr.topic.id])
         }
+    }
+    def displayResourcesOfTopic = { attr ->
+        out << render(template: '/user/inbox', model: [resourceList: tagService.displayResourcesOfTopic(Topic.findByName(attr.topic))])
+
     }
 }

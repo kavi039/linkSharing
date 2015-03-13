@@ -26,6 +26,7 @@ class TopicService {
             Topic topic = Topic.findById(topicId)
         println "********$user  $topic"
             Subscription subscription = new Subscription(user: user, topic: topic, seriousness: seriousness)
+
             if (subscription.save(flush: true)) {
                 println("********$seriousness")
                 return true

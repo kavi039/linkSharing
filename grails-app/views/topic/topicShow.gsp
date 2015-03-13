@@ -1,21 +1,46 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: intelligrape
-  Date: 5/3/15
-  Time: 11:48 AM
---%>
-
 <%@ page import="com.ttn.linkShare.Topic" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title></title>
+    <title>TopicShow</title>
+    <meta name="layout" content="header"/>
 </head>
 
 <body>
 
-<div class="col-md-12">
-    <h1>Topic Info</h1>
-<g:render template="/topic/display" model="[topic:topic]"></g:render>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Topic<span style="color:#006dcc">(${topicName})</span></div>
+
+                <div class="panel-body">
+
+                    <g:render template="/topic/display" model="[topic: Topic.findByName(topicName)]"></g:render>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Users<span style="color:#006dcc">(${topicName})</span></div>
+
+                <div class="panel-body">
+                    <ls:user topic="${topicName}" username="${null}"/>
+                </div>
+            </div>
+
+</div>
+
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">Posts<span style="color:#006dcc">(${topicName})</span></div>
+
+
+                    <ls:displayResourcesOfTopic topic="${topicName}"/>
+
+            </div>
+        </div>
+
     </div>
+</div>
 </body>
 </html>

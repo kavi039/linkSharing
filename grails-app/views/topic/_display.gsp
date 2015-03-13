@@ -1,23 +1,28 @@
 <div class="media">
     <div class="media-left">
-        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: topic?.user?.id])}" height="100px"
+        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: topic?.user?.id])}"
+             height="100px"
              width="100px"/>
     </div>
 
     <div class="media-body">
-        <h4 class="media-heading"><a href="#">${topic?.name}</a></h4>
+        <h4 class="media-heading"><a
+                href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: topic?.name])}">${topic?.name}</a>
+        </h4>
         <span>@${topic?.user?.firstName}</span>
         <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>
 
         <div class="col-md-12">
             <div class="col-md-6">
                 <p>Subscription</p>
-                <ls:subscriptionCount topic="${topic}"/>
+                ${com.ttn.linkShare.Subscription.countByUser(topic.user)}
+
             </div>
 
             <div class="col-md-6">
                 <p>Post</p>
-                <ls:postCount topic="${topic}"/>
+                ${topic.resources.size()}
+
             </div>
         </div>
 

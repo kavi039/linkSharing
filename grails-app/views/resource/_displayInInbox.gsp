@@ -3,7 +3,6 @@
         <img src="${createLink(controller: 'image',action: 'renderImage',params:[id:resourceInstance.user.id])}" height="100px" width="100px"/>
     </div>
     <div class="media-body" >
-        <h4 class="media-heading"><a href="#">${resourceInstance.topic.name}</a></h4>
         <span>${resourceInstance.user.name}</span>
         <span>${"@${resourceInstance.user.firstName}"}</span>
         <span>${resourceInstance.description}
@@ -17,5 +16,5 @@
            </div>
 
     </div>
+    <hr/>
 </div>
-<hr>
