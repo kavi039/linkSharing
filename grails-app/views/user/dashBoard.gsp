@@ -10,10 +10,8 @@
 <div class="container">
     <!--left side-->
     <div class="row">
-        <g:if test="${flash.error}">
-            <span style="color:red"><g:message message="${flash.error}"></g:message></span>
-            <span style="color:red"><g:message message="${flash.message}"></g:message></span>
-        </g:if>
+    <g:if test="${flash.error}"><script>alert("${flash.error}");</script></g:if>
+    <g:if test="${flash.message}"><script>alert("${flash.message}");</script></g:if>
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-body">

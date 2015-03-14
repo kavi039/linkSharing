@@ -9,8 +9,8 @@
 <div class="container">
 
     <div class="row">
-
-        <span style="color:red"><g:message message="${flash.error}"></g:message></span>
+            <g:if test="${flash.error}"><script>alert("${flash.error}");</script></g:if>
+        <g:if test="${flash.message}"><script>alert("${flash.message}");</script></g:if>
 
         <div class="col-md-5">
             <div class="panel panel-default">

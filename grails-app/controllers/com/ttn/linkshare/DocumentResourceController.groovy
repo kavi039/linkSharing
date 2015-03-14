@@ -9,13 +9,13 @@ class DocumentResourceController {
      Boolean b= documentResourceService.save(documentCO,"${session['username']}")
         if(b)
         {
-            flash.error="document added"
+            flash.message="document added"
         }
         else
         {
             flash.error="document not added"
         }
-   redirect(controller: 'user',action: 'dashBoard')
+        redirect(controller: 'user',action: 'dashBoard')
     }
 
 }
