@@ -13,10 +13,11 @@
         <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>
 
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-6" >
                 <p>Subscription</p>
-                ${com.ttn.linkShare.Subscription?.countByUser(topic.user)}
-
+                <div class="subscriptionCount">
+                ${com.ttn.linkShare.Subscription?.countByUser(topic?.user)}
+                </div>
             </div>
 
             <div class="col-md-6">

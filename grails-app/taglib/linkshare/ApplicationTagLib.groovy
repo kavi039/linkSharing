@@ -24,7 +24,7 @@ class ApplicationTagLib {
     }
 
     def user = { attr ->
-        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username, Topic.findByName(attr.topic))])
+        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username,attr.topic)])
     }
 
 

@@ -30,21 +30,25 @@ $(document).ready(function () {
     });
     $(".subscription").on('click', function () {
         var text1;
-        var sendData;
+        var sendData
+        var subscriptionCount=$('.subscriptionCount');
         var objAnchor = $(this);
         var topicId = objAnchor.data('topic-id')
         var objSelect = $('#' + topicId)
         var url;
         var seriouness = objSelect.val();
+        alert(">>>>>>>>>>>>"+topicId+">>>>>>>>>>>>>>>"+seriouness);
         if (objAnchor.text() == "Subscribed") {
             url = Subscription;
             text1 = "UnSubscribed";
+            objSelect.toggle();
             sendData = {topicId: topicId, seriousness: seriouness}
 
         }
         else {
             url = UnSubscription;
             text1 = "Subscribed";
+            objSelect.toggle();
             sendData = {topicId: topicId};
 
         }
@@ -52,20 +56,18 @@ $(document).ready(function () {
             data: sendData,
             url: url
         }).done(function (data) {
-            if (data == "true") {
+           // alert(subscriptionCount.text()+">>>>>>>>>>>"+data.count);
                 //objSelect.val(seriouness);
-                objSelect.toggle();
+
                 objAnchor.text(text1);
-            }
-            else {
-                alert("Subscription not possible");
-            }
+                subscriptionCount.text(data.count);
+
         });
     });
     $('.caret').on('click', function () {
         $('.dropdown-menu').toggle();
     });
-    //$(".glyphicon glyphicon-edit")
+
 });
 
 

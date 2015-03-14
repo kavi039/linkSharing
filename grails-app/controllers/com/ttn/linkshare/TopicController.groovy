@@ -23,15 +23,15 @@ class TopicController {
     }
 
     def topicShow() {
-        render view: "/topic/topicShow",model: [topicName: params.topicName]
+        render view: "/topic/topicShow", model: [topicName: params.topicName]
     }
 
     def saveTopic(TopicCo topicCO) {
 
-        if (topicService.create(topicCO,"${session['username']}")) {
+        if (topicService.create(topicCO, "${session['username']}")) {
             flash.error = "Topic created"
             //redirect(controller: "user" ,action: "dashBoard")
-            render(view: "/topic/topicShow", model: [topicName:topicCO.name])
+            render(view: "/topic/topicShow", model: [topicName: topicCO.name])
         } else {
             flash.error = "Topic Not Created"
             redirect(controller: "user", action: "dashBoard")
@@ -49,33 +49,22 @@ class TopicController {
     }
 
     def topicSubscription(Long topicId, String seriousness) {
-        Boolean isSubscribed = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
-        if (isSubscribed) {
-            println "subdgfyewf cjhv rj $isSubscribed"
-            render true
-        } else {
-            render false
-        }
+        Integer count = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
+
+            println "subdgfyewf cjhv rj $count"
+            render (model: [count:count] as JSON)
+
 
     }
 
     def topicUnSubscription(Long topicId) {
         println "*************$topicId"
-        topicService.topicUnSubscription(topicId, "${session['username']}")
-        render true
+   Integer count= topicService.topicUnSubscription(topicId, "${session['username']}")
+        render model: [count:count] as JSON
 
     }
 
-    def test() {
-        Topic topic = Topic.get(8)
-        List<User> userList = Subscription.createCriteria().list {
-            projections {
-                property('user')
-            }
-            eq('topic', topic)
-        }
-        return userList
-    }
+
 }
 
 

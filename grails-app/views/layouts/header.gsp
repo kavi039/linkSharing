@@ -9,74 +9,31 @@
 </head>
 
 <body style="background-color:#1f6377;">
-<nav class="navbar navbar-default" role="navigation" >
+<nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" href="${createLink(controller: 'user', action: 'dashBoard')}">LinkSharing</a>
     </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><div>
-<g:form name="search" class="form-group" controller="search" action="search">
-<g:textField name="searchText"  placeholder="search"/>
-<g:submitButton name="finder" value="search" />
-</g:form>
-            </div></li>
+    <ul class="nav navbar-nav">
+        <li class="active"><div>
+            <g:form name="search" class="form-group" controller="search" action="search">
+                <g:textField name="searchText" placeholder="search"/>
+                <g:submitButton name="finder" value="search"/>
+            </g:form>
+        </div></li>
 
-<g:if test="${session['username']}">
-<ls:isAdmin username="${session['username']}"/>
-</g:if>
-        </ul>
+        <g:if test="${session['username']}">
+            <ls:isAdmin username="${session['username']}"/>
+        </g:if>
+    </ul>
 </nav>
 <g:if test="${session['username']}">
     <g:render template="/sendInvitation/send"></g:render>
     <g:render template="/topic/createTopic"></g:render>
     <g:render template="/topic/documentShare"></g:render>
     <g:render template="/topic/shareLink"></g:render>
-   <g:render template="/topic/trendingtopic"></g:render>
+    <g:render template="/topic/trendingtopic"></g:render>
 
 </g:if>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%{--<div class="container col-md-12" style="border: solid;border-radius: 5px">--}%
-%{--<div class="col-md-2">--}%
-%{--<a href="${createLink(controller:'user',action: 'dashBoard')}"> <h1>LinkSharing</h1></a>--}%
-%{--</div>--}%
-%{--<div class="col-md-3" >--}%
-%{--<g:form name="search" class="form-group" controller="search" action="search">--}%
-%{--<g:textField name="searchText"  placeholder="search"/>--}%
-%{--<g:submitButton name="finder" value="search" />--}%
-%{--</g:form>--}%
-
-%{--</div>--}%
-
-%{--<div class="col-md-7">--}%
-%{--<g:if test="${session['username']}">--}%
-%{--<ls:isAdmin username="${session['username']}"/>--}%
-%{--</g:if>--}%
-%{--</div>--}%
-
-
-
-
-
 </div>
 <script src="${resource(dir: "/js", file: 'jquery.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'bootstrap.min.js')}"></script>

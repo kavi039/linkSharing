@@ -27,14 +27,14 @@
                 </div>
             </div>
 
-</div>
+        </div>
 
         <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">Posts<span style="color:#006dcc">(${topicName})</span></div>
 
 
-                    <ls:displayResourcesOfTopic topic="${topicName}"/>
+                <ls:displayResourcesOfTopic topic="${topicName}"/>
 
             </div>
         </div>

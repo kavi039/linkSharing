@@ -32,8 +32,8 @@ class TopicService {
 
     }
 
-    Boolean topicSubscription(Long topicId, String seriousness, String username) {
-
+    Integer topicSubscription(Long topicId, String seriousness, String username) {
+            Integer count=0
             User user = User.findByUsername(username)
             Topic topic = Topic.findById(topicId)
         println "********$user  $topic"
@@ -41,20 +41,23 @@ class TopicService {
 
             if (subscription.save(flush: true)) {
                 println("********$seriousness")
-                return true
+                count=Subscription.countByTopicAndUser(topic,user)
+                return count
 
             } else {
-                return false
+                return count
             }
         }
 
-   def  topicUnSubscription(Long topicId,String username){
+   Integer  topicUnSubscription(Long topicId,String username){
        User user=User.findByUsername(username)
        Topic topic=Topic.get(topicId)
       Subscription subscription= Subscription.findByTopicAndUser(topic,user)
        println("**********"+subscription)
        subscription?.delete(flush: true)
        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+Subscription.findByTopicAndUser(topic,user))
+       return Subscription.countByTopicAndUser(topic,user)
+
    }
 
 

@@ -27,11 +27,12 @@ class TagService {
         return resources
     }
 
-    def userSubscriptionByCurrentUserOrByTopic(String username, Topic topic) {
+    def userSubscriptionByCurrentUserOrByTopic(String username, String topicName) {
         List<User> userList = []
         if (username) {
             userList = User.findAllByUsername(username)
         } else {
+            Topic topic=Topic.findByName(topicName)
             userList = Subscription.createCriteria().list(max: 5) {
                 projections {
                     property('user')
@@ -41,8 +42,10 @@ class TagService {
 
 
         }
+        println userList
         return userList
     }
+
 
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
@@ -92,11 +95,11 @@ class TagService {
     }
 
     def displayResourcesOfTopic(Topic topic) {
-        List<Resource>resourceList=Resource.createCriteria().list(max:5){
-            eq('topic',topic)
-            eq('isRead',false)
+        List<Resource> resourceList = Resource.createCriteria().list(max: 5) {
+            eq('topic', topic)
+            eq('isRead', false)
         }
-        return  resourceList
+        return resourceList
 
     }
 
