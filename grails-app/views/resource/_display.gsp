@@ -1,12 +1,18 @@
-<div class="col-md-4">
-    <img src="${createLink(controller: 'image',action: 'renderImage',params: [id:resourceInstance.user.id])}"/>
-</div>
 
-<div class="col-md-8">
-    <a href="#" style="display:block;">${resourceInstance?.topic?.name}</a>
-    <p>${resourceInstance?.user?.name}</p>
-    <p>${"@${resourceInstance?.user?.firstName}"}</p>
-    <p>${resourceInstance?.description}</p>
-    <a href="#" style="display:block;">ViewPosts</a>
-    <hr>
-</div>
+<div class="media">
+    <div class="media-left">
+        <img src="${createLink(controller: 'image',action: 'renderImage',params:[id:resourceInstance.user.id])}" height="100px" width="100px"/>
+    </div>
+    <div class="media-body" >
+        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName:resourceInstance?.topic?.name])}" style="display:block;">  <span  style="float: right">${resourceInstance?.topic?.name}</span></a>
+        <p>${resourceInstance.user.name}</p>
+        <p>${"@${resourceInstance.user.firstName}"}</p>
+        <p>
+            ${resourceInstance.description}
+        </p>
+            <a href="#"> <a href="#" style="display:block;">  <span  style="float: right">ViewPosts</span></a>
+            </a>
+        </div>
+    </div>
+    <hr/>
+
