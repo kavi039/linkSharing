@@ -84,6 +84,5 @@ class ApplicationTagLib {
     }
     def displayResourcesOfTopic = { attr ->
         out << render(template: '/user/inbox', model: [resourceList: tagService.displayResourcesOfTopic(Topic.findByName(attr.topic))])
-
     }
 }

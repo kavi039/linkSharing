@@ -16,7 +16,7 @@
             <div class="col-md-6" >
                 <p>Subscription</p>
                 <div class="subscriptionCount">
-                ${com.ttn.linkShare.Subscription?.countByUser(topic?.user)}
+                ${com.ttn.linkShare.Subscription?.countByTopic(topic)}
                 </div>
             </div>
 

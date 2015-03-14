@@ -6,7 +6,7 @@
 //                             "classpath:${appName}-config.groovy",
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
-
+//- See more at: http://www.oodlestechnologies.com/blogs/Using-properties-files-in-Grails-application#sthash.QvIbQ1Fq.dpuf
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }

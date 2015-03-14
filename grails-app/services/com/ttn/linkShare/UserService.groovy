@@ -63,7 +63,6 @@ class UserService {
         println("user name *****${user}")
         userUpdateCO.id = user.id
         uploadPhoto(userUpdateCO)
-
         if (userUpdateCO.validate()) {
             user.properties = [firstName: userUpdateCO.firstName, lastName: userUpdateCO.lastName, username: userUpdateCO.username, photoPath: userUpdateCO.photoPath]
             user.save(flush: true) ? true : false

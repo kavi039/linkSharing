@@ -5,8 +5,8 @@ import com.ttn.linkShare.Resource
 class ReadingItemController {
     def readingItemService
     def markAsRead(Long resourceId){
-        readingItemService.updateResource(resourceId)
-       render "Mark as Unread"
+       Boolean isSubscrideb= readingItemService.updateResource(resourceId,"${session['username']}")
+       render isSubscrideb
     }
 //    def markAsUnRead(Long resourceId){
 //        readingItemService.updateResource(resourceId)

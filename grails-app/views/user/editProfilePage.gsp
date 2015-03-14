@@ -15,7 +15,7 @@
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <ls:user/>
+                    <ls:user username="${session['username']}" topic="${null}"/>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-</div>
+
 
         <div class="col-md-7">
             <div class="panel panel-default">
@@ -40,25 +40,26 @@
                 </div>
 
                 <div class="panel-body">
+                  <%  User user=User.findByUsername("${session['username']}")%>
                     <g:uploadForm name="editProfile" controller="user" action="updateUserProfile">
                         <div class="form-group">
                             <label for="firstName">First Name:</label>
-                            <g:textField name="firstName" class="form-control"/>
+                            <g:textField name="firstName" class="form-control" value="${user?.firstName}"/>
                         </div>
 
                         <div class="form-group">
                             <label for="lastName">Last Name:</label>
-                            <g:textField name="lastName" class="form-control"/>
+                            <g:textField name="lastName" class="form-control" value="${user?.lastName}"/>
                         </div>
 
                         <div class="form-group">
                             <label for="username">Username:</label>
-                            <g:textField name="username" class="form-control"/>
+                            <g:textField name="username" class="form-control" value="${user?.username}"/>
                         </div>
 
                         <div class="form-group">
                             <label for="photo">Upload Photo:</label>
-                            <g:field type="file" name="photo" class="form-control"/>
+                            <g:field type="file" name="photo" class="form-control" />
                         </div>
                         <g:submitButton name="submit" class="btn btn-default" value="Update"/>
 
@@ -93,5 +94,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

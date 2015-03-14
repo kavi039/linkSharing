@@ -25,42 +25,43 @@ $(document).ready(function () {
             data: {resourceId: resourceId},
             url: url
         }).done(function (data) {
-            obj.parent().parent().parent().slideUp(500).detach();
+            if (data == "true") {
+                obj.parent().parent().parent().slideUp(500).detach();
+            }
+            else {
+                alert("Please subscribed first");
+            }
         });
     });
     $(".subscription").on('click', function () {
         var text1;
-        var sendData
-        var subscriptionCount=$('.subscriptionCount');
+        var sendData;
         var objAnchor = $(this);
-        var topicId = objAnchor.data('topic-id')
-        var objSelect = $('#' + topicId)
+        var nextDiv = objAnchor.parent().next();
+        var subscriptionCount = nextDiv.find('div.subscriptionCount')
+        var topicId = objAnchor.data('topic-id');
+        var objSelect = $('#' + topicId);
         var url;
         var seriouness = objSelect.val();
-        alert(">>>>>>>>>>>>"+topicId+">>>>>>>>>>>>>>>"+seriouness);
-        if (objAnchor.text() == "Subscribed") {
+        if (objAnchor.text() == "Subscribe") {
             url = Subscription;
-            text1 = "UnSubscribed";
-            objSelect.toggle();
+            text1 = "UnSubscribe";
             sendData = {topicId: topicId, seriousness: seriouness}
 
         }
         else {
             url = UnSubscription;
-            text1 = "Subscribed";
-            objSelect.toggle();
+            text1 = "Subscribe";
             sendData = {topicId: topicId};
-
         }
         $.ajax({
             data: sendData,
             url: url
         }).done(function (data) {
-           // alert(subscriptionCount.text()+">>>>>>>>>>>"+data.count);
-                //objSelect.val(seriouness);
-
-                objAnchor.text(text1);
-                subscriptionCount.text(data.count);
+            objSelect.val(seriouness);
+            objAnchor.text(text1);
+            subscriptionCount.text(data.count);
+            window.location.reload();
 
         });
     });
@@ -71,9 +72,7 @@ $(document).ready(function () {
 });
 
 
-
-
-function editTopic( topicId){
+function editTopic(topicId) {
     alert(topicId);
 }
 

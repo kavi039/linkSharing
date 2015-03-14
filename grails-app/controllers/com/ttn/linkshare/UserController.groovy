@@ -67,9 +67,10 @@ class UserController {
     def updateUserPassword(UserPasswordCO userPasswordCO) {
         Boolean userStatus = userService.updatePassword(userPasswordCO, "${session['username']}")
         if (userStatus) {
+            flash.message="New password is send to u in email"
             redirect(controller: 'user', action: 'editProfilePage')
         } else {
-            flash.message = "Password is invalid"
+            flash.error = "Password is invalid"
             redirect(controller: 'user', action: 'editProfilePage')
         }
     }

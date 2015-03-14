@@ -49,10 +49,22 @@ class TopicController {
     }
 
     def topicSubscription(Long topicId, String seriousness) {
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("**************")
+        println("aaya")
         Integer count = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
 
-            println "subdgfyewf cjhv rj $count"
-            render (model: [count:count] as JSON)
+        println "subdgfyewf cjhv rj $count"
+        println("gaya")
+        render ([count:count] as JSON)
 
 
     }

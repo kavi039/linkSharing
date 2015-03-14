@@ -12,14 +12,12 @@ class TopicService {
             topicCo.user = user
             Topic topic = new Topic(topicCo.properties)
             Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
-            if (topic.save() && subscription.save())
-            {
+            if (topic.save() && subscription.save()) {
                 println "is    save*******************************"
                 return true
-            }
-            else {
+            } else {
                 topic.errors.allErrors.each {
-                    println  it
+                    println it
                 }
                 println "is   not save*******************************"
                 return false
@@ -33,32 +31,33 @@ class TopicService {
     }
 
     Integer topicSubscription(Long topicId, String seriousness, String username) {
-            Integer count=0
-            User user = User.findByUsername(username)
-            Topic topic = Topic.findById(topicId)
+        Integer count = 0
+        User user = User.findByUsername(username)
+        Topic topic = Topic.findById(topicId)
         println "********$user  $topic"
-            Subscription subscription = new Subscription(user: user, topic: topic, seriousness: seriousness)
+        Subscription subscription = new Subscription(user: user, topic: topic, seriousness: seriousness)
 
-            if (subscription.save(flush: true)) {
-                println("********$seriousness")
-                count=Subscription.countByTopicAndUser(topic,user)
-                return count
+        if (subscription.save(flush: true)) {
+            println("********$seriousness")
+            count = Subscription.countByTopic(topic)
+            return count
 
-            } else {
-                return count
-            }
+        } else {
+            return count
         }
+    }
 
-   Integer  topicUnSubscription(Long topicId,String username){
-       User user=User.findByUsername(username)
-       Topic topic=Topic.get(topicId)
-      Subscription subscription= Subscription.findByTopicAndUser(topic,user)
-       println("**********"+subscription)
-       subscription?.delete(flush: true)
-       println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+Subscription.findByTopicAndUser(topic,user))
-       return Subscription.countByTopicAndUser(topic,user)
+    Integer topicUnSubscription(Long topicId, String username) {
+        User user = User.findByUsername(username)
+        Topic topic = Topic.get(topicId)
+        Subscription subscription = Subscription.findByTopicAndUser(topic, user)
+        println("**********" + subscription)
+        subscription?.delete(flush: true)
+        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +Subscription.countByTopic(topic) )
 
-   }
+        return Subscription.countByTopic(topic)
+
+    }
 
 
 }

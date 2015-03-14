@@ -11,7 +11,9 @@
                 </h4>
             </div>
             <div class="modal-body">
+                <div style="overflow-y: scroll;height:500px " >
                 <ls:trendingTopic/>
+                    </div>
             </div>
         </div>
 
