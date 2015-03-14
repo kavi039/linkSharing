@@ -6,9 +6,8 @@ import grails.transaction.Transactional
 class LinkResourceService {
 
     def save(LinkCO linkCO,String username) {
-        linkCO.topic = Topic.findByName(linkCO.name)
-
           linkCO.user =User.findByUsername(username)
+        linkCO.topic = Topic.findByNameAndUser(linkCO.name,linkCO.user)
           linkCO.isRead=true
         if(!linkCO.validate())
         {

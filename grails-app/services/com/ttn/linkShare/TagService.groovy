@@ -72,6 +72,9 @@ class TagService {
             eq('user', user)
             order("dateCreated", 'desc')
         }
+        topicList.each {
+            println ("*********************"+it.resources.size())
+        }
         return topicList
     }
 

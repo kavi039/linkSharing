@@ -10,6 +10,11 @@ class TopicService {
         if (topicCo.validate()) {
             User user = User.findByUsername(username)
             topicCo.user = user
+            Topic findTopic=Topic.findByNameAndUser(topicCo.name,user)
+            if(findTopic){
+                return false
+            }
+            else{
             Topic topic = new Topic(topicCo.properties)
             Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
             if (topic.save() && subscription.save()) {
@@ -21,7 +26,7 @@ class TopicService {
                 }
                 println "is   not save*******************************"
                 return false
-            }
+            }}
 
         } else {
             println "is   not validate*******************************"

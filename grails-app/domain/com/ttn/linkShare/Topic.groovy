@@ -13,7 +13,7 @@ class Topic {
     static belongsTo = [user: User]
 
     static constraints = {
-        name blank: false, unique: true
+        name blank: false
         visibility blank: false
     }
 }

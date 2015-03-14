@@ -10,10 +10,8 @@ class DocumentResourceService {
         File newFile = null
         MultipartFile file = documentCO.document
         String name = file.getOriginalFilename()
-        documentCO.topic = Topic.findByName(documentCO.name)
-        println ("****************document added${documentCO.topic.id}")
-
         documentCO.user =User.findByUsername(username)
+        documentCO.topic = Topic.findByNameAndUser(documentCO.name,documentCO.user)
         if (name) {
         File    newFileDir = new File("/home/intelligrape/Project/Document/${documentCO.user.username}")
             newFileDir.mkdirs()
