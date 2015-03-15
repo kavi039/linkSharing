@@ -11,7 +11,7 @@
 <body style="background-color:#1f6377;">
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="${createLink(controller: 'user', action: 'dashBoard')}">LinkSharing</a>
+        <a class="navbar-brand" href="javascript:void(0)" >LinkSharing</a>
     </div>
     <ul class="nav navbar-nav">
         <li class="active"><div>
