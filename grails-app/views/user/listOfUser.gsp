@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ttn.linkShare.User" contentType="text/html;charset=UTF-8" %>
 <head>
     <meta name="layout" content="header"/>
     <title>UserDetails</title>
@@ -21,7 +21,7 @@
         </div>
 
         <div id="data">
-
+            <g:render template="/user/userInfo" model="[userList:com.ttn.linkShare.User.findAll()]"/>
         </div>
         %{--<ul class="pagination">--}%
             %{--<li><a href="#">&laquo;</a></li>--}%
@@ -37,25 +37,20 @@
 </div>
 
 <script>
+
     $(document).on('click', '#userFindButton', function () {
         var userStatus = $('#userStatus').val();
         var searchByName = $('#searchByName').val();
         //  alert(userStatus + " --- " + searchByName)
 
         jQuery.ajax({
-            data: {userStatus: userStatus, searchByName: searchByName},
+            data: {userStatus: userStatus, searchByName: searchByName,arrange:'id'},
             url: "${createLink(controller: 'search',action:"findUserList")}"
         }).done(function (data) {
             //  alert(data);
             $('#data').html(data);
         });
     });
-//    $(document).ready(function () {
-//        $('').click(function () {
-//
-//        })
-//    });
-
 
     $(document).on('click', '.setActiveOrDeactive', function () {
         var userId = jQuery(this).data('user-id');
@@ -76,6 +71,8 @@
 
         });
     });
+
+
 </script>
 </body>
 </html>

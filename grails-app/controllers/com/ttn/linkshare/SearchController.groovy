@@ -20,14 +20,20 @@ class SearchController {
         render template: '../topic/topicSubscription', model: [topicList: topicList]
     }
 
-    def findUserList(String userStatus, String searchByName) {
+    def findUserList(String userStatus, String searchByName,String arrange) {
+        arrange=arrange.trim()
+        if(arrange.equals("Manage"))
+        {
+            arrange="id"
+        }
         List<User> userList
         if (userStatus.equals('Alluser')) {
-            userList = searchByName ? User.findAllByUsernameIlike("%${searchByName}%") : User.list()
+            userList = searchByName ? User.findAllByUsernameIlike("%${searchByName}%",[sort:arrange]) : User.list(sort:arrange)
         } else {
             Boolean b = userStatus.equals('Active')
-            userList = searchByName ? User.findAllByActiveAndUsernameIlike(b, "%${searchByName}%") : User.findAllByActive(b)
+            userList = searchByName ? User.findAllByActiveAndUsernameIlike(b, "%${searchByName}%",[sort:arrange]) : User.findAllByActive(b,[sort:arrange])
         }
+
         println "*"
         println "*"
         println "*"

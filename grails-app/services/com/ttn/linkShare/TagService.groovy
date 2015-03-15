@@ -73,7 +73,7 @@ class TagService {
             order("dateCreated", 'desc')
         }
         topicList.each {
-            println ("*********************"+it.resources.size())
+            println("*********************" + it.resources.size())
         }
         return topicList
     }
@@ -104,5 +104,6 @@ class TagService {
         }
         return resourceList
     }
+
 
 }

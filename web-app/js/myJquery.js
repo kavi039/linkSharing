@@ -65,10 +65,9 @@ $(document).ready(function () {
 
         });
     });
-    $('.caret').on('click', function () {
+    $('#caret1').on('click', function () {
         $('.dropdown-menu').toggle();
     });
-
 });
 
 

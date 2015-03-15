@@ -9,13 +9,16 @@ import com.ttn.linkShare.enums.Seriousness
 import grails.converters.JSON
 
 class TopicController {
-
     def topicService
 
     def show() {
-
-        println params.name
-        render view: 'topicShow', model: [topic: Topic.findByName(params.name)]
+        if (session['username']) {
+            println params.name
+            render view: 'topicShow', model: [topicName: params.name]
+        } else {
+            servletContext.setAttribute("name", params.name)
+            redirect(controller: 'login', action: 'loginForShow');
+        }
     }
 
     def create() {
@@ -30,6 +33,7 @@ class TopicController {
 
         if (topicService.create(topicCO, "${session['username']}")) {
             flash.error = "Topic created"
+            println(">>>>>>>>>>>>>>>>>>>>>$params")
             //redirect(controller: "user" ,action: "dashBoard")
             render(view: "/topic/topicShow", model: [topicName: topicCO.name])
         } else {
@@ -64,15 +68,15 @@ class TopicController {
 
         println "subdgfyewf cjhv rj $count"
         println("gaya")
-        render ([count:count] as JSON)
+        render([count: count] as JSON)
 
 
     }
 
     def topicUnSubscription(Long topicId) {
         println "*************$topicId"
-   Integer count= topicService.topicUnSubscription(topicId, "${session['username']}")
-        render model: [count:count] as JSON
+        Integer count = topicService.topicUnSubscription(topicId, "${session['username']}")
+        render model: [count: count] as JSON
 
     }
 

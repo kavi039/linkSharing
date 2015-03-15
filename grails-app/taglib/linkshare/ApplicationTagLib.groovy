@@ -85,4 +85,8 @@ class ApplicationTagLib {
     def displayResourcesOfTopic = { attr ->
         out << render(template: '/user/inbox', model: [resourceList: tagService.displayResourcesOfTopic(Topic.findByName(attr.topic))])
     }
+    def userList={attr->
+        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
+
+    }
 }

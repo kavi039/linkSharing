@@ -10,21 +10,23 @@ class LoginController {
         println "in **********LoginHandler"
     }
 
-    def loginHandler(UserCO userCO) {
+    def loginHandler() {
         println "in **********LoginHandler"
         if (session.getAttribute("username")) {
             redirect(controller: 'user', action: 'dashBoard')
             return
         }
-        User user = User.findByEmailAndPassword(userCO.email, userCO.password)
-        if (user?.active) {
+
+       User user=User.findByUsernameOrEmail(params.email,params.email)
+
+        if (user?.active&&user.password.equals(params.password)) {
             session["username"] = user.username
             redirect(controller: 'user', action: 'dashBoard')
             return
         } else {
             flash.error = "User not Found."
             redirect(controller: "login", action: "login")
-            return
+
         }
     }
 
@@ -33,10 +35,27 @@ class LoginController {
         redirect(controller: 'login', action: 'login')
 
     }
-    def changePassword(){
+
+    def loginForShow() {
 
     }
+   def loginShowHandler(){
+       User user=User.findByUsernameOrEmail(params.email,params.email)
+       if (user?.active&&user.password.equals(params.password)) {
+           session["username"] = user.username
+           println(">>>>>>>>>>>>>>>>>>>>>>>>${servletContext.getAttribute('name')}")
+           redirect(controller: 'topic', action: 'topicShow',params: [topicName:servletContext.getAttribute("name") ])
 
+       } else {
+           flash.error = "User not Found."
+           redirect(controller: "login", action: "loginForShow")
+
+       }
+   }
+
+    def changePassword() {
+
+    }
 
 
 }

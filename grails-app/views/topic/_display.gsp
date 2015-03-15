@@ -22,7 +22,6 @@
 
             <div class="col-md-6">
                 <p>Post</p>
-                <%">>>>"+topic.resources.size()%>
                 ${topic?.resources?.size()}
 
             </div>
