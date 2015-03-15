@@ -85,8 +85,12 @@ class ApplicationTagLib {
     def displayResourcesOfTopic = { attr ->
         out << render(template: '/user/inbox', model: [resourceList: tagService.displayResourcesOfTopic(Topic.findByName(attr.topic))])
     }
-    def userList={attr->
-        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
+//    def userList={attr->
+//        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
+//
+//    }
+   def subscribedTopicInAlphabeticalOrder={
+       out<<render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}").sort{it.name}])
+   }
 
-    }
 }

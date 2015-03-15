@@ -18,4 +18,10 @@ class ReadingItemService {
             return false
         }
     }
+    def markAsUnread(Long resourceId,String username){
+        Resource resource=Resource.get(resourceI
+
+    }
+
+
 }

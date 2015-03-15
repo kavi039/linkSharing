@@ -49,7 +49,7 @@ class TagService {
 
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
-        List<Topic> topicList = Subscription.createCriteria().list(max: 2, offset: 0) {
+        List<Topic> topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
             projections {
                 property('topic')
             }
@@ -100,7 +100,7 @@ class TagService {
     List<Resource> displayResourcesOfTopic(Topic topic) {
         List<Resource> resourceList = Resource.createCriteria().list(max: 2) {
             eq('topic', topic)
-            eq('isRead', false)
+           // eq('isRead', false)
         }
         return resourceList
     }

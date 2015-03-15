@@ -15,7 +15,14 @@
         </span>
 
         <div><ls:resourceType type="${resourceInstance.id}"/>
-        <ls:markAsRead type="${resourceInstance.id}"/>
+        %{--<ls:markAsRead type="${resourceInstance.id}"/>--}%
+            <g:if test="${resourceInstance.isRead}">
+                <a href="javascript:void(0)" data-resource-id="${resourceInstance.id}" class="isRead">Mark as Unread</a>
+            </g:if>
+            <g:else>
+                <a href="javascript:void(0)" data-resource-id="${resourceInstance.id}" class="isRead">Mark as read</a>
+            </g:else>
+
             <a href="#">ViewPosts</a>
         </div>
 

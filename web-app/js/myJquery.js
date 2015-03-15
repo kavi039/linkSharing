@@ -15,24 +15,44 @@ $(document).ready(function () {
         $("#trendingTopic").modal();
     });
 
-
     $(".isRead").on('click', function () {
         var obj = $(this);
         var url;
         var resourceId = $(this).data('resource-id');
-        url = MarkAsRead;
+        if (obj.text().trim() == "Mark as Unread") {
+            alert(obj.text()+">>"+resourceId);
+            url = MarkAsUnread;
+        }
+        else {
+            alert(obj.text()+">>"+resourceId);
+            url = MarkAsRead;
+        }
         $.ajax({
             data: {resourceId: resourceId},
             url: url
         }).done(function (data) {
-            if (data == "true") {
-                obj.parent().parent().parent().slideUp(500).detach();
-            }
-            else {
-                alert("Please subscribed first");
-            }
+            obj.text(data);
         });
     });
+
+
+    //$(".isRead").on('click', function () {
+    //    var obj = $(this);
+    //    var url;
+    //    var resourceId = $(this).data('resource-id');
+    //    url = MarkAsRead;
+    //    $.ajax({
+    //        data: {resourceId: resourceId},
+    //        url: url
+    //    }).done(function (data) {
+    //        if (data == "true") {
+    //            obj.parent().parent().parent().slideUp(500).detach();
+    //        }
+    //        else {
+    //            alert("Please subscribed first");
+    //        }
+    //    });
+    //});
     $(".subscription").on('click', function () {
         var text1;
         var sendData;

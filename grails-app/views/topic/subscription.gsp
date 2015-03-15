@@ -19,7 +19,7 @@
         </div>
 
         <div id="topicListDiv">
-            <ls:subscriptionTopic/>
+            <ls:subscribedTopicInAlphabeticalOrder/>
         </div>
     </div>
     </div>
@@ -40,9 +40,14 @@
         </div>
 
         <div class="panel-body" id="topicResourceDiv">
-           <ls:inbox/>
+
         </div>
     </div>
 </div>
+<script>
+    $("a.navbar-brand").click(function(){
+        $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+    });
+</script>
 </body>
 </html>
