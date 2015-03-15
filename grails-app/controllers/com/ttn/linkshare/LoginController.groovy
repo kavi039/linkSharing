@@ -5,28 +5,24 @@ import com.ttn.linkShare.UserCO
 import org.springframework.web.multipart.MultipartFile
 
 class LoginController {
+    def loginService
 
     def login() {
-        println "in **********LoginHandler"
+
     }
 
-    def loginHandler() {
-        println "in **********LoginHandler"
+    def loginHandler(UserCO userCO) {
         if (session.getAttribute("username")) {
             redirect(controller: 'user', action: 'dashBoard')
             return
         }
-
-       User user=User.findByUsernameOrEmail(params.email,params.email)
-
-        if (user?.active&&user.password.equals(params.password)) {
-            session["username"] = user.username
+        Boolean isUserExist = loginService.isUserExist(userCO)
+        if (isUserExist) {
+            session["username"] = userCO.username
             redirect(controller: 'user', action: 'dashBoard')
-            return
         } else {
             flash.error = "User not Found."
             redirect(controller: "login", action: "login")
-
         }
     }
 
@@ -39,19 +35,18 @@ class LoginController {
     def loginForShow() {
 
     }
-   def loginShowHandler(){
-       User user=User.findByUsernameOrEmail(params.email,params.email)
-       if (user?.active&&user.password.equals(params.password)) {
-           session["username"] = user.username
-           println(">>>>>>>>>>>>>>>>>>>>>>>>${servletContext.getAttribute('name')}")
-           redirect(controller: 'topic', action: 'topicShow',params: [topicName:servletContext.getAttribute("name") ])
 
-       } else {
-           flash.error = "User not Found."
-           redirect(controller: "login", action: "loginForShow")
+    def loginShowHandler(UserCO userCO) {
+        Boolean isUserExist = loginService.isUserExist(userCO)
+        if (isUserExist) {
+            session["username"] = userCO.username
+            redirect(controller: 'topic', action: 'topicShow', params: [topicName: servletContext.getAttribute("name")])
+        } else {
+            flash.error = "User not Found."
+            redirect(controller: "login", action: "loginForShow")
 
-       }
-   }
+        }
+    }
 
     def changePassword() {
 
