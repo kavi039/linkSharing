@@ -75,7 +75,9 @@ class UserController {
         }
     }
 
-
+def test(){
+  render   tagService.inbox(User.findByUsername("${session['username']}"))
+}
 
 
 }

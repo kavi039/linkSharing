@@ -20,11 +20,11 @@ $(document).ready(function () {
         var url;
         var resourceId = $(this).data('resource-id');
         if (obj.text().trim() == "Mark as Unread") {
-         //   alert(obj.text()+">>"+resourceId);
+            //   alert(obj.text()+">>"+resourceId);
             url = MarkAsUnread;
         }
         else {
-         //   alert(obj.text()+">>"+resourceId);
+            //   alert(obj.text()+">>"+resourceId);
             url = MarkAsRead;
         }
         $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function () {
             url = Subscription;
             text1 = "UnSubscribe";
             sendData = {topicId: topicId, seriousness: seriouness}
-
+            // alert(seriouness);
         }
         else {
             url = UnSubscription;
@@ -81,7 +81,7 @@ $(document).ready(function () {
             objSelect.val(seriouness);
             objAnchor.text(text1);
             subscriptionCount.text(data.count);
-           window.location.reload();
+            window.location.reload();
 
         });
     });
@@ -95,15 +95,53 @@ function editTopic(topicId) {
 
 }
 
-function setSeriousness(topicId){
-    var object=$("#"+topicId);
-    var seriousness=object.val();
+function setSeriousness(topicId, element) {
+
+    //alert(element.value+topicId);
+
+    $.ajax({
+        data: {topicId: topicId, seriousness: element.value},
+        url: SubscriptionUpdate
+    }).done(function (data) {
+        if (data == "true") {
+            object.val(element.value);
+        }
+        else
+            alert("process fail");
+    });
+}
+function setVisibility(topicId, element) {
+
+    $.ajax({
+        data: {topicId: topicId, visibility: element.value},
+        url: TopicVisibilityUpdate
+    }).done(function (data) {
+        if (data == "true") {
+            object.val(element.value);
+        }
+        else
+            alert("process fail");
+    });
+}
+function sendInvitation(topicName, topicId) {
 
 }
+function deleteTopic(topicId) {
+    $.ajax({
+        data: {topicId: topicId},
+        url: deleteTopicDetail
+    }).done(function (data) {
+        if (data =="true") {
+            window.location.reload();
+        }
+        else {
+            alert("deletion not possible");
+        }
+    });
+}
+function editTopic(topicId) {
 
-
-
-
+}
 
 
 

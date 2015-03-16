@@ -11,7 +11,7 @@
 <body style="background-color:#1f6377;">
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="javascript:void(0)" >LinkSharing</a>
+        <a class="navbar-brand" href="javascript:void(0)">LinkSharing</a>
     </div>
     <ul class="nav navbar-nav">
         <li class="active"><div>
@@ -42,12 +42,15 @@
 
 <g:layoutBody/>
 <script>
-    var MarkAsRead, MarkAsUnread, ResourceByList;
+    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate;
     $(document).ready(function () {
         MarkAsUnread = "${createLink(controller: "readingItem", action: "markAsUnRead")}";
         MarkAsRead = "${createLink(controller: "readingItem", action: "markAsRead")}";
         Subscription = "${createLink(controller: "topic",action: 'topicSubscription')}"
         UnSubscription = "${createLink(controller: "topic",action: 'topicUnSubscription')}"
+        SubscriptionUpdate = "${createLink(controller: "topic",action: 'topicSubscriptionUpdate')}"
+        TopicVisibilityUpdate = "${createLink(controller: "topic",action: 'topicVisibilityUpdate')}"
+        deleteTopicDetail = "${createLink(controller: "topic",action: 'deleteTopic')}"
     });
 </script>
 </body>

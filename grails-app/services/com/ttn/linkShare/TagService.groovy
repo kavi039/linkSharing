@@ -67,7 +67,7 @@ class TagService {
             projections {
                 property('resource')
             }
-            eq('user', user)
+            eq('user',user)
             eq('isRead',false)
 
         }

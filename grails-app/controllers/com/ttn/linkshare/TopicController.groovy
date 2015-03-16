@@ -53,21 +53,8 @@ class TopicController {
     }
 
     def topicSubscription(Long topicId, String seriousness) {
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("**************")
-        println("aaya")
         Integer count = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
-
-        println "subdgfyewf cjhv rj $count"
-        println("gaya")
+        println "in topic controller $count"
         render([count: count] as JSON)
 
 
@@ -80,7 +67,37 @@ class TopicController {
 
     }
 
+    def topicSubscriptionUpdate(Long topicId, String seriousness) {
+        println ">><><><><In topicsubscription+$topicId+$seriousness"
+        Boolean isUpdated = topicService.topicSubscriptionUpdate(topicId, "${session['username']}", seriousness)
+        if (isUpdated) {
+            render true
+        } else {
+            render false
+        }
 
+    }
+
+    def topicVisibilityUpdate(Long topicId, String visibility) {
+        Boolean isUpdated = topicService.topicVisibilityUpdate(topicId, visibility)
+        if (isUpdated) {
+            render true
+        } else {
+            render false
+        }
+    }
+
+    def deleteTopic(Long topicId) {
+        topicService.deleteTopic(topicId)
+        if(Topic.get(topicId))
+        {
+            render false
+        }
+        else
+        {
+            render true
+        }
+    }
 }
 
 

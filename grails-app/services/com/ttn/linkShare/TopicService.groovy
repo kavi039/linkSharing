@@ -45,10 +45,10 @@ class TopicService {
             println("********$seriousness")
             Set<Resource> resourceList = topic.resources
             resourceList.each {
-              ReadingItem readingItem=new ReadingItem(resource:it,isRead:false,user:user)
+                ReadingItem readingItem = new ReadingItem(resource: it, isRead: false, user: user)
                 readingItem.save(flush: true)
             }
-          count = Subscription.countByTopic(topic)
+            count = Subscription.countByTopic(topic)
 //            count = Subscription.countByUser(user)
             return count
 
@@ -61,15 +61,33 @@ class TopicService {
         User user = User.findByUsername(username)
         Topic topic = Topic.get(topicId)
         Subscription subscription = Subscription.findByTopicAndUser(topic, user)
-        List<ReadingItem> readingItemList= ReadingItem.findAllByResourceInListAndUser(topic.resources as List, user)
+        List<ReadingItem> readingItemList = ReadingItem.findAllByResourceInListAndUser(topic.resources as List, user)
         ReadingItem.deleteAll(readingItemList)
         println("**********" + subscription)
         subscription?.delete(flush: true)
         println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + Subscription.countByTopic(topic))
-        println("After unsubscribe" + ReadingItem.findAllByUser( user))
+        println("After unsubscribe" + ReadingItem.findAllByUser(user))
         return Subscription.countByTopic(topic)
 
     }
 
+    Boolean topicSubscriptionUpdate(Long topicId, String username, String seriousness) {
+        User user = User.findByUsername(username)
+        Topic topic = Topic.get(topicId)
+        Subscription subscription = Subscription.findByTopicAndUser(topic, user)
+        subscription.properties = [seriousness: seriousness]
+        subscription.save(flush: true) ? true : false
+    }
+
+    Boolean topicVisibilityUpdate(Long topicId, String visibility) {
+        Topic topic = Topic.get(topicId)
+        topic.properties = [visibility: visibility]
+        topic.save(flush: true) ? true : false
+    }
+
+    void deleteTopic(Long topicId) {
+       Topic topic=Topic.get(topicId)
+        topic.delete(flush:true)
+    }
 
 }
