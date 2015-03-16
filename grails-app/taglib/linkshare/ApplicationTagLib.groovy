@@ -1,6 +1,7 @@
 package linkshare
 
 import com.ttn.linkShare.DocumentResource
+import com.ttn.linkShare.ReadingItem
 import com.ttn.linkShare.Resource
 import com.ttn.linkShare.Subscription
 import com.ttn.linkShare.Topic
@@ -60,8 +61,8 @@ class ApplicationTagLib {
     }
 
     def markAsRead = { attr ->
-        Resource resource = Resource.findByIdAndIsRead(attr.type, true)
-        out << render(template: '/user/isRead', model: [type: resource, resourceId: attr.type])
+        ReadingItem readingItem = ReadingItem.findByResourceAndIsRead(attr.type, true)
+        out << render(template: '/user/isRead', model: [type:readingItem, resourceId: attr.type.id])
     }
     def subscriptionTopic = { attr ->
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])

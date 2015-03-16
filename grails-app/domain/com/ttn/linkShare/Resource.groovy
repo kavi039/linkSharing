@@ -5,8 +5,8 @@ abstract class Resource {
     String description
     Date dateCreated
     User user
-    Boolean isRead
-    Integer score
+//    Boolean isRead
+//    Integer score
 
     static mapping = {
         description sqlType: 'text'
@@ -15,11 +15,11 @@ abstract class Resource {
 
     static constraints = {
         description nullable: true
-         score nullable: true
-        isRead nullable: true
+//         score nullable: true
+//        isRead nullable: true
 
     }
-
+    static hasMany = [readingItems:ReadingItem,resourceRatings:ResourceRating]
 
     static belongsTo = [topic:  Topic]
 

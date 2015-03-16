@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 class TagService {
 
     def recentShare() {
-        List<Resource> resources = Resource.createCriteria().list(max: 5) {
+        List<Resource> resources = Resource.createCriteria().list(max:3) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
@@ -22,9 +22,13 @@ class TagService {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
-            order("score", "desc")
+            'resourceRatings'{
+                order("score", "desc")
+            }
+
         }
         return resources
+
     }
 
     def userSubscriptionByCurrentUserOrByTopic(String username, String topicName) {
@@ -59,10 +63,15 @@ class TagService {
     }
 
     List<Resource> inbox(User user) {
-        List<Resource> resourceList = Resource.createCriteria().list(max: 5) {
-            eq('isRead', false)
+        List<Resource> resourceList = ReadingItem.createCriteria().list(max: 5) {
+            projections {
+                property('resource')
+            }
             eq('user', user)
+            eq('isRead',false)
+
         }
+        println("**********"+resourceList.id)
         resourceList
     }
 

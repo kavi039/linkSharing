@@ -20,11 +20,11 @@ $(document).ready(function () {
         var url;
         var resourceId = $(this).data('resource-id');
         if (obj.text().trim() == "Mark as Unread") {
-            alert(obj.text()+">>"+resourceId);
+         //   alert(obj.text()+">>"+resourceId);
             url = MarkAsUnread;
         }
         else {
-            alert(obj.text()+">>"+resourceId);
+         //   alert(obj.text()+">>"+resourceId);
             url = MarkAsRead;
         }
         $.ajax({
@@ -81,7 +81,7 @@ $(document).ready(function () {
             objSelect.val(seriouness);
             objAnchor.text(text1);
             subscriptionCount.text(data.count);
-            window.location.reload();
+           window.location.reload();
 
         });
     });
@@ -92,7 +92,13 @@ $(document).ready(function () {
 
 
 function editTopic(topicId) {
-    alert(topicId);
+
+}
+
+function setSeriousness(topicId){
+    var object=$("#"+topicId);
+    var seriousness=object.val();
+
 }
 
 

@@ -10,23 +10,23 @@ class TopicService {
         if (topicCo.validate()) {
             User user = User.findByUsername(username)
             topicCo.user = user
-            Topic findTopic=Topic.findByNameAndUser(topicCo.name,user)
-            if(findTopic){
+            Topic findTopic = Topic.findByNameAndUser(topicCo.name, user)
+            if (findTopic) {
                 return false
-            }
-            else{
-            Topic topic = new Topic(topicCo.properties)
-            Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
-            if (topic.save() && subscription.save()) {
-                println "is    save*******************************"
-                return true
             } else {
-                topic.errors.allErrors.each {
-                    println it
+                Topic topic = new Topic(topicCo.properties)
+                Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
+                if (topic.save() && subscription.save()) {
+                    println "is    save*******************************"
+                    return true
+                } else {
+                    topic.errors.allErrors.each {
+                        println it
+                    }
+                    println "is   not save*******************************"
+                    return false
                 }
-                println "is   not save*******************************"
-                return false
-            }}
+            }
 
         } else {
             println "is   not validate*******************************"
@@ -39,12 +39,17 @@ class TopicService {
         Integer count = 0
         User user = User.findByUsername(username)
         Topic topic = Topic.findById(topicId)
-        println "********$user  $topic"
+        println "***********${topic.resources*.id}"
         Subscription subscription = new Subscription(user: user, topic: topic, seriousness: seriousness)
-
         if (subscription.save(flush: true)) {
             println("********$seriousness")
-            count = Subscription.countByTopic(topic)
+            Set<Resource> resourceList = topic.resources
+            resourceList.each {
+              ReadingItem readingItem=new ReadingItem(resource:it,isRead:false,user:user)
+                readingItem.save(flush: true)
+            }
+          count = Subscription.countByTopic(topic)
+//            count = Subscription.countByUser(user)
             return count
 
         } else {
@@ -56,10 +61,12 @@ class TopicService {
         User user = User.findByUsername(username)
         Topic topic = Topic.get(topicId)
         Subscription subscription = Subscription.findByTopicAndUser(topic, user)
+        List<ReadingItem> readingItemList= ReadingItem.findAllByResourceInListAndUser(topic.resources as List, user)
+        ReadingItem.deleteAll(readingItemList)
         println("**********" + subscription)
         subscription?.delete(flush: true)
-        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" +Subscription.countByTopic(topic) )
-
+        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + Subscription.countByTopic(topic))
+        println("After unsubscribe" + ReadingItem.findAllByUser( user))
         return Subscription.countByTopic(topic)
 
     }
