@@ -61,7 +61,8 @@ class ApplicationTagLib {
     }
 
     def markAsRead = { attr ->
-        ReadingItem readingItem = ReadingItem.findByResourceAndIsRead(attr.type,true)
+        User user=User.findByUsername("${session['username']}")
+        ReadingItem readingItem = ReadingItem.findByResourceAndIsReadAndUser(attr.type,true,user)
         out << render(template: '/user/isRead', model: [type:readingItem, resourceId: attr.type.id])
     }
     def subscriptionTopic = { attr ->

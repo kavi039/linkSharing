@@ -13,7 +13,6 @@
             <br>
             <br>
         </span>
-<%%>
         <div><ls:resourceType type="${resourceInstance?.id}"/>
 
         <ls:markAsRead type="${resourceInstance}"/>
