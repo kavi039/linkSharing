@@ -99,6 +99,7 @@ class TopicController {
         }
     }
     def updateTopicName(Long topicId,String topicName){
+        println("@@@@@@@@@@@@@@$topicId+>>>>>>>>>>$topicName")
       Boolean isUpdated= topicService.updateTopicName(topicId,topicName)
         if(isUpdated)
         {

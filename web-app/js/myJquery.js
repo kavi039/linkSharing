@@ -151,27 +151,25 @@ function editTopic(topicId, element) {
     var object = $(element);
     var parentObject = object.parent().parent().parent().parent();
     var editableObject = $('.editable', parentObject);
-    // alert(editableObject.text());
     var topicName = editableObject.data('topic-name');
-    editableObject.parent().html("<input type='text' id='topicNameAdded' value=" + topicName + "><input type='button' id='myEdit' value='save'><input type='button' id='edit' value='cancel'>");
+    var htmlOfElement=editableObject.parent().html();
+    editableObject.parent().html("<div class='editable'><input type='text' id='topicNameAdded' value=" + topicName + "><input type='button' id='myEdit' value='save'><input type='button' id='closeEdit' value='cancel'></div>");
     $(document).on('click','#myEdit',function () {
-            alert($("#topicNameAdded").val());
-            //$.ajax({
-            //    data: {topicId: topicId, topicName: topicName},
-            //   url:topicNameUpdate
-            //}).done(function(data){
-            //    if(data=="true"){
-            //        window.location.reload();
-            //    }
-            //    else{
-            //        alert("topic name not updated");
-            //    }
-            //});
+            $.ajax({
+                data: {topicId: topicId, topicName: $("#topicNameAdded").val()},
+               url:topicNameUpdate
+            }).done(function(data){
+                if(data=="true"){
+                    window.location.reload();
+                }
+                else{
+                    alert("topic name not updated");
+                }
+            });
         });
-    //alert($('#topicNameAdded1').val());
-//});$('button#myEdit').click(function(){
-//    alert("vhgvhvffhcffg");
-//});
+    $(document).on('click','#closeEdit',function(){
+        $('.editable', parentObject).parent().html( htmlOfElement);
+    });
 }
 
 function sendInvitation(topicName) {

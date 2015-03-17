@@ -90,6 +90,7 @@ class TopicService {
         topic.delete(flush:true)
     }
    Boolean updateTopicName(Long topicId,String topicName){
+       println("@@@@@@@@@@@@@@$topicId+>>>>>>>>>>$topicName")
      Topic topic=Topic.get(topicId)
        topic.properties=[name:topicName]
        topic.save(flush: true)?true:false
