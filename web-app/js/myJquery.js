@@ -152,10 +152,15 @@ var object=$(element);
     var parentObject=object.parent().parent().parent().parent();
     var editableObject=$('.editable',parentObject);
    // alert(editableObject.text());
-   var topicName=object.data('topic-name');
+   var topicName=editableObject.data('topic-name');
     editableObject.html("<input type='text' id='topicNameAdded1'  readonly value="+topicName+"><input type='button' id='myEdit' value='save'><input type='button' id='edit' value='cancel'>");
+   $('#myEdit',editableObject).click(
+       function(){
+           $.ajax({
 
- alert($('#topicNameAdded1').val());
+           });
+   });
+ //alert($('#topicNameAdded1').val());
 //});$('button#myEdit').click(function(){
 //    alert("vhgvhvffhcffg");
 //});

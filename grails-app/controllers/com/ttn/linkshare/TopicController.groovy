@@ -98,6 +98,16 @@ class TopicController {
             render true
         }
     }
+    def updateTopicName(Long topicId){
+      Boolean isUpdated= topicService.updateTopicName(topicId)
+        if(isUpdated)
+        {
+            render true
+        }
+        else{
+            render false
+        }
+    }
 }
 
 

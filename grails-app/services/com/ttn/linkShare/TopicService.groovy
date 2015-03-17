@@ -89,5 +89,7 @@ class TopicService {
        Topic topic=Topic.get(topicId)
         topic.delete(flush:true)
     }
+   Boolean updateTopicName(topicId){
 
+   }
 }
