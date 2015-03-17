@@ -29,6 +29,7 @@
 
         <div style="float: right"><ls:subscriptionActions topic="${topic}"/></div>
 
+
     </div>
 </div>
 <hr>

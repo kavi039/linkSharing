@@ -123,15 +123,27 @@ function setVisibility(topicId, element) {
             alert("process fail");
     });
 }
-function sendInvitation(topicName, topicId) {
 
-}
+//$(document).on('click', "#sendMail", function(){
+//   // alert($("form#formSendMail").serialize());
+//   // alert($("form").serialize());
+//    $.ajax({
+//       data:$("form#formSendMail").serialize(),
+//        url:sendMail
+//    }).done(function(){
+//        alert("Invition has been send");
+//    }).fail(function(){
+//        alert("Invition has not send");
+//    });
+//});
+
+
 function deleteTopic(topicId) {
     $.ajax({
         data: {topicId: topicId},
         url: deleteTopicDetail
     }).done(function (data) {
-        if (data =="true") {
+        if (data == "true") {
             window.location.reload();
         }
         else {
@@ -143,7 +155,21 @@ function editTopic(topicId) {
 
 }
 
+function sendInvitation(topicName) {
+    $('#sendInvitationOfTopic').modal();
+        $("input#topic").val(topicName);
+    $(document).on('click', "#sendMail", function(){
+    $.ajax({
+       data:$("form#formSendMail").serialize(),
+        url:sendMail
+    }).done(function(){
+        alert("Invition has been send");
+    }).fail(function(){
+        alert("Invition has not send");
+    });
+});
 
+}
 
 
 

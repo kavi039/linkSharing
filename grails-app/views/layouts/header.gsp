@@ -32,6 +32,7 @@
     <g:render template="/topic/documentShare"></g:render>
     <g:render template="/topic/shareLink"></g:render>
     <g:render template="/topic/trendingtopic"></g:render>
+    <g:render template="/sendInvitation/sendingInvitationforTopic"/>
 
 </g:if>
 </div>
@@ -42,7 +43,7 @@
 
 <g:layoutBody/>
 <script>
-    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate;
+    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate,sendMail;
     $(document).ready(function () {
         MarkAsUnread = "${createLink(controller: "readingItem", action: "markAsUnRead")}";
         MarkAsRead = "${createLink(controller: "readingItem", action: "markAsRead")}";
@@ -51,6 +52,7 @@
         SubscriptionUpdate = "${createLink(controller: "topic",action: 'topicSubscriptionUpdate')}"
         TopicVisibilityUpdate = "${createLink(controller: "topic",action: 'topicVisibilityUpdate')}"
         deleteTopicDetail = "${createLink(controller: "topic",action: 'deleteTopic')}"
+        sendMail="${createLink(controller:'sendInvitation',action:'sendEmail')}"
     });
 </script>
 </body>
