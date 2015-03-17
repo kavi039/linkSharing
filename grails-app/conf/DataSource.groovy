@@ -24,12 +24,25 @@ environments {
             password = "igdefault"
             username = "root"
             url = "jdbc:mysql://localhost:3306/linkshare_dev"
+
         }
     }
     test {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+        }
+    }
+    qa {
+        dataSource {
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            logSql = true
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "kavita-bora"
+            password = "igdefault"
+            url = "jdbc:mysql://localhost:3306/kavita-bora_QA"
+
         }
     }
     production {

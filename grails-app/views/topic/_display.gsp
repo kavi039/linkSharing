@@ -7,7 +7,7 @@
 
     <div class="media-body">
         <h4 class="media-heading"><a
-                href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: topic?.name])}">${topic?.name}</a>
+                href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: topic?.name])}" class="editable" data-topic-name="${topic.name}">${topic?.name}</a>
         </h4>
         <span>@${topic?.user?.firstName}</span>
         <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>

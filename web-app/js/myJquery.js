@@ -91,10 +91,6 @@ $(document).ready(function () {
 });
 
 
-function editTopic(topicId) {
-
-}
-
 function setSeriousness(topicId, element) {
 
     //alert(element.value+topicId);
@@ -151,8 +147,18 @@ function deleteTopic(topicId) {
         }
     });
 }
-function editTopic(topicId) {
+function editTopic(topicId,element) {
+var object=$(element);
+    var parentObject=object.parent().parent().parent().parent();
+    var editableObject=$('.editable',parentObject);
+   // alert(editableObject.text());
+   var topicName=object.data('topic-name');
+    editableObject.html("<input type='text' id='topicNameAdded1'  readonly value="+topicName+"><input type='button' id='myEdit' value='save'><input type='button' id='edit' value='cancel'>");
 
+ alert($('#topicNameAdded1').val());
+//});$('button#myEdit').click(function(){
+//    alert("vhgvhvffhcffg");
+//});
 }
 
 function sendInvitation(topicName) {

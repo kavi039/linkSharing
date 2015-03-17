@@ -6,9 +6,9 @@
         <%flash.topic=topic.name%>
         <g:select name="visibility" from="${com.ttn.linkShare.enums.Visibility.values()}" value="${topic.visibility}" id="${topic.id}" onchange="setVisibility(${topic.id},this)"/>
     </g:if>
-    <a href="javascript:void(0)"  class="glyphicon glyphicon-envelope" data-topic="${topic}" onclick="sendInvitation('${topic.name}')"></a>
+    <a href="javascript:void(0)"  class="glyphicon glyphicon-envelope A" data-topic="${topic}" onclick="sendInvitation('${topic.name}')"></a>
     <g:if test="${isAdminOrCreator}">
-        <a href="javascript:void(0)"  class="glyphicon glyphicon-edit" onclick="editTopic(${topic.id})"></a>
+        <a href="javascript:void(0)"  class="glyphicon glyphicon-edit" onclick="editTopic(${topic.id},this)"></a>
         <a href="javascript:void(0)"  class="glyphicon glyphicon-remove" onclick="deleteTopic(${topic.id})">uy</a>
     </g:if>
 
