@@ -21,11 +21,11 @@ class DocumentResourceService {
             file.transferTo(newFile)
         }
         documentCO.filePath = newFile?.canonicalFile
-        documentCO.isRead = true
         println ">>>>>>>>>>>>>>>>>>>>>>>>.${name}"
         if (documentCO.validate()) {
             DocumentResource documentResource = new DocumentResource(documentCO.properties)
-            return documentResource.save(failOnError: true)
+            ReadingItem readingItem=new ReadingItem(resource:documentResource,isRead: false,user:documentCO.user)
+            (documentResource.save(failOnError: true)!=null)&&(readingItem.save(flush:true)!=null)
         }
         else
         {

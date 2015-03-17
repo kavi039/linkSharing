@@ -7,14 +7,11 @@ class LinkCO {
     String name
     String description
     User user
-    Boolean isRead
-    Integer score
     String url
     Topic topic
 
     static constraints={
         url url: true,blank: false
-        score nullable: true
     }
 
 }

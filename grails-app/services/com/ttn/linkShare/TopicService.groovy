@@ -7,9 +7,9 @@ import grails.transaction.Transactional
 @Transactional
 class TopicService {
     Boolean create(TopicCo topicCo, String username) {
+        User user = User.findByUsername(username)
+        topicCo.user = user
         if (topicCo.validate()) {
-            User user = User.findByUsername(username)
-            topicCo.user = user
             Topic findTopic = Topic.findByNameAndUser(topicCo.name, user)
             if (findTopic) {
                 return false

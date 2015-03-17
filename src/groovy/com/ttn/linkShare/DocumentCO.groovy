@@ -8,8 +8,6 @@ class DocumentCO {
     String name
     String description
     User user
-    Boolean isRead
-    Integer score
     String filePath
     Topic topic
     MultipartFile document
