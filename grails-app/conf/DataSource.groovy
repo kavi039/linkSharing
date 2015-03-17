@@ -1,9 +1,9 @@
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "org.h2.Driver"
-    username = "sa"
-    password = ""
+//    driverClassName = "org.h2.Driver"
+//    username = "sa"
+//    password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -36,11 +36,10 @@ environments {
     qa {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            logSql = true
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
-            username = "kavita-bora"
             password = "igdefault"
+            username = "kavita-bora"
             url = "jdbc:mysql://localhost:3306/kavita-bora_QA"
 
         }

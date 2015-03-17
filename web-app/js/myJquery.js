@@ -147,20 +147,28 @@ function deleteTopic(topicId) {
         }
     });
 }
-function editTopic(topicId,element) {
-var object=$(element);
-    var parentObject=object.parent().parent().parent().parent();
-    var editableObject=$('.editable',parentObject);
-   // alert(editableObject.text());
-   var topicName=editableObject.data('topic-name');
-    editableObject.html("<input type='text' id='topicNameAdded1'  readonly value="+topicName+"><input type='button' id='myEdit' value='save'><input type='button' id='edit' value='cancel'>");
-   $('#myEdit',editableObject).click(
-       function(){
-           $.ajax({
-
-           });
-   });
- //alert($('#topicNameAdded1').val());
+function editTopic(topicId, element) {
+    var object = $(element);
+    var parentObject = object.parent().parent().parent().parent();
+    var editableObject = $('.editable', parentObject);
+    // alert(editableObject.text());
+    var topicName = editableObject.data('topic-name');
+    editableObject.parent().html("<input type='text' id='topicNameAdded' value=" + topicName + "><input type='button' id='myEdit' value='save'><input type='button' id='edit' value='cancel'>");
+    $(document).on('click','#myEdit',function () {
+            alert($("#topicNameAdded").val());
+            //$.ajax({
+            //    data: {topicId: topicId, topicName: topicName},
+            //   url:topicNameUpdate
+            //}).done(function(data){
+            //    if(data=="true"){
+            //        window.location.reload();
+            //    }
+            //    else{
+            //        alert("topic name not updated");
+            //    }
+            //});
+        });
+    //alert($('#topicNameAdded1').val());
 //});$('button#myEdit').click(function(){
 //    alert("vhgvhvffhcffg");
 //});
@@ -168,17 +176,17 @@ var object=$(element);
 
 function sendInvitation(topicName) {
     $('#sendInvitationOfTopic').modal();
-        $("input#topic").val(topicName);
-    $(document).on('click', "#sendMail", function(){
-    $.ajax({
-       data:$("form#formSendMail").serialize(),
-        url:sendMail
-    }).done(function(){
-        alert("Invition has been send");
-    }).fail(function(){
-        alert("Invition has not send");
+    $("input#topic").val(topicName);
+    $(document).on('click', "#sendMail", function () {
+        $.ajax({
+            data: $("form#formSendMail").serialize(),
+            url: sendMail
+        }).done(function () {
+            alert("Invition has been send");
+        }).fail(function () {
+            alert("Invition has not send");
+        });
     });
-});
 
 }
 

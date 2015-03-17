@@ -109,6 +109,10 @@ environments {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
+    qa {
+        grails.logging.jul.usebridge = false
+        grails.serverURL = "http://www.LinkSharing.com"
+    }
 }
 simian {
     reportsDir = "target/simian-reports"
