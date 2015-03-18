@@ -25,7 +25,7 @@ class ResourceController {
     }
 
     def post() {
-        render view: '/resource/post', model: [resourceInstance: Resource.get(params.resourceId)]
+        render view: '/resource/post', model: [resourceInstance: Resource.get(params?.resourceId)]
     }
 
 

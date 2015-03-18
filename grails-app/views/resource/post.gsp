@@ -112,14 +112,11 @@ def myService = grailsApplication.mainContext.getBean("tagService");
        $('#deleteResource').modal();
         $(document).on('click','.delete',function(){
             var resourceId=object.data('resource-id');
-            alert(resourceId);
             $.ajax({
                 data:{resourceId:resourceId},
                 url:  resourceDelete
             }).done(function(data){
-                window.location.assign(dashboard);
-                //alert("deleted");
-                //$("div.resourceRating").slideUp().detach();
+                $("div.resourceRating").slideUp().detach();
             });
         })
         $(document).on('click','.cancel',function(){
