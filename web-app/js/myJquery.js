@@ -2,12 +2,20 @@ $(document).ready(function () {
     $("a[title='sendInvitation']").on('click', function () {
         $("#sendInvitation").modal();
     });
+    $(document).on('click', "#sendTopicInvitation", function () {
+        $.ajax({
+            data: $("form#envelopForm").serialize(),
+            url: sendMail
+        }).always(function () {
+            alert('message has been send');
+        });
+    });
     $("a[title='comment']").on('click', function () {
         $("#comment").modal();
-    })
+    });
     $("a[title='document']").on('click', function () {
         $("#documentShare").modal();
-    })
+    });
     $("a[title='linkresource']").on('click', function () {
         $("#linkShare").modal();
     });
@@ -20,11 +28,9 @@ $(document).ready(function () {
         var url;
         var resourceId = $(this).data('resource-id');
         if (obj.text().trim() == "Mark as Unread") {
-            //   alert(obj.text()+">>"+resourceId);
             url = MarkAsUnread;
         }
         else {
-            //   alert(obj.text()+">>"+resourceId);
             url = MarkAsRead;
         }
         $.ajax({
@@ -35,24 +41,6 @@ $(document).ready(function () {
         });
     });
 
-
-    //$(".isRead").on('click', function () {
-    //    var obj = $(this);
-    //    var url;
-    //    var resourceId = $(this).data('resource-id');
-    //    url = MarkAsRead;
-    //    $.ajax({
-    //        data: {resourceId: resourceId},
-    //        url: url
-    //    }).done(function (data) {
-    //        if (data == "true") {
-    //            obj.parent().parent().parent().slideUp(500).detach();
-    //        }
-    //        else {
-    //            alert("Please subscribed first");
-    //        }
-    //    });
-    //});
     $(".subscription").on('click', function () {
         var text1;
         var sendData;
@@ -92,15 +80,19 @@ $(document).ready(function () {
 
 
 function setSeriousness(topicId, element) {
-
-    //alert(element.value+topicId);
-
     $.ajax({
         data: {topicId: topicId, seriousness: element.value},
         url: SubscriptionUpdate
     }).done(function (data) {
         if (data == "true") {
-            object.val(element.value);
+    var divObject=$("div#message");
+            $(document).ready(function(){
+        divObject.html("Seriouness has changed").css('background-color','yellow');
+            $(divObject).slideToggle();
+            setTimeout(function () {
+                divObject.slideUp();
+            }, 3000);
+            });
         }
         else
             alert("process fail");
@@ -113,27 +105,19 @@ function setVisibility(topicId, element) {
         url: TopicVisibilityUpdate
     }).done(function (data) {
         if (data == "true") {
-            object.val(element.value);
+            var divObject=$("div#message");
+            $(document).ready(function(){
+                divObject.html("Visibility has changed").css('background-color','yellow');
+                $(divObject).slideToggle();
+                setTimeout(function () {
+                    divObject.slideUp();
+                }, 3000);
+            });
         }
         else
             alert("process fail");
     });
 }
-
-//$(document).on('click', "#sendMail", function(){
-//   // alert($("form#formSendMail").serialize());
-//   // alert($("form").serialize());
-//    $.ajax({
-//       data:$("form#formSendMail").serialize(),
-//        url:sendMail
-//    }).done(function(){
-//        alert("Invition has been send");
-//    }).fail(function(){
-//        alert("Invition has not send");
-//    });
-//});
-
-
 function deleteTopic(topicId) {
     $.ajax({
         data: {topicId: topicId},
@@ -152,23 +136,23 @@ function editTopic(topicId, element) {
     var parentObject = object.parent().parent().parent().parent();
     var editableObject = $('.editable', parentObject);
     var topicName = editableObject.data('topic-name');
-    var htmlOfElement=editableObject.parent().html();
+    var htmlOfElement = editableObject.parent().html();
     editableObject.parent().html("<div class='editable'><input type='text' id='topicNameAdded' value=" + topicName + "><input type='button' id='myEdit' value='save'><input type='button' id='closeEdit' value='cancel'></div>");
-    $(document).on('click','#myEdit',function () {
-            $.ajax({
-                data: {topicId: topicId, topicName: $("#topicNameAdded").val()},
-               url:topicNameUpdate
-            }).done(function(data){
-                if(data=="true"){
-                    window.location.reload();
-                }
-                else{
-                    alert("topic name not updated");
-                }
-            });
+    $(document).on('click', '#myEdit', function () {
+        $.ajax({
+            data: {topicId: topicId, topicName: $("#topicNameAdded").val()},
+            url: topicNameUpdate
+        }).done(function (data) {
+            if (data == "true") {
+                window.location.reload();
+            }
+            else {
+                alert("topic name not updated");
+            }
         });
-    $(document).on('click','#closeEdit',function(){
-        $('.editable', parentObject).parent().html( htmlOfElement);
+    });
+    $(document).on('click', '#closeEdit', function () {
+        $('.editable', parentObject).parent().html(htmlOfElement);
     });
 }
 
@@ -179,12 +163,11 @@ function sendInvitation(topicName) {
         $.ajax({
             data: $("form#formSendMail").serialize(),
             url: sendMail
-        }).done(function () {
-            alert("Invition has been send");
-        }).fail(function () {
-            alert("Invition has not send");
+        }).always(function () {
+            alert('message has been send');
         });
     });
+
 
 }
 

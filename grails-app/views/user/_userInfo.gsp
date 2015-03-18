@@ -1,41 +1,35 @@
-
 <script>
-    $(document).ready(function(){
-$(".sort").on('click',function(){
-        var object=   $(this).parent("th");
-       // alert(object.text());
+    $(document).on('click', ".sort", function () {
+        var object = $(this).parent();
         var userStatus = $('#userStatus').val();
         var searchByName = $('#searchByName').val();
-        var sortBy=object.text().toString();
-        //  alert(userStatus + " --- " + searchByName)
-       // alert(object.text());
+        var sortBy = object.text().toString();
         jQuery.ajax({
-            data: {userStatus: userStatus, searchByName: searchByName,arrange:sortBy},
+            data: {userStatus: userStatus, searchByName: searchByName, arrange: sortBy},
             url: "${createLink(controller: 'search',action:"findUserList")}"
         }).done(function (data) {
-          //  alert(data);
             $('#data').html(data);
         });
     });
-    });
+
 </script>
 
 <div class="table-responsive">
-   <table class="table">
-       <thead>
-       <tr>
-           <th>id  <b class="caret sort" ></b></th>
-           <th>username  <b class="caret sort" ></b></th>
-           <th>email  <b class="caret sort"></b></th>
-           <th>firstName  <b class="caret sort"></b></th>
-           <th>lastName  <b class="caret sort"></b></th>
-           <th>active  <b class="caret sort"></b></th>
-           <th>Manage  <b class="caret sort"></b></th>
-       </tr>
-       </thead>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id  <b class="caret sort"></b></th>
+            <th>username  <b class="caret sort"></b></th>
+            <th>email  <b class="caret sort"></b></th>
+            <th>firstName  <b class="caret sort"></b></th>
+            <th>lastName  <b class="caret sort"></b></th>
+            <th>active  <b class="caret sort"></b></th>
+            <th>Manage  <b class="caret sort"></b></th>
+        </tr>
+        </thead>
 
 
-       <tbody>
+        <tbody>
         <g:each in="${userList}" var="user">
             <tr>
                 <td>${user?.id}</td>

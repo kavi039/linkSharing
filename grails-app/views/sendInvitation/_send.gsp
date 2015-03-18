@@ -12,14 +12,14 @@
                 </h4>
             </div>
             <div class="modal-body">
-<g:form controller="sendInvitation" action="sendEmail" class="form-group">
+<form id="envelopForm" class="form-group">
 <label for="email">Email</label>
 <g:textField name="email" class="form-control"/>
 <label for="topic">Topic</label>
 <g:select name="topic" from="${com.ttn.linkShare.Subscription.findAllByUser(com.ttn.linkShare.User.findByUsername("${session['username']}")).topic.name}">
 </g:select>
-<g:submitButton class="btn btn-default" value="Send" name="send"/>
-</g:form>
+<a class="btn btn-default"  id="sendTopicInvitation">send</a>
+</form>
 </div>
 </div>
 

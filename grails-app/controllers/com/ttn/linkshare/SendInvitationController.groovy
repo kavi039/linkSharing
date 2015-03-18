@@ -9,11 +9,9 @@ class SendInvitationController {
         String address = params.get("email")
         String sub = "${params.get("topic")} invitation"
 
-        if (sendInvitationService.sendInvitation(address, sub, url)) {
-            flash.message = "message send"
-        } else {
-            flash.message = "message has not send"
-        }
-        redirect(controller: 'user', action: 'dashBoard')
+       sendInvitationService.sendInvitation(address, sub, url)
+        render true
+          //  flash.message = "message send"
+       // redirect(controller: 'user', action: 'dashBoard')
     }
 }

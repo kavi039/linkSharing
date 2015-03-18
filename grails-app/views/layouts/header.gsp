@@ -26,6 +26,7 @@
         </g:if>
     </ul>
 </nav>
+<div id="message" style="display: none"></div>
 <g:if test="${session['username']}">
     <g:render template="/sendInvitation/send"></g:render>
     <g:render template="/topic/createTopic"></g:render>
@@ -42,6 +43,7 @@
 <script src="${resource(dir: "/js", file: 'myJquery.js')}"></script>
 
 <g:layoutBody/>
+
 <script>
     var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate,sendMail,topicNameUpdate;
     $(document).ready(function () {

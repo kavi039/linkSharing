@@ -21,16 +21,16 @@
         </div>
 
         <div id="data">
-            <g:render template="/user/userInfo" model="[userList:com.ttn.linkShare.User.findAll()]"/>
+            <g:render template="/user/userInfo" model="[userList: com.ttn.linkShare.User.findAll()]"/>
         </div>
         %{--<ul class="pagination">--}%
-            %{--<li><a href="#">&laquo;</a></li>--}%
-            %{--<li class="active"><a href="#">1</a></li>--}%
-            %{--<li class="disabled"><a href="#">2</a></li>--}%
-            %{--<li><a href="#">3</a></li>--}%
-            %{--<li><a href="#">4</a></li>--}%
-            %{--<li><a href="#">5</a></li>--}%
-            %{--<li><a href="#">&raquo;</a></li>--}%
+        %{--<li><a href="#">&laquo;</a></li>--}%
+        %{--<li class="active"><a href="#">1</a></li>--}%
+        %{--<li class="disabled"><a href="#">2</a></li>--}%
+        %{--<li><a href="#">3</a></li>--}%
+        %{--<li><a href="#">4</a></li>--}%
+        %{--<li><a href="#">5</a></li>--}%
+        %{--<li><a href="#">&raquo;</a></li>--}%
         %{--</ul>--}%
 
     </div>
@@ -38,20 +38,17 @@
 
 <script>
 
-    $("a.navbar-brand").click(function(){
-        $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+    $("a.navbar-brand").click(function () {
+        $(this).attr('href', "${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
     });
 
     $(document).on('click', '#userFindButton', function () {
         var userStatus = $('#userStatus').val();
         var searchByName = $('#searchByName').val();
-        //  alert(userStatus + " --- " + searchByName)
-
         jQuery.ajax({
-            data: {userStatus: userStatus, searchByName: searchByName,arrange:'id'},
+            data: {userStatus: userStatus, searchByName: searchByName, arrange: 'id'},
             url: "${createLink(controller: 'search',action:"findUserList")}"
         }).done(function (data) {
-            //  alert(data);
             $('#data').html(data);
         });
     });
@@ -59,7 +56,6 @@
     $(document).on('click', '.setActiveOrDeactive', function () {
         var userId = jQuery(this).data('user-id');
         var obj = $(this)
-        // alert(">>>>>>>>>>>>>>>>"+userId+"____"+userStatus);
         jQuery.ajax({
             data: {userId: userId},
             url: "${createLink(controller: 'user',action:"updateUserByActivation")}"
@@ -70,7 +66,7 @@
             }
             else {
                 obj.val('Activated');
-               obj.parent().prev().html("Deactivated");
+                obj.parent().prev().html("Deactivated");
             }
 
         });
