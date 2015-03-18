@@ -7,7 +7,9 @@
     <div class="media-body">
         <span style="float: right">${resourceInstance.topic.name}</span>
         <span>${resourceInstance.user.name}</span>
+        <br>
         <span>${"@${resourceInstance.user.firstName}"}</span>
+        <br>
         <span>${resourceInstance.description}
             <br>
             <br>
@@ -16,7 +18,7 @@
 
         <div><ls:resourceType type="${resourceInstance?.id}"/>
         <ls:markAsRead type="${resourceInstance}"/>
-            <a href="#">ViewPosts</a>
+            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance.id])}">ViewPosts</a>
         </div>
 
     </div>

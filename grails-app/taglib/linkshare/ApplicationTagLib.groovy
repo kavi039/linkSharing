@@ -91,8 +91,11 @@ class ApplicationTagLib {
 //        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
 //
 //    }
-   def subscribedTopicInAlphabeticalOrder={
+   def subscribedTopicInAlphabeticalOrder={attr->
        out<<render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}").sort{it.name}])
    }
+    def dateFormat={attr->
+       out<<attr.type.format("hh:mm:ss dd/MM/yyyy")
+    }
 
 }

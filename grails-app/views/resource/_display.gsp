@@ -7,11 +7,14 @@
         <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName:resourceInstance?.topic?.name])}" style="display:block;">  <span  style="float: right">${resourceInstance?.topic?.name}</span></a>
         <p>${resourceInstance.user.name}</p>
         <p>${"@${resourceInstance.user.firstName}"}</p>
+        <br>
         <p>
             ${resourceInstance.description}
         </p>
-            <a href="#"> <a href="#" style="display:block;">  <span  style="float: right">ViewPosts</span></a>
-            </a>
+        <br>
+        <br>
+            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance.id])}" style="display:block;">  <span  style="float: right">ViewPosts</span></a>
+
         </div>
     </div>
     <hr/>

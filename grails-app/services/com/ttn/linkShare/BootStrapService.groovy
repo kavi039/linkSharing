@@ -93,11 +93,10 @@ class BootStrapService {
     }
 
     void ratingScore(List<ReadingItem> readingItemList) {
-        int i = 1
         readingItemList.each {
-            ResourceRating resourceRating = new ResourceRating(resourse: it.resource, score: (it.isRead ? i : 0), user: it.user)
+            ResourceRating resourceRating = new ResourceRating(resourse: it.resource, score:1, user: it.user)
             resourceRating.save(flush: true)
-            i = i + 1
+
         }
     }
 
