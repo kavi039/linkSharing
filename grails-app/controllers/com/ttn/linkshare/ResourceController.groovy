@@ -7,7 +7,8 @@ import com.ttn.linkShare.ResourceRating
 import com.ttn.linkShare.User
 
 class ResourceController {
-def tagService
+    def tagService
+
     def downloadAction(Long resourceId) {
         Resource resource = DocumentResource.get(resourceId)
         File file = new File(resource.filePath)
@@ -27,22 +28,19 @@ def tagService
         render view: '/resource/post', model: [resourceInstance: Resource.get(params.resourceId)]
     }
 
+
     def resourceRating(Long resourceId, Integer score) {
         User user = User.findByUsername("${session['username']}")
         Resource resource = Resource.get(resourceId)
         ResourceRating resourceRating = ResourceRating.findOrCreateByResourseAndUser(resource, user)
-        println "<<<<<<<<<<<<<< ${resourceRating.id}"
         resourceRating.properties = [user: user, resourse: resource, score: score]
-        if(resourceRating.save(flush: true))
-        {
-            println "<<< ${resourceRating.score}"
-            render true
-        }
-        else{
-            return false
-        }
+        Boolean status = resourceRating.save(flush: true)
+        render status
     }
-
-
+    def deleteResource(Long resourceId){
+        Resource resource=Resource.get(resourceId)
+        resource.delete(flush: true)
+        render true
+    }
 
 }

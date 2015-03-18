@@ -57,6 +57,8 @@
         sendMail="${createLink(controller:'sendInvitation',action:'sendEmail')}"
         topicNameUpdate="${createLink(controller:'topic',action:'updateTopicName')}"
         resourceRatingUpdate="${createLink(controller: 'resource',action: 'resourceRating')}"
+        resourceDelete="${createLink(controller: 'resource',action: 'deleteResource')}"
+        dashboard="${createLink(controller: 'user',action: 'dashBoard',absolute: true)}"
     });
 </script>
 </body>

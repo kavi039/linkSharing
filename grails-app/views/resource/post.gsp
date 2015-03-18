@@ -9,7 +9,7 @@ def myService = grailsApplication.mainContext.getBean("tagService");
 </head>
 
 <body>
-<div class="col-md-6">
+<div class="col-md-6 resourceRating">
     <div class="panel panel-default">
 
         <div class="panel-body">
@@ -20,13 +20,13 @@ def myService = grailsApplication.mainContext.getBean("tagService");
                 </div>
 
                 <div class="media-body">
-                    <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance.topic.name])}"><span
+                    <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.name])}"><span
                             style="float: right">${resourceInstance?.topic?.name}</span></a>
 
                     <span>${resourceInstance?.user?.name}</span>
                     <br>
                     <span>${"@${resourceInstance?.user?.firstName}"}</span>
-                    <span style="float: right"><ls:dateFormat type="${resourceInstance.dateCreated}"/></span>
+                    <span style="float: right"><ls:dateFormat type="${resourceInstance?.dateCreated}"/></span>
 
                     <div class="rating-select parent" data-resource-Id="${resourceInstance.id}">
                         <a href="javascript:void(0)" class="rating" data-rating="1"><span
@@ -50,6 +50,9 @@ def myService = grailsApplication.mainContext.getBean("tagService");
 
                     <div><ls:resourceType type="${resourceInstance?.id}"/>
                     <ls:markAsRead type="${resourceInstance}"/>
+                    <g:if test="${session['username']}">
+                        <ls:adminOrCreatorOfResource resourceId="${resourceInstance?.id}"/>
+                    </g:if>
                     </div>
 
                 </div>
@@ -68,28 +71,10 @@ def myService = grailsApplication.mainContext.getBean("tagService");
         </div>
         </g:if>
         <g:else>
-            <div class="panel panel-default">
-              <div class="panel-heading">Login</div>
-
-              <div class="panel-body">
-            <g:form role="form" controller="login" action="loginHandler">
-                <div class="form-group">
-                    <label for="email">Email/UserName:</label>
-                    <g:textField name="email" id="email" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <g:passwordField name="password" id="password" class="form-control"/>
-                </div>
-
-                <g:submitButton name="submit" class="btn btn-default" value="Login"/>
-            </g:form>
-            <a href="<g:createLink controller='login' action='changePassword'/>"
-               title="change Password">Forget Password?</a>
-            </div>
+          <g:render template="/login/login"></g:render>
+            <g:render template="/login/register"></g:render>
         </g:else>
-
+<g:render template="/resource/deleteResource"></g:render>
 
     </div>
 <script>
@@ -121,6 +106,25 @@ def myService = grailsApplication.mainContext.getBean("tagService");
     ratingFun(score);
         });}
 
+    });
+    $(document).on('click','.deleteResource',function(){
+        var object=$(this);
+       $('#deleteResource').modal();
+        $(document).on('click','.delete',function(){
+            var resourceId=object.data('resource-id');
+            alert(resourceId);
+            $.ajax({
+                data:{resourceId:resourceId},
+                url:  resourceDelete
+            }).done(function(data){
+                window.location.assign(dashboard);
+                //alert("deleted");
+                //$("div.resourceRating").slideUp().detach();
+            });
+        })
+        $(document).on('click','.cancel',function(){
+            $('#deleteResource').modal('hide');
+        })
     });
 
 </script>
