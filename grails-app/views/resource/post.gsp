@@ -104,34 +104,10 @@ def myService = grailsApplication.mainContext.getBean("tagService");
 
         var object = $('a.rating');
         var i = 0;
-        switch (score) {
-            case 1:
-                $(object[0]).css('color', 'red');
-                 for( i=1;i<5;i++)
-                $(object[i]).css('color', 'blue');
-                break;
-            case 2:
-                for (i = 0; i < score; i++)
-                    $(object[i]).css('color', 'red');
-                    for(i=2;i<5;i++)
-                        $(object[i]).css('color', 'blue');
-                break;
-            case 3:
-                for (i = 0; i < score; i++)
-                    $(object[i]).css('color', 'red');
-                for(i=3;i<5;i++)
-                    $(object[i]).css('color', 'blue');
-                break;
-            case 4:
-                for (i = 0; i < score; i++)
-                    $(object[i]).css('color', 'red');
-                    $(object[4]).css('color','blue');
-                break;
-            case 5:
-                for (i = 0; i < score; i++)
-                    $(object[i]).css('color', 'red');
-                break;
+        for(i=0;i<5;i++){
+            $(object[i]).css('color',(i<score?'red':'blue'));
         }
+
     }
     $(document).on('click','.rating',function(){
         if( ${session['username']!=null}){
