@@ -22,9 +22,12 @@
 <g:textArea name="description" class="form-control"/>
 </div>
 <div class="form-group">
-<label for="name">Topic</label>
-<g:select from="${com.ttn.linkShare.Topic.list().name}" name="name" />
+<label for="topicId">Topic</label>
+<g:select from="${com.ttn.linkShare.Topic.list()}" name="topicId" optionKey="id" optionValue="name"/>
 </div>
+    <g:if test="${resourceInstance}">
+        <input type="hidden" name="id" value="${resourceInstance?.id}">
+    </g:if>
 <input type="reset" name="reset" value="cancel" class="btn btn-default"/>
 <g:submitButton name="submit" class="btn btn-default" value="Save"/>
 </g:uploadForm>

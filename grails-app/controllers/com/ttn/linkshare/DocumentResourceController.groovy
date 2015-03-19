@@ -6,7 +6,7 @@ class DocumentResourceController {
     def documentResourceService
 
     def saveDocument(DocumentCO documentCO) {
-     Boolean b= documentResourceService.save(documentCO,"${session['username']}")
+    Boolean b= documentResourceService.save(documentCO,"${session['username']}")
         if(b)
         {
             flash.message="document added"
@@ -15,7 +15,7 @@ class DocumentResourceController {
         {
             flash.error="document not added"
         }
-        redirect(controller: 'user',action: 'dashBoard')
+       redirect(controller: 'user',action: 'dashBoard')
     }
 
 }

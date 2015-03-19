@@ -1,8 +1,8 @@
 <div class="media">
     <g:each in="${userList}" var="userInfo">
         <div class="media-left">
-            <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo?.id])}"
-                 height="100px" width="100px"/>
+      <a href="${createLink(controller: 'user',action: 'user', params: [id: userInfo?.id])}">     <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo?.id])}"
+                 height="100px" width="100px"/></a>
         </div>
 
         <div class="media-body">

@@ -7,6 +7,7 @@ import com.ttn.linkShare.Subscription
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 import com.ttn.linkShare.enums.Seriousness
+import com.ttn.linkShare.enums.Visibility
 
 class ApplicationTagLib {
 
@@ -25,7 +26,7 @@ class ApplicationTagLib {
     }
 
     def user = { attr ->
-        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username,attr.topic)])
+        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username, attr.topic)])
     }
 
 
@@ -57,13 +58,13 @@ class ApplicationTagLib {
 
     def resourceType = { attr ->
         DocumentResource isDocument = DocumentResource.get(attr.type)
-        out << render(template: '/user/isDocOrLink', model: [type: isDocument,resourceId:attr.type])
+        out << render(template: '/user/isDocOrLink', model: [type: isDocument, resourceId: attr.type])
     }
 
     def markAsRead = { attr ->
-        User user=User.findByUsername("${session['username']}")
-        ReadingItem readingItem = ReadingItem.findByResourceAndIsReadAndUser(attr.type,true,user)
-        out << render(template: '/user/isRead', model: [type:readingItem, resourceId: attr.type.id])
+        User user = User.findByUsername("${session['username']}")
+        ReadingItem readingItem = ReadingItem.findByResourceAndIsReadAndUser(attr.type, true, user)
+        out << render(template: '/user/isRead', model: [type: readingItem, resourceId: attr.type.id])
     }
     def subscriptionTopic = { attr ->
         out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}")])
@@ -91,8 +92,39 @@ class ApplicationTagLib {
 //        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
 //
 //    }
-   def subscribedTopicInAlphabeticalOrder={
-       out<<render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}").sort{it.name}])
-   }
+    def subscribedTopicInAlphabeticalOrder = { attr ->
+        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}").sort {
+            it.name
+        }])
+    }
+    def dateFormat = { attr ->
+        out << attr.type?.format("hh:mm:ss dd/MM/yyyy")
+    }
+    def adminOrCreatorOfResource = { attr ->
+        User user = User.findByUsername("${session['username']}")
+        Resource resource = Resource.findByUserAndId(user, attr.resourceId)
+        println("****************$resource")
+        Boolean adminOrCreator = ((resource != null) || user.admin)
+        out << render(template: '/resource/actionPerformed', model: [adminOrCreator: adminOrCreator, resource: resource])
+    }
+    def userPublicProfile = { attr ->
+        Boolean status = false
+        User user = User.get(attr.userId)
+        if (user.username.equals("$session['username']") && user.admin) {
+            status = true
+        }
 
+        out << render(template: '/user/profilePage', model: [userPublicProfileDTO: tagService.userPublicProfileInfo(user, status)])
+    }
+    def publicTopicCreatedByUser={attr->
+        User user=User.get(attr.userId)
+        List<Topic>topicList=tagService.topicCreatedByUser(user.username)
+        if(topicList)
+        {
+            topicList=topicList.findAll{
+                it.visibility.equals(Visibility.PUBLIC)
+            }
+        }
+        out << render(template: '/topic/topicSubscription', model: [topicList:topicList])
+    }
 }

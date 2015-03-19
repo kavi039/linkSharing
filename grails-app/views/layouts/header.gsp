@@ -45,7 +45,7 @@
 <g:layoutBody/>
 
 <script>
-    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate,sendMail,topicNameUpdate;
+    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate,sendMail,topicNameUpdate,resourceRatingUpdate;
     $(document).ready(function () {
         MarkAsUnread = "${createLink(controller: "readingItem", action: "markAsUnRead")}";
         MarkAsRead = "${createLink(controller: "readingItem", action: "markAsRead")}";
@@ -56,6 +56,10 @@
         deleteTopicDetail = "${createLink(controller: "topic",action: 'deleteTopic')}"
         sendMail="${createLink(controller:'sendInvitation',action:'sendEmail')}"
         topicNameUpdate="${createLink(controller:'topic',action:'updateTopicName')}"
+        resourceRatingUpdate="${createLink(controller: 'resource',action: 'resourceRating')}"
+        resourceDelete="${createLink(controller: 'resource',action: 'deleteResource')}"
+        dashboard="${createLink(controller: 'user',action: 'dashBoard',absolute: true)}"
+        documentController="${createLink(controller:'documentResource' ,action:'saveDocument')}"
     });
 </script>
 </body>

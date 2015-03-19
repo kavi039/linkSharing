@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 class TagService {
 
     def recentShare() {
-        List<Resource> resources = Resource.createCriteria().list(max:3) {
+        List<Resource> resources = Resource.createCriteria().list(max: 3) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
@@ -22,7 +22,7 @@ class TagService {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
-            'resourceRatings'{
+            'resourceRatings' {
                 order("score", "desc")
             }
 
@@ -67,11 +67,11 @@ class TagService {
             projections {
                 property('resource')
             }
-            eq('user',user)
-            eq('isRead',false)
+            eq('user', user)
+            eq('isRead', false)
 
         }
-        println("**********"+resourceList.id)
+        println("**********" + resourceList.id)
         resourceList
     }
 
@@ -80,9 +80,6 @@ class TagService {
         List<Topic> topicList = Topic.createCriteria().list(max: 4, offset: 0) {
             eq('user', user)
             order("dateCreated", 'desc')
-        }
-        topicList.each {
-            println("*********************" + it.resources.size())
         }
         return topicList
     }
@@ -109,10 +106,43 @@ class TagService {
     List<Resource> displayResourcesOfTopic(Topic topic) {
         List<Resource> resourceList = Resource.createCriteria().list(max: 2) {
             eq('topic', topic)
-           // eq('isRead', false)
         }
         return resourceList
     }
 
+    Integer getScore(Resource resourceInstance) {
+        Integer score = ResourceRating.createCriteria().get{
+            projections {
+                avg('score')
+            }
+           eq('resourse',resourceInstance)
+
+        }
+        return score
+    }
+    def userPublicProfileInfo(User user,Boolean status) {
+        Integer subscriptionCount,topicCount=topicCreatedByUser(user.username).size()
+        List<Topic> topicList=Subscription.createCriteria().list(){
+            projections {
+                property('topic')
+            }
+        }
+        subscriptionCount=topicList.size()
+        if(!status){
+        topicCount=topicCreatedByUser(user.username).findAll{
+            it.visibility.equals(Visibility.PUBLIC)
+        }.size()n
+        subscriptionCount=topicList.findAll{
+            it.visibility.equals(Visibility.PUBLIC)
+        }.size()
+
+        }
+        UserPublicProfile userPublicProfile=new UserPublicProfile(subscriptionCount: subscriptionCount,publicTopicCreated:topicCount,user:user)
+      return  userPublicProfile
+
+    }
+    List<Topic> publicTopicCreatedByUser(S){
+
+    }
 
 }

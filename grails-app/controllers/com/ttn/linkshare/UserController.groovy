@@ -23,6 +23,9 @@ class UserController {
     def editProfilePage() {
 
     }
+    def user(){
+
+    }
 
     def registerHandler(UserCO userCO) {
         if (userService.register(userCO)) {
@@ -76,7 +79,8 @@ class UserController {
     }
 
 def test(){
-  render   tagService.inbox(User.findByUsername("${session['username']}"))
+   User user= User.findByUsername("${session['username']}")
+  render  ( tagService.userPublicProfileInfo(user))
 }
 
 
