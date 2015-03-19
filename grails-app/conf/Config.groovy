@@ -111,7 +111,7 @@ environments {
     }
     qa {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://www.LinkSharing.com"
+        grails.serverURL = "kavita-bora.qa6.intelligrape.net"
     }
 }
 simian {

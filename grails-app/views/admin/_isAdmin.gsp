@@ -1,9 +1,10 @@
+<%@ page import="com.ttn.linkShare.User" %>
 <li><a href="javascript:void(0)" title="comment"><span class="glyphicon glyphicon-comment"></span></a></li>
 <li><a href="javascript:void(0)" title="document"><span class="glyphicon glyphicon-file"></span></a></li>
 <li><a href="javascript:void(0)" title="linkresource"><span class="glyphicon glyphicon-paperclip"></span></a></li>
 <li><a title="sendInvitation" href="javascript:void(0)"><span class="glyphicon glyphicon-envelope"></span></a></li>
 <li><a href="javascript:void(0)" title="trendingTopic"><span class="glyphicon glyphicon-file"></span></a></li>
-<li><a href="javascript:void(0)" title="user Profile"><span class="glyphicon glyphicon-user"></span></a></li>
+<li><a href="javascript:void(0)" title="user Profile"><img src="${createLink(controller: 'image',action: 'renderImage',params: [id:com.ttn.linkShare.User.findByUsername("${session['username']}").id])}"/></a></li>
 <li>
 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
     ${session['username']}
