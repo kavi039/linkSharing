@@ -21,7 +21,7 @@ class BootStrapService {
         List<User> users = []
         User user
         2.times {
-            user = new User(username: "kavita${it}", email: "kavita${it}@gmail.com ", password: "1234", firstName: "kavita $it", lastName: "bora", admin: (it % 2 == 0 ? false : true), active: (it % 2 == 0 ? true : false), photoPath: "kavita${it}.jpeg")
+            user = new User(username: "kavita${it}", email: "kavita${it}@gmail.com ", password: "1234", firstName: "kavita $it", lastName: "bora", admin: (it % 2 == 0 ), active:true , photoPath: "kavita${it}.jpeg")
             if (user.save(failOnError: true)) {
                 users.add(user)
             } else {
