@@ -120,5 +120,27 @@ class TagService {
         }
         return score
     }
+    def userPublicProfileInfo(User user,Boolean status) {
+        Integer subscriptionCount,topicCount=topicCreatedByUser(user.username).size()
+        List<Topic> topicList=Subscription.createCriteria().list(){
+            projections {
+                property('topic')
+            }
+        }
+        subscriptionCount=topicList.size()
+        if(!status){
+        topicCount=topicCreatedByUser(user.username).findAll{
+            it.visibility.equals(Visibility.PUBLIC)
+        }.size()
+        subscriptionCount=topicList.findAll{
+            it.visibility.equals(Visibility.PUBLIC)
+        }.size()
+
+        }
+        UserPublicProfile userPublicProfile=new UserPublicProfile(subscriptionCount: subscriptionCount,publicTopicCreated:topicCount,user:user)
+      return  userPublicProfile
+
+    }
+
 
 }

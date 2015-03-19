@@ -1,7 +1,7 @@
 <div class="media">
     <div class="media-left">
-        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: resourceInstance?.user?.id])}"
-             height="100px" width="100px"/>
+     <a href="${createLink(controller: 'user',action: 'user',params:[id: resourceInstance?.user?.id])}">   <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: resourceInstance?.user?.id])}"
+             height="100px" width="100px"/></a>
     </div>
 
     <div class="media-body">
