@@ -37,6 +37,11 @@
 </div>
 
 <script>
+
+    $("a.navbar-brand").click(function () {
+        $(this).attr('href', "${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+    });
+
     $(document).on('click', '#userFindButton', function () {
         var userStatus = $('#userStatus').val();
         var searchByName = $('#searchByName').val();
