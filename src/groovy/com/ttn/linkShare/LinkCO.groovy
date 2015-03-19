@@ -4,14 +4,15 @@ import grails.validation.Validateable
 
 @Validateable
 class LinkCO {
-    String name
+    Long topicId
     String description
     User user
     String url
-    Topic topic
+    Long id
 
-    static constraints={
-        url url: true,blank: false
+    static constraints = {
+        url url: true, blank: false
+        id nullable: true
     }
 
 }

@@ -59,6 +59,7 @@
         resourceRatingUpdate="${createLink(controller: 'resource',action: 'resourceRating')}"
         resourceDelete="${createLink(controller: 'resource',action: 'deleteResource')}"
         dashboard="${createLink(controller: 'user',action: 'dashBoard',absolute: true)}"
+        documentController="${createLink(controller:'documentResource' ,action:'saveDocument')}"
     });
 </script>
 </body>

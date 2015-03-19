@@ -40,7 +40,7 @@ environments {
             driverClassName = "com.mysql.jdbc.Driver"
             password = "igdefault"
             username = "kavita-bora"
-            url = "jdbc:mysql://localhost:3306/kavita-bora_QA"
+            url = "jdbc:mysql://127.0.0.1:3306/kavita-bora_QA"
 
         }
     }

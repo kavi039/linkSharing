@@ -102,7 +102,8 @@ class ApplicationTagLib {
     def adminOrCreatorOfResource = { attr ->
         User user = User.findByUsername("${session['username']}")
         Resource resource = Resource.findByUserAndId(user, attr.resourceId)
+        println("****************$resource")
         Boolean adminOrCreator = ((resource != null) || user.admin)
-        out << render(template: '/resource/actionPerformed', model: [adminOrCreator: adminOrCreator,resourceId: resource.id])
+        out << render(template: '/resource/actionPerformed', model: [adminOrCreator: adminOrCreator,resource:resource])
     }
 }

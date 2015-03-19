@@ -5,14 +5,15 @@ import org.springframework.web.multipart.MultipartFile
 
 @Validateable
 class DocumentCO {
-    String name
+    Long id
+    Long topicId
     String description
     User user
     String filePath
-    Topic topic
     MultipartFile document
     static constraints={
         filePath nullable: false
+        id nullable: true
     }
 
 }

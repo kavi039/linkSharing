@@ -167,11 +167,28 @@ function sendInvitation(topicName) {
             alert('message has been send');
         });
     });
-
-
 }
 
+$(document).on('click','.editResource',function(){
+   var modal=$(this).data('toggle');
+    $("#"+modal).modal();
+});
 
-
+$(document).on('click','.deleteResource',function(){
+    var object=$(this);
+    $('#deleteResource').modal();
+    $(document).on('click','.delete',function(){
+        var resourceId=object.data('resource-id');
+        $.ajax({
+            data:{resourceId:resourceId},
+            url:  resourceDelete
+        }).done(function(data){
+            $("div.resourceRating").slideUp().detach();
+        });
+    })
+    $(document).on('click','.cancel',function(){
+        $('#deleteResource').modal('hide');
+    })
+});
 
 

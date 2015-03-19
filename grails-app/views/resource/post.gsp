@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ttn.linkShare.DocumentResource" contentType="text/html;charset=UTF-8" %>
 <%
-def myService = grailsApplication.mainContext.getBean("tagService");
+    def myService = grailsApplication.mainContext.getBean("tagService");
 %>
 <html>
 <head>
@@ -9,19 +9,20 @@ def myService = grailsApplication.mainContext.getBean("tagService");
 </head>
 
 <body>
-<div class="col-md-6 resourceRating">
-    <div class="panel panel-default">
+<div class="col-md-6 ">
+    <div class="panel panel-default resourceRating">
 
         <div class="panel-body">
             <div class="media">
-                <div class="media-left">
-                    <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: resourceInstance?.user?.id])}"
-                         height="100px" width="100px"/>
-                </div>
+                <g:if test="${resourceInstance}">
+                    <div class="media-left">
+                        <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: resourceInstance?.user?.id])}"
+                             height="100px" width="100px"/>
+                    </div>
 
-                <div class="media-body">
-                    <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.name])}"><span
-                            style="float: right">${resourceInstance?.topic?.name}</span></a>
+                    <div class="media-body">
+                        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.name])}"><span
+                        style="float: right">${resourceInstance?.topic?.name}</span></a>
 
                     <span>${resourceInstance?.user?.name}</span>
                     <br>
@@ -47,36 +48,40 @@ def myService = grailsApplication.mainContext.getBean("tagService");
                         <br>
                         <br>
                     </span>
-
                     <div><ls:resourceType type="${resourceInstance?.id}"/>
-                    <ls:markAsRead type="${resourceInstance}"/>
                     <g:if test="${session['username']}">
+                        <ls:markAsRead type="${resourceInstance}"/>
                         <ls:adminOrCreatorOfResource resourceId="${resourceInstance?.id}"/>
+                        <g:render template="/resource/deleteResource" id="deleteResource" data-resource-id="${resourceInstance.id}"></g:render>
+                        <g:render template="/topic/documentShare" model="[resourceInstance:resourceInstance]"></g:render>
+                        <g:render template="/topic/shareLink"  model="[resourceInstance:resourceInstance]"></g:render>
                     </g:if>
                     </div>
-
-                </div>
+                </g:if>
+            </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <div class="col-md-6">
     <g:if test="${session['username']}">
         <div class="panel panel-default" style="overflow-y: scroll;height: 500px">
-              <div class="panel-heading" >TrendingTopic</div>
+            <div class="panel-heading">TrendingTopic</div>
 
-              <div class="panel-body">
-        <ls:trendingTopic/>
+            <div class="panel-body">
+                <ls:trendingTopic/>
+            </div>
         </div>
-        </div>
-        </g:if>
-        <g:else>
-          <g:render template="/login/login"></g:render>
-            <g:render template="/login/register"></g:render>
-        </g:else>
-<g:render template="/resource/deleteResource"></g:render>
+    </g:if>
+    <g:else>
+        <g:render template="/login/login"></g:render>
+        <g:render template="/login/register"></g:render>
+    </g:else>
 
-    </div>
+
+</div>
 <script>
     $("a.navbar-brand").click(function () {
         $(this).attr('href', "${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
@@ -89,37 +94,39 @@ def myService = grailsApplication.mainContext.getBean("tagService");
 
         var object = $('a.rating');
         var i = 0;
-        for(i=0;i<5;i++){
-            $(object[i]).css('color',(i<score?'red':'blue'));
+        for (i = 0; i < 5; i++) {
+            $(object[i]).css('color', (i < score ? 'red' : 'blue'));
         }
 
     }
-    $(document).on('click','.rating',function(){
-        if( ${session['username']!=null}){
-      var currentObject=$(this);
-        var score=currentObject.data('rating');
-        var resourceId=$(currentObject).parent().attr('data-resource-Id');
-        $.ajax({
-           data:{resourceId:resourceId,score:score} ,
-            url: resourceRatingUpdate
-        }).done(function(data){
-    ratingFun(score);
-        });}
+    $(document).on('click', '.rating', function () {
+        if (${session['username']!=null}) {
+            var currentObject = $(this);
+            var score = currentObject.data('rating');
+            var resourceId = $(currentObject).parent().attr('data-resource-Id');
+            $.ajax({
+                data: {resourceId: resourceId, score: score},
+                url: resourceRatingUpdate
+            }).done(function (data) {
+                ratingFun(score);
+            });
+        }
 
     });
-    $(document).on('click','.deleteResource',function(){
-        var object=$(this);
-       $('#deleteResource').modal();
-        $(document).on('click','.delete',function(){
-            var resourceId=object.data('resource-id');
+    $(document).on('click', '.deleteResource', function () {
+        var object = $(this);
+        $('#deleteResource').modal();
+        $(document).on('click', '.delete', function () {
+            var resourceId = object.data('resource-id');
             $.ajax({
-                data:{resourceId:resourceId},
-                url:  resourceDelete
-            }).done(function(data){
-                $("div.resourceRating").slideUp().detach();
+                data: {resourceId: resourceId},
+                url: resourceDelete
+            }).done(function (data) {
+                $('#deleteResource').modal('hide');
+                $("div.resourceRating").slideToggle().detach();
             });
         })
-        $(document).on('click','.cancel',function(){
+        $(document).on('click', '.cancel', function () {
             $('#deleteResource').modal('hide');
         })
     });
