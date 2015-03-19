@@ -35,7 +35,7 @@
         </div>
        <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Topics
+            <div class="panel-heading">Posts
                 <div style="float: right">
                     <g:form name="search" class="form-group" controller="search" action="search">
                         <g:textField name="searchText" placeholder="search"/>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="panel-body" >
-                %{--<ls: userId="${params.id}" />--}%
+                %{--<ls:userId="${params.id}" />--}%
             </div>
         </div>
 

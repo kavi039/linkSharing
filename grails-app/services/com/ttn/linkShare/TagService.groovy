@@ -131,7 +131,7 @@ class TagService {
         if(!status){
         topicCount=topicCreatedByUser(user.username).findAll{
             it.visibility.equals(Visibility.PUBLIC)
-        }.size()
+        }.size()n
         subscriptionCount=topicList.findAll{
             it.visibility.equals(Visibility.PUBLIC)
         }.size()
@@ -141,6 +141,8 @@ class TagService {
       return  userPublicProfile
 
     }
+    List<Topic> publicTopicCreatedByUser(S){
 
+    }
 
 }
