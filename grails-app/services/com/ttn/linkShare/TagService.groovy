@@ -53,13 +53,23 @@ class TagService {
 
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
-        List<Topic> topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
+        List<Topic> topicList
+        if(!user.admin) {
+            topicList =Subscription.createCriteria().list(max: 10, offset: 0) {
+                projections {
+                    property('topic')
+                }
+                eq('user',user)
+            }
+        }
+        else{
+      topicList  = Subscription.createCriteria().list(max: 10, offset: 0) {
             projections {
                 property('topic')
             }
-        }
-        if(!user.admin)
-            topicList=topicList.findAll {it.user.equals(user)}
+        }}
+
+        println "**********>>>>>>><<<<<<<<<<<<*******$topicList 7777777777777"
         return topicList
     }
 

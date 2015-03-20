@@ -18,6 +18,8 @@ class UserCO {
     MultipartFile photo
 
     static constraints = {
+        photoPath nullable: true
+        photo nullable: true
         password(validator: { val, obj ->
             val.equals(obj.confirmPassword)
         })

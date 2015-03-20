@@ -125,7 +125,9 @@ class ApplicationTagLib {
       out<<render (template: '/user/inbox',model: [resourceList: Resource.findAllByTopicInList(tagService.publicTopicCreatedByUser(user))])
     }
     def topicSubscribedPost={attr->
-        out<<render(template: '/user/inbox',model: [resourceList:Resource.findAllByTopicInList(tagService.userTopicSubscribed("${session['username']}") )])
+        out<<render(template: '/user/inbox',model: [resourceList:Resource.findAllByTopicInList(tagService.userTopicSubscribed("${session['username']}") ).sort{
+            it.dateCreated
+        }.reverse()])
 
 
     }

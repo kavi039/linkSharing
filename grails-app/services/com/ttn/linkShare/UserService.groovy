@@ -10,9 +10,9 @@ class UserService {
     def mailService
 
     Boolean register(UserCO userco) {
+        userco.active = true
         if (userco.validate()) {
             uploadPhoto(userco)
-            userco.active = true
             User user = new User(userco.properties)
             if (user.save(failOnError: true)) {
                 return true
