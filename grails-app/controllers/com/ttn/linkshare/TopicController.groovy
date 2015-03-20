@@ -11,16 +11,6 @@ import grails.converters.JSON
 class TopicController {
     def topicService
 
-    def show() {
-        if (session['username']) {
-            println params.name
-            render view: 'topicShow', model: [topicName: params.name]
-        } else {
-            servletContext.setAttribute("name", params.name)
-            redirect(controller: 'login', action: 'loginForShow');
-        }
-    }
-
     def create() {
 
     }
@@ -99,7 +89,6 @@ class TopicController {
         }
     }
     def updateTopicName(Long topicId,String topicName){
-        println("@@@@@@@@@@@@@@$topicId+>>>>>>>>>>$topicName")
       Boolean isUpdated= topicService.updateTopicName(topicId,topicName)
         if(isUpdated)
         {

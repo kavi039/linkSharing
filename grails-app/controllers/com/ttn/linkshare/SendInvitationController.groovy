@@ -5,7 +5,7 @@ class SendInvitationController {
     def sendInvitationService
     def sendEmail() {
         println("params: $params")
-        String url = g.createLink([controller: 'topic', action: 'show', params: [name: params.get('topic')], absolute: true])
+        String url = g.createLink([controller: 'topic', action: 'topicShow', params: [name: params.get('topic')], absolute: true])
         String address = params.get("email")
         String sub = "${params.get("topic")} invitation"
 

@@ -40,7 +40,7 @@
         </div>
 
         <div class="panel-body" id="topicResourceDiv">
-
+       <ls:topicSubscribedPost/>
         </div>
     </div>
 </div>

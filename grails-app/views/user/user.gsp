@@ -45,7 +45,7 @@
             </div>
 
             <div class="panel-body" >
-                %{--<ls:userId="${params.id}" />--}%
+                <ls:publicPost userId="${params.id}" />
             </div>
         </div>
 

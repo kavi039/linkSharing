@@ -6,7 +6,7 @@
     </div>
 
     <div class="media-body">
-        <h4 class="media-heading"><a href="#">${userPublicProfileDTO?.user?.getName()}</a></h4>
+        <h4 class="media-heading"><a href="${createLink(controller: 'user', action: 'user', params: [id: userPublicProfileDTO?.user?.id])}">${userPublicProfileDTO?.user?.getName()}</a></h4>
         <span>${"@${userPublicProfileDTO?.user?.username}"}</span>
 
         <div class="col-md-12">

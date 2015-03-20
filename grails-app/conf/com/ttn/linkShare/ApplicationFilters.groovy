@@ -6,7 +6,7 @@ class ApplicationFilters {
         all(controller: '*', action: '*') {
             before = {
                 //   println("*********** In all, params: ${params}")
-                log.info("params :${params - params?.get("passsword")}")
+                log.info("params :${params-(params?.get("passsword"))}")
 
             }
             after = { Map model ->
@@ -18,7 +18,7 @@ class ApplicationFilters {
         }
 
 //        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
-        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|changePassword|show|loginForShow|loginShowHandler|post|renderImage|user") {
+        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|changePassword|post|renderImage|user|downloadAction|viewFullSite") {
             before = {
                 if (!session.getAttribute('username')) {
                     println "************in secure filter ${controllerName}/${actionName}"
@@ -28,14 +28,6 @@ class ApplicationFilters {
             }
         }
 
-//        isAdmin(controller: 'user', action: 'listOfUser') {
-//            before = {
-//                if (!User.findByUsername(session['username'])?.admin) {
-//                    flash.error = "Permission denied"
-//                    redirect(controller:'user',action: 'dashBoard')
-//                    return
-//                }
-//
-}
+    }
 
 }

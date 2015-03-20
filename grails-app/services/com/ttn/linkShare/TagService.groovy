@@ -57,8 +57,9 @@ class TagService {
             projections {
                 property('topic')
             }
-            eq('user', user)
         }
+        if(!user.admin)
+            topicList=topicList.findAll {it.user.equals(user)}
         return topicList
     }
 
@@ -141,8 +142,15 @@ class TagService {
       return  userPublicProfile
 
     }
-    List<Topic> publicTopicCreatedByUser(S){
-
+    List<Topic> publicTopicCreatedByUser(User user){
+        List<Topic>topicList=topicCreatedByUser(user.username)
+        if(topicList)
+        {
+            topicList=topicList.findAll{
+                it.visibility.equals(Visibility.PUBLIC)
+            }
+        }
+        return  topicList
     }
 
 }

@@ -17,7 +17,9 @@
         </span>
 
         <div><ls:resourceType type="${resourceInstance?.id}"/>
+        <g:if test="${session['username']}">
         <ls:markAsRead type="${resourceInstance}"/>
+        </g:if>
             <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance.id])}">ViewPosts</a>
         </div>
 

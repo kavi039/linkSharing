@@ -110,7 +110,7 @@ class ApplicationTagLib {
     def userPublicProfile = { attr ->
         Boolean status = false
         User user = User.get(attr.userId)
-        if (user.username.equals("$session['username']") && user.admin) {
+        if (User.findByUsername("${session['username']}")?.admin) {
             status = true
         }
 
@@ -118,13 +118,15 @@ class ApplicationTagLib {
     }
     def publicTopicCreatedByUser={attr->
         User user=User.get(attr.userId)
-        List<Topic>topicList=tagService.topicCreatedByUser(user.username)
-        if(topicList)
-        {
-            topicList=topicList.findAll{
-                it.visibility.equals(Visibility.PUBLIC)
-            }
-        }
-        out << render(template: '/topic/topicSubscription', model: [topicList:topicList])
+        out << render(template: '/topic/topicSubscription', model: [topicList:tagService.publicTopicCreatedByUser(user)])
+    }
+    def publicPost={attr->
+        User user=User.get(attr.userId)
+      out<<render (template: '/user/inbox',model: [resourceList: Resource.findAllByTopicInList(tagService.publicTopicCreatedByUser(user))])
+    }
+    def topicSubscribedPost={attr->
+        out<<render(template: '/user/inbox',model: [resourceList:Resource.findAllByTopicInList(tagService.userTopicSubscribed("${session['username']}") )])
+
+
     }
 }

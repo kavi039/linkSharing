@@ -12,7 +12,9 @@
                 class="editable" data-topic-name="${topic.name}">${topic?.name}</a>
         </h4>
         <span>@${topic?.user?.firstName}</span>
-        <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>
+        <g:if test="${session['username']}">
+            <span style="float: right"><ls:isSubscribed topic="${topic}"/></span>
+        </g:if>
 
         <div class="col-md-12">
             <div class="col-md-6">

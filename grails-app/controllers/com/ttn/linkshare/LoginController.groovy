@@ -32,21 +32,6 @@ class LoginController {
 
     }
 
-    def loginForShow() {
-
-    }
-
-    def loginShowHandler(UserCO userCO) {
-        Boolean isUserExist = loginService.isUserExist(userCO)
-        if (isUserExist) {
-            session["username"] = userCO.username
-            redirect(controller: 'topic', action: 'topicShow', params: [topicName: servletContext.getAttribute("name")])
-        } else {
-            flash.error = "User not Found."
-            redirect(controller: "login", action: "loginForShow")
-
-        }
-    }
 
     def changePassword() {
 
