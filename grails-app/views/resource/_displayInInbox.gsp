@@ -6,11 +6,11 @@
 
     <div class="media-body">
         <span style="float: right">${resourceInstance.topic.name}</span>
-        <span>${resourceInstance.user.name}</span>
+        <span>${resourceInstance?.user?.name}</span>
         <br>
-        <span>${"@${resourceInstance.user.firstName}"}</span>
+        <span>${"@${resourceInstance?.user?.firstName}"}</span>
         <br>
-        <span>${resourceInstance.description}
+        <span>${resourceInstance?.description}
             <br>
             <br>
             <br>
@@ -20,7 +20,7 @@
         <g:if test="${session['username']}">
         <ls:markAsRead type="${resourceInstance}"/>
         </g:if>
-            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance.id])}">ViewPosts</a>
+            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance?.id])}">ViewPosts</a>
         </div>
 
     </div>

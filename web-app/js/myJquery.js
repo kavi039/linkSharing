@@ -95,7 +95,9 @@ function setSeriousness(topicId, element) {
             });
         }
         else
-            alert("process fail");
+        {
+         alert("please subscribed first");
+        }
     });
 }
 function setVisibility(topicId, element) {

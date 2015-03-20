@@ -93,9 +93,7 @@ class ApplicationTagLib {
 //
 //    }
     def subscribedTopicInAlphabeticalOrder = { attr ->
-        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userTopicSubscribed("${session['username']}").sort {
-            it.name
-        }])
+        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userSubscribedTopicOrderByName("${session['username']}")] )
     }
     def dateFormat = { attr ->
         out << attr.type?.format("hh:mm:ss dd/MM/yyyy")
@@ -125,9 +123,7 @@ class ApplicationTagLib {
       out<<render (template: '/user/inbox',model: [resourceList: Resource.findAllByTopicInList(tagService.publicTopicCreatedByUser(user))])
     }
     def topicSubscribedPost={attr->
-        out<<render(template: '/user/inbox',model: [resourceList:Resource.findAllByTopicInList(tagService.userTopicSubscribed("${session['username']}") ).sort{
-            it.dateCreated
-        }.reverse()])
+        out<<render(template: '/user/inbox',model: [resourceList:tagService.userSubscribedResourceList("${session['username']}")])
 
 
     }

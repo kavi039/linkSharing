@@ -75,8 +75,12 @@ class TopicService {
         User user = User.findByUsername(username)
         Topic topic = Topic.get(topicId)
         Subscription subscription = Subscription.findByTopicAndUser(topic, user)
-        subscription.properties = [seriousness: seriousness]
-        subscription.save(flush: true) ? true : false
+        if(subscription) {
+            subscription.properties = [seriousness: seriousness]
+            subscription.save(flush: true) ? true : false
+        }
+        else
+            return  false
     }
 
     Boolean topicVisibilityUpdate(Long topicId, String visibility) {
@@ -87,10 +91,10 @@ class TopicService {
 
     void deleteTopic(Long topicId) {
        Topic topic=Topic.get(topicId)
+
         topic.delete(flush:true)
     }
    Boolean updateTopicName(Long topicId,String topicName){
-       println("@@@@@@@@@@@@@@$topicId+>>>>>>>>>>$topicName")
      Topic topic=Topic.get(topicId)
        topic.properties=[name:topicName]
        topic.save(flush: true)?true:false

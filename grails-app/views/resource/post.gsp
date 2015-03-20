@@ -89,7 +89,7 @@
     jQuery(document).ready(function () {
         %{--ratingFun(${com.ttn.linkShare.ResourceRating.findByResourse(resourceInstance).score});--}%
         ratingFun(${myService.getScore(resourceInstance)});
-    })
+    });
     function ratingFun(score) {
 
         var object = $('a.rating');

@@ -38,11 +38,6 @@ class UserController {
 
     }
 
-//    def show() {
-//        String key = params.user
-//        render template: 'userInfo', model: [userList: userService.listingUser(key)]
-//
-//    }
 
     def updateUserByActivation(Long userId) {
         User user = User.get(userId)
@@ -78,10 +73,10 @@ class UserController {
         }
     }
 
-def test(){
-   User user= User.findByUsername("${session['username']}")
-  render  ( tagService.userPublicProfileInfo(user))
-}
+    def inboxPagination(){
 
-
+    }
+    def test(){
+      tagService.userSubscribedTopicOrderByName("${session['username']}")
+    }
 }

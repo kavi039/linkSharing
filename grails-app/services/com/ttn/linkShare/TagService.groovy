@@ -54,23 +54,35 @@ class TagService {
     def userTopicSubscribed(String username) {
         User user = User.findByUsername(username)
         List<Topic> topicList
-        if(!user.admin) {
-            topicList =Subscription.createCriteria().list(max: 10, offset: 0) {
+        if (!user.admin) {
+
+            topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
                 projections {
                     property('topic')
                 }
-                eq('user',user)
+                'topic' {
+                    'resources' {
+                        order('dateCreated', 'desc')
+                    }
+                }
+                eq('user', user)
+            }
+        } else {
+            topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
+                projections {
+                    property('topic')
+                }
+                'topic' {
+                    'resources' {
+                        order('dateCreated', 'desc')
+                    }
+                }
             }
         }
-        else{
-      topicList  = Subscription.createCriteria().list(max: 10, offset: 0) {
-            projections {
-                property('topic')
-            }
-        }}
 
-        println "**********>>>>>>><<<<<<<<<<<<*******$topicList 7777777777777"
-        return topicList
+
+        println "**********>>>>>>><<<<<<<<<<<<*******${topicList} 7777777777777"
+        return topicList.unique()
     }
 
     List<Resource> inbox(User user) {
@@ -122,45 +134,103 @@ class TagService {
     }
 
     Integer getScore(Resource resourceInstance) {
-        Integer score = ResourceRating.createCriteria().get{
+        Integer score = ResourceRating.createCriteria().get {
             projections {
                 avg('score')
             }
-           eq('resourse',resourceInstance)
+            eq('resourse', resourceInstance)
 
         }
         return score
     }
-    def userPublicProfileInfo(User user,Boolean status) {
-        Integer subscriptionCount,topicCount=topicCreatedByUser(user.username).size()
-        List<Topic> topicList=Subscription.createCriteria().list(){
+
+    def userPublicProfileInfo(User user, Boolean status) {
+        Integer subscriptionCount, topicCount = topicCreatedByUser(user.username).size()
+        List<Topic> topicList = Subscription.createCriteria().list() {
             projections {
                 property('topic')
             }
         }
-        subscriptionCount=topicList.size()
-        if(!status){
-        topicCount=topicCreatedByUser(user.username).findAll{
-            it.visibility.equals(Visibility.PUBLIC)
-        }.size()
-        subscriptionCount=topicList.findAll{
-            it.visibility.equals(Visibility.PUBLIC)
-        }.size()
+        subscriptionCount = topicList.size()
+        if (!status) {
+            topicCount = topicCreatedByUser(user.username).findAll {
+                it.visibility.equals(Visibility.PUBLIC)
+            }.size()
+            subscriptionCount = topicList.findAll {
+                it.visibility.equals(Visibility.PUBLIC)
+            }.size()
 
         }
-        UserPublicProfile userPublicProfile=new UserPublicProfile(subscriptionCount: subscriptionCount,publicTopicCreated:topicCount,user:user)
-      return  userPublicProfile
+        UserPublicProfile userPublicProfile = new UserPublicProfile(subscriptionCount: subscriptionCount, publicTopicCreated: topicCount, user: user)
+        return userPublicProfile
 
     }
-    List<Topic> publicTopicCreatedByUser(User user){
-        List<Topic>topicList=topicCreatedByUser(user.username)
-        if(topicList)
-        {
-            topicList=topicList.findAll{
+
+    List<Topic> publicTopicCreatedByUser(User user) {
+        List<Topic> topicList = topicCreatedByUser(user.username)
+        if (topicList) {
+            topicList = topicList.findAll {
                 it.visibility.equals(Visibility.PUBLIC)
             }
         }
-        return  topicList
+        return topicList
     }
+
+    List<Topic> userSubscribedTopicOrderByName(String username) {
+        User user = User.findByUsername(username)
+        List<Topic> topicList
+        if (user.admin) {
+            topicList = Topic.createCriteria().list {
+
+                'subscriptions' {
+
+                }
+
+                order('name')
+            }
+        } else {
+            topicList = Topic.createCriteria().list(max: 5, offset: 0) {
+
+                'subscriptions' {
+                    eq('user', user)
+
+                }
+                order('name')
+            }
+        }
+
+
+        return topicList
+
+    }
+
+    def userSubscribedResourceList(String username) {
+        User user = User.findByUsername(username)
+
+        println "$user"
+        List<Resource> resourceList
+        if (user.admin) {
+            resourceList = Resource.createCriteria().list {
+                'topic' {
+                    'subscriptions' {
+
+                    }
+                }
+                order('dateCreated')
+            }
+        } else {
+            resourceList = Resource.createCriteria().list(max: 5, offset: 0) {
+                'topic' {
+                    'subscriptions' {
+                        eq('user', user)
+                    }
+                }
+                order('dateCreated')
+            }
+        }
+
+        return resourceList
+    }
+
 
 }
