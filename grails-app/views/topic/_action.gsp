@@ -8,7 +8,9 @@
     </g:if>
     <a href="javascript:void(0)"  class="glyphicon glyphicon-envelope A" data-topic="${topic}" onclick="sendInvitation('${topic.id}','${topic.name}')"></a>
     <g:if test="${isAdminOrCreator}">
+        <span>
         <a href="javascript:void(0)"  class="glyphicon glyphicon-edit" onclick="editTopic(${topic.id},this)"></a>
+        </span>
         <a href="javascript:void(0)"  class="glyphicon glyphicon-remove" onclick="deleteTopic(${topic.id})">uy</a>
     </g:if>
 

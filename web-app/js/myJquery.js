@@ -3,6 +3,7 @@ $(document).ready(function () {
         $("#sendInvitation").modal();
     });
     $(document).on('click', "#sendTopicInvitation", function () {
+        alert($("form#envelopForm").serialize());
         $.ajax({
             data: $("form#envelopForm").serialize(),
             url: sendMail
@@ -135,11 +136,12 @@ function deleteTopic(topicId) {
 }
 function editTopic(topicId, element) {
     var object = $(element);
-    var parentObject = object.parent().parent().parent().parent();
+    var parentObject = object.parent().parent().parent().parent().parent();
     var editableObject = $('.editable', parentObject);
     var topicName = editableObject.data('topic-name');
     var htmlOfElement = editableObject.parent().html();
     editableObject.parent().html("<div class='editable'><input type='text' id='topicNameAdded' value=" + topicName + "><input type='button' id='myEdit' value='save'><input type='button' id='closeEdit' value='cancel'></div>");
+    object.parent().html('<a href="javascript:void(0)"  class="glyphicon glyphicon-edit" ></a>');
     $(document).on('click', '#myEdit', function () {
         $.ajax({
             data: {topicId: topicId, topicName: $("#topicNameAdded").val()},

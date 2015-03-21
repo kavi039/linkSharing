@@ -16,8 +16,8 @@
                 <form id="envelopForm" class="form-group">
                     <label for="email">Email</label>
                     <g:textField name="email" class="form-control"/>
-                    <label for="topic">Topic</label>
-                    <g:select name="topic"
+                    <label for="topicId">Topic</label>
+                    <g:select name="topicId"
                               from="${com.ttn.linkShare.Topic.topicListSubscribedByCurrentUser(''+session['username'])}" optionKey="id" optionValue="name">
                     </g:select>
                     <a class="btn btn-default" id="sendTopicInvitation">send</a>
