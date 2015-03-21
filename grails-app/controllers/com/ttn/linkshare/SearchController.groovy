@@ -16,7 +16,7 @@ class SearchController {
     }
 
     def topicListByName(String name) {
-        List<Topic> topicList = searchService.topicListByName(name, session['username'])
+        List<Topic> topicList = searchService.topicListByName(name, ""+session['username'])
         render template: '../topic/topicSubscription', model: [topicList: topicList]
     }
 

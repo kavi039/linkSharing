@@ -15,7 +15,7 @@
 
     <g:submitButton name="submit" class="btn btn-default" value="Login"/>
 </g:form>
-<a href="<g:createLink controller='login' action='changePassword'/>"
-   title="change Password">Forget Password?</a>
+<a href="${createLink (controller:'login', action:'forgetPassword')}"
+   title="Forget Password">Forget Password?</a>
 </div>
 </div>

@@ -12,10 +12,10 @@
         <div class="panel-heading">
             %{--Topic"${topic.name}"--}%
             Topics
-            <div style="float: right">
-                <g:textField name="searchText" placeholder="search" id="topicResult"/>
-                <input type="button" name="finder" value="search" id="topicFindSubmitButton"/>
-            </div>
+            %{--<div style="float: right">--}%
+                %{--<g:textField name="searchText" placeholder="search" id="topicResult"/>--}%
+                %{--<input type="button" name="finder" value="search" id="topicFindSubmitButton"/>--}%
+            %{--</div>--}%
         </div>
 
         <div id="topicListDiv">
@@ -31,12 +31,12 @@
         <div class="panel-heading">
             Posts <span id="topicName"></span>
 
-            <div style="float: right">
-                <g:form name="search" class="form-group" controller="search" action="search">
-                    <g:textField name="searchText" placeholder="search"/>
-                    <g:submitButton name="finder" value="search"/>
-                </g:form>
-            </div>
+            %{--<div style="float: right">--}%
+                %{--<g:form name="search" class="form-group" controller="search" action="search">--}%
+                    %{--<g:textField name="searchText" placeholder="search"/>--}%
+                    %{--<g:submitButton name="finder" value="search"/>--}%
+                %{--</g:form>--}%
+            %{--</div>--}%
         </div>
 
         <div class="panel-body" id="topicResourceDiv">

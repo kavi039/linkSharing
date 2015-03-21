@@ -33,9 +33,20 @@ class LoginController {
     }
 
 
-    def changePassword() {
+    def forgetPassword() {
 
     }
 
+    def forgetPasswordAction() {
 
+            User status = loginService.forgetPasswordAction(params.email)
+            if (status) {
+                session['username'] = status.username
+                flash.message = "password is reset and send to You "
+            } else
+                flash.error = "Invalid Username/Password"
+
+        redirect(controller: 'user', action: 'dashBoard')
+
+    }
 }

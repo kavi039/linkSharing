@@ -21,10 +21,10 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">Topic
-                    <div style="float: right">
-                        <g:textField name="search" placeholder="search"/>
-                        <input type="button" id="finder" value="search">
-                    </div>
+                    %{--<div style="float: right">--}%
+                        %{--<g:textField name="search" placeholder="search"/>--}%
+                        %{--<input type="button" id="finder" value="search">--}%
+                    %{--</div>--}%
                 </div>
 
                 <div class="panel-body">
@@ -73,9 +73,16 @@
                 <span style="color: blue"><g:message message="${flash.message}"/></span>
             <div class="panel-body">
                 <g:form name="editProfile" controller="user" action="updateUserPassword">
+                    <div class="form-group">
+                        <label for="oldPassword">OldPassword:</label>
+                        <g:passwordField name="oldPassword" class="form-control"/>
+                    </div>
+
+                        <g:hiddenField name="username" class="form-control" value="${session['username']}"/>
+
 
                     <div class="form-group">
-                        <label for="password">Password:</label>
+                        <label for="password">NewPassword:</label>
                         <g:passwordField name="password" class="form-control"/>
                     </div>
 

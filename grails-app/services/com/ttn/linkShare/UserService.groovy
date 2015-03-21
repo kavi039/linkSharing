@@ -77,7 +77,6 @@ class UserService {
         if (userPasswordCO.validate()) {
             user.properties = [password: userPasswordCO.password]
             if (user.save(flush: true)) {
-                sendEmailToUser(user)
                 return true
             } else {
                 return false
@@ -88,13 +87,6 @@ class UserService {
 
     }
 
-    def sendEmailToUser(User user) {
-        mailService.sendMail {
-            to user.email
-            subject "password change"
-            html "<h1>${user.password}</h1>"
-        }
-    }
 
     def checkNull(def userCO, User user) {
 

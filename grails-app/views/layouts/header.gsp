@@ -8,7 +8,7 @@
 
 </head>
 
-<body style="background-color:#1f6377;">
+<body style="background-color: #31b0d5">
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0)">LinkSharing</a>

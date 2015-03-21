@@ -65,18 +65,21 @@ class UserController {
     def updateUserPassword(UserPasswordCO userPasswordCO) {
         Boolean userStatus = userService.updatePassword(userPasswordCO, "${session['username']}")
         if (userStatus) {
-            flash.message="New password is send to u in email"
-            redirect(controller: 'user', action: 'editProfilePage')
+            flash.message="Password updated"
         } else {
             flash.error = "Password is invalid"
-            redirect(controller: 'user', action: 'editProfilePage')
         }
+        redirect(controller: 'user', action: 'editProfilePage')
     }
 
     def inboxPagination(){
 
     }
-    def test(){
-      tagService.userSubscribedTopicOrderByName("${session['username']}")
+    def userListPagination(){
+  // int offset=params.offset?params.int("offset"):0
+    int max= params.max?params.int("max"):0
+        int totalCount=params.total?params.int("totalCount"):User.list().size()
+        render "$offset  $max "
     }
+
 }
