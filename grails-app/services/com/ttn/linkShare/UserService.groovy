@@ -7,7 +7,9 @@ import javax.jws.soap.SOAPBinding
 
 @Transactional
 class UserService {
+
     def mailService
+    def grailsApplication
 
     Boolean register(UserCO userco) {
         userco.active = true
@@ -47,7 +49,7 @@ class UserService {
         String name = file.getOriginalFilename()
         if (name) {
 //            String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
-            String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
+            String filePath = grailsApplication.config.userFolderPath + userCO.username
             File photoFileDir = new File(filePath)
             photoFileDir.mkdirs()
             photoFile = new File("$photoFileDir/$name")
