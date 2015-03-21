@@ -16,7 +16,7 @@ class TopicController {
     }
 
     def topicShow() {
-        render view: "/topic/topicShow", model: [topicName: params.topicName]
+        render view: "/topic/topicShow", model: [topic:Topic.get(params.topicName)]
     }
 
     def saveTopic(TopicCo topicCO) {

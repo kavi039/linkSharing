@@ -15,6 +15,7 @@
                     <label for="email">Email</label>
                     <g:textField name="email" class="form-control"/>
                     <label for="topic">Topic</label>
+                    <g:hiddenField name="topicId" />
                     <input type="text" name="topic"  id="topic" readonly/>
                     <a href="javascript:void(0)"  class="btn btn-default"  id="sendMail">send</a>
                 </form>

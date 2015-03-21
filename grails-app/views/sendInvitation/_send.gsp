@@ -1,4 +1,4 @@
-<%@ page import="com.ttn.linkShare.User" %>
+<%@ page import="com.ttn.linkShare.TagService; com.ttn.linkShare.User" %>
 <div class="modal fade" id="sendInvitation" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -18,7 +18,7 @@
                     <g:textField name="email" class="form-control"/>
                     <label for="topic">Topic</label>
                     <g:select name="topic"
-                              from="${com.ttn.linkShare.Subscription.findAllByUser(com.ttn.linkShare.User.findByUsername("${session['username']}")).topic.name}">
+                              from="${com.ttn.linkShare.Topic.topicListSubscribedByCurrentUser(''+session['username'])}" optionKey="id" optionValue="name">
                     </g:select>
                     <a class="btn btn-default" id="sendTopicInvitation">send</a>
                 </form>

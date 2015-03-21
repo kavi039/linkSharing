@@ -12,25 +12,25 @@
 
     <div class="col-md-5">
     <div class="panel panel-default">
-        <g:if test="${Topic.findByName(topicName)}">
-            <div class="panel-heading">Topic<span style="color:#006dcc">(${topicName})</span></div>
+        <g:if test="${topic}">
+            <div class="panel-heading">Topic<span style="color:#006dcc">(${topic.name})</span></div>
 
             <div class="panel-body">
-                <g:render template="/topic/display" model="[topic: Topic.findByName(topicName)]"></g:render>
+                <g:render template="/topic/display" model="[topic:topic]"></g:render>
             </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Users<span style="color:#006dcc">(${topicName})</span></div>
+                <div class="panel-heading">Users<span style="color:#006dcc">(${topic.name})</span></div>
 
                 <div class="panel-body">
-                    <ls:user topic="${topicName}" username="${null}"/>
+                    <ls:user topic="${topic}" username="${null}"/>
                 </div>
             </div>
             </div>
             <div class="col-md-7">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Posts<span style="color:#006dcc">(${topicName})</span></div>
-                    <ls:displayResourcesOfTopic topic="${topicName}"/>
+                    <div class="panel-heading">Posts<span style="color:#006dcc">(${topic.name})</span></div>
+                    <ls:displayResourcesOfTopic topic="${topic}"/>
                 </div>
             </div>
         </g:if>

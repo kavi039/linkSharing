@@ -31,12 +31,11 @@ class TagService {
 
     }
 
-    def userSubscriptionByCurrentUserOrByTopic(String username, String topicName) {
+    def userSubscriptionByCurrentUserOrByTopic(String username,Topic topic) {
         List<User> userList = []
         if (username) {
             userList = User.findAllByUsername(username)
         } else {
-            Topic topic = Topic.findByName(topicName)
             userList = Subscription.createCriteria().list(max: 5) {
                 projections {
                     property('user')

@@ -5,7 +5,7 @@
                                                                              height="100px" width="100px"/></a>
     </div>
     <div class="media-body" >
-        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName:resourceInstance?.topic?.name])}" style="display:block;">  <span  style="float: right">${resourceInstance?.topic?.name}</span></a>
+        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName:resourceInstance?.topic?.id])}" style="display:block;">  <span  style="float: right">${resourceInstance?.topic?.name}</span></a>
         <p>${resourceInstance?.user?.name}</p>
         <p>${"@${resourceInstance?.user?.firstName}"}</p>
         <br>

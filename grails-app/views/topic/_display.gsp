@@ -8,7 +8,7 @@
 
     <div class="media-body">
         <h4 class="media-heading"><a
-                href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: topic?.name])}"
+                href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: topic?.id])}"
                 class="editable" data-topic-name="${topic.name}">${topic?.name}</a>
         </h4>
         <span>@${topic?.user?.firstName}</span>

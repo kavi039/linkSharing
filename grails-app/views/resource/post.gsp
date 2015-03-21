@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="media-body">
-                        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.name])}"><span
+                        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.id])}"><span
                         style="float: right">${resourceInstance?.topic?.name}</span></a>
 
                     <span>${resourceInstance?.user?.name}</span>

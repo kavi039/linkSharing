@@ -158,10 +158,12 @@ function editTopic(topicId, element) {
     });
 }
 
-function sendInvitation(topicName) {
+function sendInvitation(topicId,topicName) {
     $('#sendInvitationOfTopic').modal();
     $("input#topic").val(topicName);
+    $("input#topicId").val(topicId);
     $(document).on('click', "#sendMail", function () {
+        alert($("form#formSendMail").serialize());
         $.ajax({
             data: $("form#formSendMail").serialize(),
             url: sendMail

@@ -16,4 +16,12 @@ class Topic {
         name blank: false
         visibility blank: false
     }
+    static  List<Topic> topicListSubscribedByCurrentUser(String username){
+        List<Topic>topicList=createCriteria().list{
+          'subscriptions'{
+              eq('user',User.findByUsername(username))
+          }
+        }
+        return  topicList
+    }
 }
