@@ -46,6 +46,7 @@ class UserService {
         MultipartFile file = userCO.photo
         String name = file.getOriginalFilename()
         if (name) {
+//            String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
             String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
             File photoFileDir = new File(filePath)
             photoFileDir.mkdirs()

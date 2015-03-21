@@ -52,7 +52,7 @@
             </tr>
         </g:each>
         <span style="color: #ffffff">
-        <util:remotePaginate controller="user" action="userListPagination" update="data" total="${totalCount}" max="${max}" />
+        <util:remotePaginate controller="user" action="userListPagination" update="data" total="10" max="${max}" />
         </span>
         </tbody>
     </table>
