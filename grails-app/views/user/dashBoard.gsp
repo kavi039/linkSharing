@@ -25,7 +25,7 @@
                        style="float: right">View All</a>
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" style="overflow-y: scroll;height:500px " >
                     <ls:userSubscription/>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     %{--</div>--}%
                 </div>
 
-                <div class="panel-body" id="inbox">
+                <div class="panel-body" id="inbox" style="overflow-y: scroll;height:500px " >
                     <ls:inbox/>
                 </div>
             </div>

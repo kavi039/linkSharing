@@ -67,10 +67,10 @@
 
 <div class="col-md-6">
     <g:if test="${session['username']}">
-        <div class="panel panel-default" style="overflow-y: scroll;height: 500px">
+        <div class="panel panel-default">
             <div class="panel-heading">TrendingTopic</div>
 
-            <div class="panel-body">
+            <div class="panel-body"  style="overflow-y: scroll;height: 500px">
                 <ls:trendingTopic/>
             </div>
         </div>

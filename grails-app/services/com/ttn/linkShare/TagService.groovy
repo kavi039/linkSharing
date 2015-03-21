@@ -183,7 +183,9 @@ class TagService {
             topicList = Topic.createCriteria().list {
 
                 'subscriptions' {
-
+                 projections{
+                     distinct('topic')
+                 }
                 }
 
                 order('name')
