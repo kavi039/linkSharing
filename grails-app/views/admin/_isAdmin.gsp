@@ -4,7 +4,7 @@
 <li><a href="javascript:void(0)" title="linkresource"><span class="glyphicon glyphicon-paperclip"></span></a></li>
 <li><a title="sendInvitation" href="javascript:void(0)"><span class="glyphicon glyphicon-envelope"></span></a></li>
 <li><a href="javascript:void(0)" title="trendingTopic"><span class="glyphicon glyphicon-file"></span></a></li>
-<li><a href="${createLink(controller: 'user',action: 'user',params: [id:User.findByUsername(''+session['username']).id])}" title="user Profile"><img src="${createLink(controller: 'image',action: 'renderImage',params: [id:com.ttn.linkShare.User.findByUsername("${session['username']}").id])}"/></a></li>
+<li><a href="${createLink(controller: 'user',action: 'user',params: [id:User.findByUsername(''+session['username']).id])}" title="user Profile"><img src="${createLink(controller: 'image',action: 'renderImage',params: [id:com.ttn.linkShare.User.findByUsername("${session['username']}").id])}" height="100px" width="100px"/></a></li>
 <li>
 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
     ${session['username']}
