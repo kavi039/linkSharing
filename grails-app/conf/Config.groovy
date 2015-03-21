@@ -105,7 +105,7 @@ environments {
     development {
         grails.logging.jul.usebridge = true
         userFolderPath = '/home/intelligrape/Project/Userfolder/'
-        documentFolderPath="/home/intelligrape/Project/Document"
+        documentFolderPath="/home/intelligrape/Project/Document/"
     }
     production {
         grails.logging.jul.usebridge = false
@@ -115,7 +115,7 @@ environments {
         grails.logging.jul.usebridge = false
         grails.serverURL = "http://kavita-bora.qa6.intelligrape.net"
         userFolderPath = "/home/kavita-bora/userFolder/"
-        documentFolderPath="/home/kavita-bora/Document"
+        documentFolderPath="/home/kavita-bora/Document/"
     }
 }
 simian {
