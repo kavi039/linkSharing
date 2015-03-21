@@ -1,9 +1,13 @@
+import com.ttn.linkShare.User
+
 class BootStrap {
 
     def bootStrapService
 
     def init = { servletContext ->
-        bootStrapService.bootStrap()
+        if(!User.count()) {
+            bootStrapService.bootStrap()
+        }
     }
     def destroy = {
     }
