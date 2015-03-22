@@ -83,7 +83,7 @@ class UserController {
     def userList(){
         Topic topic=Topic.get(params.int("topicId"))
         int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):1
+        int max=params.max?params.int("max"):10
         List<User>userList=tagService.userSubscriptionByTopic(topic,offset,max)
         int totalCount=userList.totalCount
         render (template: "/user/userSubscriptionList" ,model: [userList:userList,total:totalCount,topicId:topic.id])

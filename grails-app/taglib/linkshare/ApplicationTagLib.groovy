@@ -137,8 +137,8 @@ class ApplicationTagLib {
 
     }
     def userList={attr->
-        List<User>userList=tagService.userSubscriptionByTopic( attr.topic,0,1)
-  out<< render( template: "/user/userSubscriptionList", model: [userList: userList,total:userList.totalCount,max:1,topicId:attr.topic.id])
+        List<User>userList=tagService.userSubscriptionByTopic( attr.topic,0,10)
+  out<< render( template: "/user/userSubscriptionList", model: [userList: userList,total:userList.totalCount,max:10,topicId:attr.topic.id])
 //  out<< render( template: "/user/userSubscriptionList", model: [userList: userList])
     }
 }
