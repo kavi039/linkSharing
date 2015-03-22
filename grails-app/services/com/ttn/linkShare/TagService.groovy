@@ -73,7 +73,11 @@ class TagService {
                 }
             }
         }
-        return topicList.unique()
+        topicList=topicList.unique()
+        if(topicList.size()>5)
+        return topicList.subList(0,5)
+        else
+        return topicList
     }
 
     List<Resource> inbox(User user, int offset, int max) {
