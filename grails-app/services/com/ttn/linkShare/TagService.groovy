@@ -32,22 +32,18 @@ class TagService {
 
     }
 
-    def userSubscriptionByCurrentUserOrByTopic(String username,Topic topic) {
-        List<User> userList = []
-        if (username) {
-            userList = User.findAllByUsername(username)
-        } else {
-            userList = Subscription.createCriteria().list(max: 5) {
+    List<User> userSubscriptionByTopic(Topic topic,int offset,int max) {
+
+            List<User>     userList = Subscription.createCriteria().list (max:max,offset: offset){
                 projections {
                     property('user')
                 }
                 eq('topic', topic)
             }
+            return userList
 
 
-        }
-        println userList
-        return userList
+
     }
 
 
@@ -56,7 +52,7 @@ class TagService {
         List<Topic> topicList
         if (!user.admin) {
 
-            topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
+            topicList = Subscription.createCriteria().list() {
                 projections {
                     property('topic')
                 }
@@ -68,7 +64,7 @@ class TagService {
                 eq('user', user)
             }
         } else {
-            topicList = Subscription.createCriteria().list(max: 10, offset: 0) {
+            topicList = Subscription.createCriteria().list() {
                 projections {
                     property('topic')
                 }
@@ -79,14 +75,11 @@ class TagService {
                 }
             }
         }
-
-
-        println "**********>>>>>>><<<<<<<<<<<<*******${topicList} 7777777777777"
         return topicList.unique()
     }
 
-    List<Resource> inbox(User user) {
-        List<Resource> resourceList = ReadingItem.createCriteria().list(max: 5) {
+    List<Resource> inbox(User user,int offset,int max) {
+        List<Resource> resourceList = ReadingItem.createCriteria().list(max:max,offset: offset) {
             projections {
                 property('resource')
             }
@@ -94,7 +87,6 @@ class TagService {
             eq('isRead', false)
 
         }
-        println("**********" + resourceList.id)
         resourceList
     }
 
@@ -107,9 +99,9 @@ class TagService {
         return topicList
     }
 
-    def trendingTopic() {
+    def trendingTopic(int max,int offset) {
         List<Topic> topicList = []
-        List<Object> objectList = Resource.createCriteria().list(max: 5, offset: 0) {
+        List<Object> objectList = Resource.createCriteria().list(max:max, offset:offset) {
             projections {
                 groupProperty("topic")
                 count("topic", "topicCount")
@@ -120,10 +112,8 @@ class TagService {
             }
             order("topicCount", "desc")
         }
-        objectList.collect(topicList) {
-            it[0]
-        }
-        return topicList
+
+        return objectList
     }
 
     List<Resource> displayResourcesOfTopic(Topic topic) {

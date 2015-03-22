@@ -22,8 +22,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Users<span style="color:#006dcc">(${topic.name})</span></div>
 
-                <div class="panel-body">
-                    <ls:user topic="${topic}" username="${null}"/>
+                <div class="panel-body" >
+                    <div class="media" >
+                        <div id="userInfoDiv">
+                    <ls:userList topic="${topic}" />
+                            </div>
+                </div>
                 </div>
             </div>
             </div>

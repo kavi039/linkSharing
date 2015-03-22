@@ -28,7 +28,7 @@ class ApplicationTagLib {
     }
 
     def user = { attr ->
-        out << render(template: "/user/userSubscripton", model: [userList: tagService.userSubscriptionByCurrentUserOrByTopic(attr.username, attr.topic)])
+        out << render(template: "/user/userSubscripton", model: [userInfo:User.findByUsername("${session['username']}") ])
     }
 
 
@@ -55,7 +55,8 @@ class ApplicationTagLib {
 
     def inbox = { attr ->
         User user = User.findByUsername("${session['username']}")
-        out << render(template: '/user/inbox', model: [resourceList: tagService.inbox(user)])
+        List<Resource>resourceList=tagService.inbox(user,0,5)
+        out << render(template: '/user/inbox', model: [resourceList:resourceList,total:resourceList.totalCount,max:5 ])
     }
 
     def resourceType = { attr ->
@@ -78,7 +79,12 @@ class ApplicationTagLib {
 
     }
     def trendingTopic = { attr ->
-        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.trendingTopic()])
+        List<Topic>topicList=[]
+        List<Object>objectList=tagService.trendingTopic(5,0)
+        objectList.collect(topicList) {
+            it[0]
+        }
+        out << render(template: '/topic/trendingTopicDisplay', model: [topicList:topicList,total:objectList.totalCount,max:5 ])
 
     }
     def isSubscribed = { attr ->
@@ -89,7 +95,7 @@ class ApplicationTagLib {
         }
     }
     def displayResourcesOfTopic = { attr ->
-        out << render(template: '/user/inbox', model: [resourceList: tagService.displayResourcesOfTopic(attr.topic)])
+        out << render(template: '/topic/displayResourcesOfTopic', model: [resourceList: tagService.displayResourcesOfTopic(attr.topic)])
     }
 //    def userList={attr->
 //        out<<render(template: '/user/userInfo',model:[userList:tagService.userList("${session['username']}")])
@@ -123,11 +129,16 @@ class ApplicationTagLib {
     }
     def publicPost={attr->
         User user=User.get(attr.userId)
-      out<<render (template: '/user/inbox',model: [resourceList: Resource.findAllByTopicInList(tagService.publicTopicCreatedByUser(user))])
+      out<<render (template: '/user/publicPost',model: [resourceList: Resource.findAllByTopicInList(tagService.publicTopicCreatedByUser(user))])
     }
     def topicSubscribedPost={attr->
-        out<<render(template: '/user/inbox',model: [resourceList:tagService.userSubscribedResourceList("${session['username']}")])
+        out<<render(template: '/topic/topicSubscribedPost',model: [resourceList:tagService.userSubscribedResourceList("${session['username']}")])
 
 
+    }
+    def userList={attr->
+        List<User>userList=tagService.userSubscriptionByTopic( attr.topic,0,1)
+  out<< render( template: "/user/userSubscriptionList", model: [userList: userList,total:userList.totalCount,max:1,topicId:attr.topic.id])
+//  out<< render( template: "/user/userSubscriptionList", model: [userList: userList])
     }
 }

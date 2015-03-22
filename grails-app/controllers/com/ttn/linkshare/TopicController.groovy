@@ -10,13 +10,14 @@ import grails.converters.JSON
 
 class TopicController {
     def topicService
+    def tagService
 
     def create() {
 
     }
 
     def topicShow() {
-        render view: "/topic/topicShow", model: [topic:Topic.get(params.topicName)]
+        render view: "/topic/topicShow", model: [topic: Topic.get(params.topicName)]
     }
 
     def saveTopic(TopicCo topicCO) {
@@ -24,11 +25,10 @@ class TopicController {
         if (topicService.create(topicCO, "${session['username']}")) {
             flash.error = "Topic created"
             println(">>>>>>>>>>>>>>>>>>>>>$params")
-            //redirect(controller: "user" ,action: "dashBoard")
-            render(view: "/topic/topicShow", model: [topicName: topicCO.name])
+           render(view: "/topic/topicShow", model: [topic: topicCO.topic])
         } else {
             flash.error = "Topic Not Created"
-            redirect(controller: "user", action: "dashBoard")
+           redirect(controller: "user", action: "dashBoard")
         }
 
     }
@@ -79,25 +79,35 @@ class TopicController {
 
     def deleteTopic(Long topicId) {
         topicService.deleteTopic(topicId)
-        if(Topic.get(topicId))
-        {
+        if (Topic.get(topicId)) {
             render false
-        }
-        else
-        {
+        } else {
             render true
         }
     }
-    def updateTopicName(Long topicId,String topicName){
-      Boolean isUpdated= topicService.updateTopicName(topicId,topicName)
-        if(isUpdated)
-        {
+
+    def updateTopicName(Long topicId, String topicName) {
+        Boolean isUpdated = topicService.updateTopicName(topicId, topicName)
+        if (isUpdated) {
             render true
-        }
-        else{
+        } else {
             render false
         }
     }
+
+    def trendingTopic() {
+        List<Topic> topicList = []
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 5
+        List<Object> objectList = tagService.trendingTopic(offset, max)
+        objectList.collect(topicList) {
+            it[0]
+        }
+        int totalCount = objectList.totalCount
+        render(template: "/topic/trendingTopicDisplay", model: [topicList:topicList, total: totalCount])
+    }
+
+
 }
 
 

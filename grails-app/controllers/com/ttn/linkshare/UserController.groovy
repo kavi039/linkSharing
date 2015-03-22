@@ -1,5 +1,6 @@
 package com.ttn.linkshare
 
+import com.ttn.linkShare.Resource
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 import com.ttn.linkShare.UserCO
@@ -73,13 +74,19 @@ class UserController {
     }
 
     def inboxPagination(){
-
+        int offset=params.offset?params.int("offset"):0
+        int max=params.max?params.int("max"):5
+        List<Resource>resourceList=tagService.inbox(User.findByUsername("${session['username']}"),offset,max)
+        int totalCount=resourceList.totalCount
+        render (template: "/user/inbox" ,model: [resourceList:resourceList,total:totalCount])
     }
-    def userListPagination(){
-  // int offset=params.offset?params.int("offset"):0
-    int max= params.max?params.int("max"):0
-        int totalCount=params.total?params.int("totalCount"):User.list().size()
-        render "$offset  $max "
+    def userList(){
+        Topic topic=Topic.get(params.int("topicId"))
+        int offset=params.offset?params.int("offset"):0
+        int max=params.max?params.int("max"):1
+        List<User>userList=tagService.userSubscriptionByTopic(topic,offset,max)
+        int totalCount=userList.totalCount
+        render (template: "/user/userSubscriptionList" ,model: [userList:userList,total:totalCount,topicId:topic.id])
     }
 
 }

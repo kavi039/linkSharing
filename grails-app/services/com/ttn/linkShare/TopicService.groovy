@@ -16,20 +16,18 @@ class TopicService {
             } else {
                 Topic topic = new Topic(topicCo.properties)
                 Subscription subscription = new Subscription(seriousness: Seriousness.CASUAL, topic: topic, user: user)
-                if (topic.save() && subscription.save()) {
-                    println "is    save*******************************"
+                if (topic.save(flush: true) && subscription.save(flush: true)) {
+                    topicCo.topic = topic
                     return true
                 } else {
                     topic.errors.allErrors.each {
                         println it
                     }
-                    println "is   not save*******************************"
                     return false
                 }
             }
 
         } else {
-            println "is   not validate*******************************"
             return false
         }
 
@@ -75,12 +73,11 @@ class TopicService {
         User user = User.findByUsername(username)
         Topic topic = Topic.get(topicId)
         Subscription subscription = Subscription.findByTopicAndUser(topic, user)
-        if(subscription) {
+        if (subscription) {
             subscription.properties = [seriousness: seriousness]
             subscription.save(flush: true) ? true : false
-        }
-        else
-            return  false
+        } else
+            return false
     }
 
     Boolean topicVisibilityUpdate(Long topicId, String visibility) {
@@ -90,13 +87,14 @@ class TopicService {
     }
 
     void deleteTopic(Long topicId) {
-       Topic topic=Topic.get(topicId)
+        Topic topic = Topic.get(topicId)
 
-        topic.delete(flush:true)
+        topic.delete(flush: true)
     }
-   Boolean updateTopicName(Long topicId,String topicName){
-     Topic topic=Topic.get(topicId)
-       topic.properties=[name:topicName]
-       topic.save(flush: true)?true:false
-   }
+
+    Boolean updateTopicName(Long topicId, String topicName) {
+        Topic topic = Topic.get(topicId)
+        topic.properties = [name: topicName]
+        topic.save(flush: true) ? true : false
+    }
 }

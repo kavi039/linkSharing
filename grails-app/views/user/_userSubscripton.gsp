@@ -1,5 +1,5 @@
-<div class="media">
-    <g:each in="${userList}" var="userInfo">
+
+    %{--<g:each in="${userList}" var="userInfo">--}%
         <div class="media-left">
       <a href="${createLink(controller: 'user',action: 'user', params: [id: userInfo?.id])}">     <img src="${createLink(controller: 'image', action: 'renderImage', params: [id: userInfo?.id])}"
                  height="100px" width="100px"/></a>
@@ -23,8 +23,9 @@
 
         </div>
         <hr>
-    </g:each>
-</div>
+    %{--</g:each>--}%
+
+
 
 
 

@@ -12,10 +12,12 @@
     <div class="row">
     <g:if test="${flash.error}"><script>alert("${flash.error}");</script></g:if>
     <g:if test="${flash.message}"><script>alert("${flash.message}");</script></g:if>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <ls:user username="${session['username']}" topic="${null}"/>
+                    <div class="media">
+                    <ls:user/>
+                        </div>
                 </div>
             </div>
 
@@ -25,13 +27,13 @@
                        style="float: right">View All</a>
                 </div>
 
-                <div class="panel-body" style="overflow-y: scroll;height:500px " >
+                <div class="panel-body" >
                     <ls:userSubscription/>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">Inbox
                     %{--<div style="float: right">--}%
@@ -42,7 +44,7 @@
                     %{--</div>--}%
                 </div>
 
-                <div class="panel-body" id="inbox" style="overflow-y: scroll;height:500px " >
+                <div class="panel-body" id="inboxDiv" style="overflow-y: scroll;height:500px " >
                     <ls:inbox/>
                 </div>
             </div>

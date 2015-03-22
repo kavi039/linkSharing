@@ -5,11 +5,13 @@ import grails.validation.Validateable
 
 @Validateable
 class TopicCo {
+    Topic topic
     User user
     String name
     Visibility visibility
     static constraints = {
-        name blank: false, unique: true
+        name blank: false
         visibility blank: false
+        topic nullable: true
     }
 }

@@ -17,7 +17,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">RecentShare</div>
 
-                <div class="panel-body" id="recentShare">
+                <div class="panel-body" id="recentShare" style="overflow-y: scroll;height:500px ">
                     <ls:recentShare/>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         <option>1month</option>
                     </select></div>
 
-                <div class="panel-body" id="topPost">
+                <div class="panel-body" id="topPost" style="overflow-y: scroll;height:500px ">
                     <ls:topPost/>
                 </div>
 

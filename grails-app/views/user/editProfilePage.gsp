@@ -15,7 +15,9 @@
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <ls:user username="${session['username']}" topic="${null}"/>
+                    <div class="media">
+                    <ls:user/>
+                        </div>
                 </div>
             </div>
 
