@@ -43,6 +43,9 @@
     </div>
 </div>
 <script>
+    $("a.navbar-brand").click(function(){
+        $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+    });
     $(document).ready(function () {
         $(document).on('click', '.topicToResource', function () {
             var object = $(this);

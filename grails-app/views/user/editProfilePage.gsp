@@ -101,5 +101,8 @@
         </div>
     </div>
 </div>
+<script> $("a.navbar-brand").click(function(){
+    $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+});</script>
 </body>
 </html>
