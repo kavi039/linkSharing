@@ -4,6 +4,7 @@ import com.ttn.linkShare.DocumentResource
 import com.ttn.linkShare.LinkResource
 import com.ttn.linkShare.Resource
 import com.ttn.linkShare.ResourceRating
+import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 
 class ResourceController {
@@ -37,24 +38,43 @@ class ResourceController {
         Boolean status = resourceRating.save(flush: true)
         render status
     }
-    def deleteResource(Long resourceId){
-        Resource resource=Resource.get(resourceId)
+
+    def deleteResource(Long resourceId) {
+        Resource resource = Resource.get(resourceId)
         resource.delete(flush: true)
         render true
     }
-    def recentShare(){
-       int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):5
-        List<Resource>resourceList=tagService.recentShare(offset,max)
-        int totalCount=resourceList.totalCount
-        render (template: "/login/recentShare" ,model: [resourceList:resourceList,total:totalCount])
+
+    def recentShare() {
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 5
+        List<Resource> resourceList = tagService.recentShare(offset, max)
+        int totalCount = resourceList.totalCount
+        render(template: "/login/recentShare", model: [resourceList: resourceList, total: totalCount])
     }
-    def topPost(){
-        int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):5
-        List<Resource>resourceList=tagService.topPost(offset,max)
-        int totalCount=resourceList.totalCount
-        render (template: "/login/topPost" ,model: [resourceList:resourceList,total:totalCount])
+
+    def topPost() {
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 5
+        List<Resource> resourceList = tagService.topPost(offset, max)
+        int totalCount = resourceList.totalCount
+        render(template: "/login/topPost", model: [resourceList: resourceList, total: totalCount])
+    }
+
+    def resourceList() {
+        Topic topic = Topic.get(params.int("topicId"))
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") :5
+        List<Resource> resourceList = tagService.displayResourcesOfTopic(topic, offset, max)
+        int totalCount = resourceList.totalCount
+        render(template: "/topic/displayResourcesOfTopic", model: [resourceList: resourceList, total: totalCount, topicId: topic.id])
+    }
+    def resourceListOfSubscribedTopic(){
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") :10
+        List<Resource>resourceList=tagService.userSubscribedResourceList("${session['username']}",offset,max)
+        render(template: '/topic/topicSubscribedPost', model: [resourceList:resourceList,total:resourceList.totalCount])
+
     }
 
 }

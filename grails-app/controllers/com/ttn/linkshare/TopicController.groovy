@@ -25,10 +25,10 @@ class TopicController {
         if (topicService.create(topicCO, "${session['username']}")) {
             flash.error = "Topic created"
             println(">>>>>>>>>>>>>>>>>>>>>$params")
-           render(view: "/topic/topicShow", model: [topic: topicCO.topic])
+            render(view: "/topic/topicShow", model: [topic: topicCO.topic])
         } else {
             flash.error = "Topic Not Created"
-           redirect(controller: "user", action: "dashBoard")
+            redirect(controller: "user", action: "dashBoard")
         }
 
     }
@@ -95,16 +95,31 @@ class TopicController {
         }
     }
 
-    def trendingTopic() {
-        List<Topic> topicList = []
-        int offset = params.offset ? params.int("offset") : 0
-        int max = params.max ? params.int("max") : 5
-        List<Object> objectList = tagService.trendingTopic(offset, max)
-        objectList.collect(topicList) {
-            it[0]
-        }
-        int totalCount = objectList.totalCount
-        render(template: "/topic/trendingTopicDisplay", model: [topicList:topicList, total: totalCount])
+//    def trendingTopic() {
+//        List<Topic> topicList = []
+//        int offset =params.int("offset")
+//        int max = params.int("max")
+//        List<Object> objectList = tagService.trendingTopic(offset, max)
+//        objectList.collect(topicList) {
+//            it[0]
+//        }
+//        int totalCount = objectList.totalCount
+//        render(template: "/topic/trendingTopicDisplay", model: [topicList: topicList, total: totalCount])
+//    }
+
+    def topicList() {
+        int offset = params.int("offset")
+        int max = params.int("max")
+        List<Topic> topicList = tagService.userSubscribedTopicOrderByName("${session['username']}", offset, max)
+        int totalCount = topicList.totalCount
+        render(template: "/topic/topicsSubscription", model: [topicList: topicList, total: totalCount])
+    }
+    def topicCreatedByUser(){
+        int offset = params.offset as Integer
+        int max = params.max as Integer
+        List<Topic> topicList = tagService.topicCreatedByUser("${session['username']}", offset, max)
+        int totalCount = topicList.totalCount
+        render(template: '/topic/topicCreatedByUser', model: [topicList: topicList, total: totalCount])
     }
 
 

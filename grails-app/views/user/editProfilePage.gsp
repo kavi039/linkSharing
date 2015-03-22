@@ -29,7 +29,7 @@
                     %{--</div>--}%
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="dataDiv">
                     <ls:topicCreatedByUSer/>
                 </div>
             </div>

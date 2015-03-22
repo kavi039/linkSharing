@@ -34,7 +34,8 @@ class SearchController {
         render template: "/user/userInfo", model: [userList: userList]
     }
     def resourceListByTopicName(Long topicId){
-render (template: '/user/inbox',model: [resourceList: Resource.findAllByTopic(Topic.get(topicId))])
+        List<Resource> resourceList = Resource.findAllByTopic(Topic.get(topicId))
+        render (template: '/topic/topicSubscribedPost',model: [resourceList: resourceList, total: resourceList.size()])
     }
 
 }

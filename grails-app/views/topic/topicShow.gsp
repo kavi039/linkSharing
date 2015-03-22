@@ -34,7 +34,9 @@
             <div class="col-md-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">Posts<span style="color:#006dcc">(${topic.name})</span></div>
+                    <div id="postDiv">
                     <ls:displayResourcesOfTopic topic="${topic}"/>
+                        </div>
                 </div>
             </div>
         </g:if>

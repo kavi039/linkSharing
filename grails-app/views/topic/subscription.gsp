@@ -7,7 +7,7 @@
 
 <body>
 <div class="col-md-5">
-    <div class="panel panel-default" >
+    <div class="panel panel-default">
 
         <div class="panel-heading">
             Topics   <span class="topicName"></span>
@@ -17,7 +17,7 @@
             %{--</div>--}%
         </div>
 
-        <div id="topicListDiv" style="overflow-y: scroll;height:500px " >
+        <div id="topicListDiv" style="overflow-y: scroll;height:500px ">
             <ls:subscribedTopicInAlphabeticalOrder/>
         </div>
     </div>
@@ -37,30 +37,29 @@
             %{--</div>--}%
         </div>
 
-        <div class="panel-body" id="topicResourceDiv" style="overflow-y: scroll;height:500px " >
+        <div class="panel-body" id="topicResourceDiv" style="overflow-y: scroll;height:500px ">
             <ls:topicSubscribedPost/>
         </div>
     </div>
-</div>
-<script>
-    $("a.navbar-brand").click(function(){
-        $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
-    });
-    $(document).ready(function () {
-        $(document).on('click', '.topicToResource', function () {
-            var object = $(this);
-            var topicId = object.data('topic-id');
-            var topicName = object.data('topic-name');
-            $.ajax({
-                data: {topicId: topicId},
-                url:"${createLink(controller: 'search',action: 'resourceListByTopicName')}"
-            }).done(function(data){
-               $(".topicName").html(topicName);
-                $("#topicResourceDiv").html(data);
+    <script>
+        $("a.navbar-brand").click(function () {
+            $(this).attr('href', "${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+        });
+        $(document).ready(function () {
+            $(document).on('click', '.topicToResource', function () {
+                var object = $(this);
+                var topicId = object.data('topic-id');
+                var topicName = object.data('topic-name');
+                $.ajax({
+                    data: {topicId: topicId},
+                    url: "${createLink(controller: 'search',action: 'resourceListByTopicName')}"
+                }).done(function (data) {
+                    $(".topicName").html(topicName);
+                    $("#topicResourceDiv").html(data);
+                });
             });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
 

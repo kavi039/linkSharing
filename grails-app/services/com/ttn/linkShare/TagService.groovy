@@ -6,20 +6,19 @@ import grails.transaction.Transactional
 @Transactional
 class TagService {
 
-    def recentShare(int offset,int max) {
-        List<Resource> resources = Resource.createCriteria().list(max:max,offset: offset) {
+    def recentShare(int offset, int max) {
+        List<Resource> resources = Resource.createCriteria().list(max: max, offset: offset) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
             order("dateCreated", "desc")
 
         }
-        println(">>>>>>>>>>>>>>>>>>>in tagservice${resources.totalCount}")
         return resources
     }
 
-    def topPost(int offset,int max) {
-        List<Resource> resources = Resource.createCriteria().list(max:max,offset: offset) {
+    def topPost(int offset, int max) {
+        List<Resource> resources = Resource.createCriteria().list(max: max, offset: offset) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
@@ -32,16 +31,15 @@ class TagService {
 
     }
 
-    List<User> userSubscriptionByTopic(Topic topic,int offset,int max) {
+    List<User> userSubscriptionByTopic(Topic topic, int offset, int max) {
 
-            List<User>     userList = Subscription.createCriteria().list (max:max,offset: offset){
-                projections {
-                    property('user')
-                }
-                eq('topic', topic)
+        List<User> userList = Subscription.createCriteria().list(max: max, offset: offset) {
+            projections {
+                property('user')
             }
-            return userList
-
+            eq('topic', topic)
+        }
+        return userList
 
 
     }
@@ -78,8 +76,8 @@ class TagService {
         return topicList.unique()
     }
 
-    List<Resource> inbox(User user,int offset,int max) {
-        List<Resource> resourceList = ReadingItem.createCriteria().list(max:max,offset: offset) {
+    List<Resource> inbox(User user, int offset, int max) {
+        List<Resource> resourceList = ReadingItem.createCriteria().list(max: max, offset: offset) {
             projections {
                 property('resource')
             }
@@ -90,18 +88,18 @@ class TagService {
         resourceList
     }
 
-    List<Topic> topicCreatedByUser(String username) {
+    List<Topic> topicCreatedByUser(String username, int offset, int max) {
         User user = User.findByUsername(username)
-        List<Topic> topicList = Topic.createCriteria().list(max: 4, offset: 0) {
+        List<Topic> topicList = Topic.createCriteria().list(max: max, offset: offset) {
             eq('user', user)
             order("dateCreated", 'desc')
         }
         return topicList
     }
 
-    def trendingTopic(int max,int offset) {
+    def trendingTopic(int max, int offset) {
         List<Topic> topicList = []
-        List<Object> objectList = Resource.createCriteria().list(max:max, offset:offset) {
+        List<Object> objectList = Resource.createCriteria().list(max: max, offset: offset) {
             projections {
                 groupProperty("topic")
                 count("topic", "topicCount")
@@ -116,8 +114,8 @@ class TagService {
         return objectList
     }
 
-    List<Resource> displayResourcesOfTopic(Topic topic) {
-        List<Resource> resourceList = Resource.createCriteria().list(max: 2) {
+    List<Resource> displayResourcesOfTopic(Topic topic, int offset, int max) {
+        List<Resource> resourceList = Resource.createCriteria().list(max: max, offset: offset) {
             eq('topic', topic)
         }
         return resourceList
@@ -166,22 +164,22 @@ class TagService {
         return topicList
     }
 
-    List<Topic> userSubscribedTopicOrderByName(String username) {
+    List<Topic> userSubscribedTopicOrderByName(String username, int offset, int max) {
         User user = User.findByUsername(username)
         List<Topic> topicList
         if (user.admin) {
-            topicList = Topic.createCriteria().list {
+            topicList = Topic.createCriteria().list(max: max, offset: offset) {
 
                 'subscriptions' {
-                 projections{
-                     distinct('topic')
-                 }
+                    projections {
+                        distinct('topic')
+                    }
                 }
 
                 order('name')
             }
         } else {
-            topicList = Topic.createCriteria().list(max: 5, offset: 0) {
+            topicList = Topic.createCriteria().list(max: max, offset: offset) {
 
                 'subscriptions' {
                     eq('user', user)
@@ -196,13 +194,13 @@ class TagService {
 
     }
 
-    def userSubscribedResourceList(String username) {
+    def userSubscribedResourceList(String username, int offset, int max) {
         User user = User.findByUsername(username)
 
         println "$user"
         List<Resource> resourceList
         if (user.admin) {
-            resourceList = Resource.createCriteria().list {
+            resourceList = Resource.createCriteria().list(max: max, offset: offset) {
                 'topic' {
                     'subscriptions' {
 
@@ -211,7 +209,7 @@ class TagService {
                 order('dateCreated')
             }
         } else {
-            resourceList = Resource.createCriteria().list(max: 5, offset: 0) {
+            resourceList = Resource.createCriteria().list(max: max, offset: offset) {
                 'topic' {
                     'subscriptions' {
                         eq('user', user)
