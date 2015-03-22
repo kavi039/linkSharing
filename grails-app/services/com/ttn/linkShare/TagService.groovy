@@ -18,8 +18,8 @@ class TagService {
         return resources
     }
 
-    def topPost() {
-        List<Resource> resources = Resource.createCriteria().list(max: 4) {
+    def topPost(int offset,int max) {
+        List<Resource> resources = Resource.createCriteria().list(max:max,offset: offset) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
@@ -133,8 +133,8 @@ class TagService {
         return resourceList
     }
 
-    Integer getScore(Resource resourceInstance) {
-        Integer score = ResourceRating.createCriteria().get {
+    Float getScore(Resource resourceInstance) {
+        Float score = ResourceRating.createCriteria().get {
             projections {
                 avg('score')
             }
