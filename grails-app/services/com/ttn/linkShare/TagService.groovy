@@ -6,14 +6,15 @@ import grails.transaction.Transactional
 @Transactional
 class TagService {
 
-    def recentShare() {
-        List<Resource> resources = Resource.createCriteria().list(max: 3) {
+    def recentShare(int offset,int max) {
+        List<Resource> resources = Resource.createCriteria().list(max:max,offset: offset) {
             'topic' {
                 eq("visibility", Visibility.PUBLIC)
             }
             order("dateCreated", "desc")
 
         }
+        println(">>>>>>>>>>>>>>>>>>>in tagservice${resources.totalCount}")
         return resources
     }
 

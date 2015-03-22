@@ -42,5 +42,12 @@ class ResourceController {
         resource.delete(flush: true)
         render true
     }
+    def resourceListPagination(){
+       int offset=params.offset?params.int("offset"):0
+        int max=params.max?params.int("max"):5
+        List<Resource>resourceList=tagService.recentShare(offset,max)
+        int totalCount=resourceList.totalCount
+        render (template: "/login/recentShare" ,model: [resourceList:resourceList,total:totalCount])
+    }
 
 }

@@ -17,7 +17,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">RecentShare</div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="recentShare">
                     <ls:recentShare/>
                 </div>
             </div>

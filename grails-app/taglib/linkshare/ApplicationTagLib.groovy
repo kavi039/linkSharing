@@ -18,7 +18,9 @@ class ApplicationTagLib {
     static namespace = "ls"
 
     def recentShare = { attrs ->
-        out << render(template: "/login/recentShare", model: [resourceList: tagService.recentShare()])
+       List<Resource> resourceList=tagService.recentShare(0,5)
+        println(">>>>>>>>>>>>>>>>>>>in tagLibrary${resourceList.totalCount}")
+        out << render(template: "/login/recentShare", model: [resourceList:resourceList ,total:resourceList.totalCount,max:5])
     }
 
     def topPost = { attr ->

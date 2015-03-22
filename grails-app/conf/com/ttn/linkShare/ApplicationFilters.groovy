@@ -6,7 +6,7 @@ class ApplicationFilters {
         all(controller: '*', action: '*') {
             before = {
                 //   println("*********** In all, params: ${params}")
-                log.info("params :${params-(params?.get("passsword"))}")
+                log.info("params :${params - (params?.get("passsword"))}")
 
             }
             after = { Map model ->
@@ -18,7 +18,7 @@ class ApplicationFilters {
         }
 
 //        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
-        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|forgetPassword|forgetPasswordAction|post|renderImage|user|downloadAction|viewFullSite") {
+        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|forgetPassword|forgetPasswordAction|post|renderImage|user|downloadAction|viewFullSite|resourceListPagination") {
             before = {
                 if (!session.getAttribute('username')) {
                     println "************in secure filter ${controllerName}/${actionName}"
