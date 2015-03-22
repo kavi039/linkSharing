@@ -53,8 +53,10 @@
         </g:each>
         </tbody>
     </table>
+
 </div>
 <util:remotePaginate controller="user" action="userListPagination" update="data" total="${total}" max="${max}"/>
+
 
 
 

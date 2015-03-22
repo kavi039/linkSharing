@@ -141,7 +141,7 @@ class ApplicationTagLib {
         out << render(template: "/user/userSubscriptionList", model: [userList: userList, total: userList.totalCount, max: 5, topicId: attr.topic.id])
     }
     def listOfUser={attr->
-        List<User>userList=userService.listOfUser(0,2)
+        List<User>userList=userService.listOfUser(0,10)
         out<<render (template:"/user/userInfo", model:[userList:userList,total:userList.totalCount,max:10])
 
     }
