@@ -31,7 +31,7 @@
                         <option>1month</option>
                     </select></div>
 
-                <div class="panel-body">
+                <div class="panel-body" id="topPost">
                     <ls:topPost/>
                 </div>
 
