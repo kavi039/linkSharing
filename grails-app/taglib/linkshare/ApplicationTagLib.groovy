@@ -58,6 +58,7 @@ class ApplicationTagLib {
 
     def resourceType = { attr ->
         DocumentResource isDocument = DocumentResource.findById(attr.type)
+       // println "************$isDocument"
         out << render(template: '/user/isDocOrLink', model: [type: isDocument, resourceId: attr.type])
     }
 

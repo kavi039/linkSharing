@@ -15,7 +15,7 @@
     <g:if test="${isAdmin}">
         <li><a href="${createLink(controller: 'user', action: 'listOfUser')}">Users</a></li>
         <li><a href="${createLink(controller: 'topic', action: 'subscription')}">Topics</a></li>
-        <li><a href="${createLink(controller: 'resource',action: 'post')}">Posts</a></li>
+        <li><a href="${createLink(controller: 'topic',action: 'subscription')}">Posts</a></li>
     </g:if>
     <li><a href="${createLink(controller: 'login', action: 'logout')}" title="logout">Logout</a></li>
 
