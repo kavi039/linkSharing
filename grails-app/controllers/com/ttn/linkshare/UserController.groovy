@@ -88,5 +88,12 @@ class UserController {
         int totalCount=userList.totalCount
         render (template: "/user/userSubscriptionList" ,model: [userList:userList,total:totalCount,topicId:topic.id])
     }
+    def userListPagination(){
+        int offset=params.offset?params.int("offset"):0
+        int max=params.max?params.int("max"):2
+        List<User>userList=userService.listOfUser(offset,max)
+        int totalCount=userList.totalCount
+        render (template: "/user/userInfo" ,model: [userList:userList,total:totalCount])
+    }
 
 }

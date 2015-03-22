@@ -21,7 +21,7 @@
         </div>
 
         <div id="data">
-            <g:render template="/user/userInfo" model="[userList: com.ttn.linkShare.User.findAll()]"/>
+         <ls:listOfUser/>
         </div>
     </div>
 

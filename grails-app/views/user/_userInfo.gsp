@@ -51,13 +51,10 @@
 
             </tr>
         </g:each>
-        <span style="color: #ffffff">
-            <util:remotePaginate controller="user" action="userListPagination" update="data" total="10" max="${max}"/>
-        </span>
         </tbody>
     </table>
-
 </div>
+<util:remotePaginate controller="user" action="userListPagination" update="data" total="${total}" max="${max}"/>
 
 
 

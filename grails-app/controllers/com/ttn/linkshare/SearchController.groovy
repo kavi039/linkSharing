@@ -31,7 +31,7 @@ class SearchController {
             Boolean b = userStatus.equals('Active')
             userList = searchByName ? User.findAllByActiveAndUsernameIlike(b, "%${searchByName}%", [sort: arrange]) : User.findAllByActive(b, [sort: arrange])
         }
-        render template: "/user/userInfo", model: [userList: userList]
+        render template: "/user/userInfo", model: [userList: userList,total:User.count,max:10]
     }
     def resourceListByTopicName(Long topicId){
         List<Resource> resourceList = Resource.findAllByTopic(Topic.get(topicId))

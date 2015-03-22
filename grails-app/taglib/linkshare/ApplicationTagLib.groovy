@@ -11,7 +11,7 @@ import com.ttn.linkShare.enums.Visibility
 
 class ApplicationTagLib {
 
-    def tagService
+    def tagService,userService
 
     static defaultEncodeAs = 'raw'
 
@@ -139,5 +139,10 @@ class ApplicationTagLib {
     def userList = { attr ->
         List<User> userList = tagService.userSubscriptionByTopic(attr.topic, 0, 5)
         out << render(template: "/user/userSubscriptionList", model: [userList: userList, total: userList.totalCount, max: 5, topicId: attr.topic.id])
+    }
+    def listOfUser={attr->
+        List<User>userList=userService.listOfUser(0,2)
+        out<<render (template:"/user/userInfo", model:[userList:userList,total:userList.totalCount,max:10])
+
     }
 }

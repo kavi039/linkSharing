@@ -38,10 +38,12 @@ class UserService {
 
     }
 
-//    def listingUser(String key) {
-//        List<User> userList
-//        return userList
-//    }
+    def listOfUser(int offset, int max) {
+        List<User> userList = User.createCriteria().list(max: max, offset: offset) {
+
+        }
+        return userList
+    }
 
     def uploadPhoto(def userCO) {
         File photoFile = null
