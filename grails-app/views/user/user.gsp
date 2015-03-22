@@ -19,12 +19,12 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">Topics
-                    <div style="float: right">
-                        <g:form name="search" class="form-group" controller="search" action="search">
-                            <g:textField name="searchText" placeholder="search"/>
-                            <g:submitButton name="finder" value="search"/>
-                        </g:form>
-                    </div>
+                    %{--<div style="float: right">--}%
+                        %{--<g:form name="search" class="form-group" controller="search" action="search">--}%
+                            %{--<g:textField name="searchText" placeholder="search"/>--}%
+                            %{--<g:submitButton name="finder" value="search"/>--}%
+                        %{--</g:form>--}%
+                    %{--</div>--}%
                 </div>
 
                 <div class="panel-body" >
@@ -36,12 +36,12 @@
        <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">Posts
-                <div style="float: right">
-                    <g:form name="search" class="form-group" controller="search" action="search">
-                        <g:textField name="searchText" placeholder="search"/>
-                        <g:submitButton name="finder" value="search"/>
-                    </g:form>
-                </div>
+                %{--<div style="float: right">--}%
+                    %{--<g:form name="search" class="form-group" controller="search" action="search">--}%
+                        %{--<g:textField name="searchText" placeholder="search"/>--}%
+                        %{--<g:submitButton name="finder" value="search"/>--}%
+                    %{--</g:form>--}%
+                %{--</div>--}%
             </div>
 
             <div class="panel-body" >
