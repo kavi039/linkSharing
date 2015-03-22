@@ -133,7 +133,7 @@ class TagService {
     }
 
     def userPublicProfileInfo(User user, Boolean status) {
-        Integer subscriptionCount, topicCount = topicCreatedByUser(user.username).size()
+        Integer subscriptionCount, topicCount =Topic.findAllByUser(user).size()
         List<Topic> topicList = Subscription.createCriteria().list() {
             projections {
                 property('topic')
@@ -141,9 +141,7 @@ class TagService {
         }
         subscriptionCount = topicList.size()
         if (!status) {
-            topicCount = topicCreatedByUser(user.username).findAll {
-                it.visibility.equals(Visibility.PUBLIC)
-            }.size()
+            topicCount =Topic.findAllByUserAndVisibility(user,Visibility.PUBLIC).size()
             subscriptionCount = topicList.findAll {
                 it.visibility.equals(Visibility.PUBLIC)
             }.size()
@@ -155,11 +153,9 @@ class TagService {
     }
 
     List<Topic> publicTopicCreatedByUser(User user) {
-        List<Topic> topicList = topicCreatedByUser(user.username)
-        if (topicList) {
-            topicList = topicList.findAll {
-                it.visibility.equals(Visibility.PUBLIC)
-            }
+        List<Topic> topicList =Topic.createCriteria().list{
+            eq('user',user)
+            eq('visibility',Visibility.PUBLIC)
         }
         return topicList
     }

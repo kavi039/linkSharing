@@ -53,7 +53,7 @@ class ResourceController {
         render(template: "/login/recentShare", model: [resourceList: resourceList, total: totalCount])
     }
 
-    def topPost() {
+    def topPostAction() {
         int offset = params.offset ? params.int("offset") : 0
         int max = params.max ? params.int("max") : 5
         List<Resource> resourceList = tagService.topPost(offset, max)

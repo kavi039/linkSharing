@@ -31,8 +31,10 @@
                         <option>1month</option>
                     </select></div>
 
-                <div class="panel-body" id="topPost" style="overflow-y: scroll;height:500px ">
+                <div class="panel-body"  style="overflow-y: scroll;height:500px ">
+                    <div id="topPostDiv">
                     <ls:topPost/>
+                    </div>
                 </div>
 
 </div>
