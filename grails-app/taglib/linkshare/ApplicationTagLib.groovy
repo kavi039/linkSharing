@@ -94,7 +94,7 @@ class ApplicationTagLib {
 //
 //    }
     def subscribedTopicInAlphabeticalOrder = { attr ->
-        out << render(template: '/topic/topicSubscription', model: [topicList: tagService.userSubscribedTopicOrderByName("${session['username']}")] )
+        out << render(template: '/topic/topicsSubscription', model: [topicList: tagService.userSubscribedTopicOrderByName("${session['username']}")] )
     }
     def dateFormat = { attr ->
         out << attr.type?.format("hh:mm:ss dd/MM/yyyy")
