@@ -64,17 +64,27 @@ class ResourceController {
     def resourceList() {
         Topic topic = Topic.get(params.int("topicId"))
         int offset = params.offset ? params.int("offset") : 0
-        int max = params.max ? params.int("max") :5
+        int max = params.max ? params.int("max") : 5
         List<Resource> resourceList = tagService.displayResourcesOfTopic(topic, offset, max)
         int totalCount = resourceList.totalCount
         render(template: "/topic/displayResourcesOfTopic", model: [resourceList: resourceList, total: totalCount, topicId: topic.id])
     }
-    def resourceListOfSubscribedTopic(){
-        int offset = params.offset ? params.int("offset") : 0
-        int max = params.max ? params.int("max") :10
-        List<Resource>resourceList=tagService.userSubscribedResourceList("${session['username']}",offset,max)
-        render(template: '/topic/topicSubscribedPost', model: [resourceList:resourceList,total:resourceList.totalCount])
 
+    def resourceListOfSubscribedTopic() {
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 10
+        List<Resource> resourceList = tagService.userSubscribedResourceList("${session['username']}", offset, max)
+        render(template: '/topic/topicSubscribedPost', model: [resourceList: resourceList, total: resourceList.totalCount])
+
+    }
+
+    def publicResourceListCreatedByUser() {
+        int offset =params.int("offset")
+        int max = params.int("max")
+        User user=User.get(params.int("userId"))
+        List<Resource> resourceList = tagService.publicResourcesOfTopicCreatedByUser(user,offset, max)
+        int totalCount = resourceList.totalCount
+        render(template: "/user/publicPost", model: [resourceList: resourceList, total: totalCount,userId:user.id])
     }
 
 }

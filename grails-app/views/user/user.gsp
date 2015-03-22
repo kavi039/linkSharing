@@ -27,7 +27,7 @@
                     %{--</div>--}%
                 </div>
 
-                <div class="panel-body" >
+                <div class="panel-body"  id="topicListDiv">
                     <ls:publicTopicCreatedByUser userId="${params.id}" />
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 %{--</div>--}%
             </div>
 
-            <div class="panel-body" >
+            <div class="panel-body" id="publicPost" >
                 <ls:publicPost userId="${params.id}" />
             </div>
         </div>

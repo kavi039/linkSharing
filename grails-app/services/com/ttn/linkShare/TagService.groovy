@@ -152,8 +152,8 @@ class TagService {
 
     }
 
-    List<Topic> publicTopicCreatedByUser(User user) {
-        List<Topic> topicList =Topic.createCriteria().list{
+    List<Topic> publicTopicCreatedByUser(User user,int offset,int max) {
+        List<Topic> topicList =Topic.createCriteria().list(max:max,offset: offset){
             eq('user',user)
             eq('visibility',Visibility.PUBLIC)
         }
@@ -216,6 +216,15 @@ class TagService {
         }
 
         return resourceList
+    }
+ List<Resource>   publicResourcesOfTopicCreatedByUser(User user,int offset,int max){
+       List<Resource>resourceList=Resource.createCriteria().list(offset:offset,max: max ){
+           'topic'{
+               eq('user',user)
+               eq('visibility',Visibility.PUBLIC)
+           }
+       }
+     return  resourceList
     }
 
 

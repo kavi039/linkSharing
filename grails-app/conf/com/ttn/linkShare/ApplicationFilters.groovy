@@ -18,7 +18,7 @@ class ApplicationFilters {
         }
 
 //        secureAction(controller: 'login',action: 'login|loginHandler',invert: true) {
-        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|forgetPassword|forgetPasswordAction|post|renderImage|user|downloadAction|viewFullSite|recentShare|topPostAction") {
+        secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|forgetPassword|forgetPasswordAction|post|renderImage|user|downloadAction|viewFullSite|recentShare|topPostAction|publicTopicCreatedByUser|publicResourceListCreatedByUser") {
             before = {
                 if (!session.getAttribute('username')) {
                     println "************in secure filter ${controllerName}/${actionName}"

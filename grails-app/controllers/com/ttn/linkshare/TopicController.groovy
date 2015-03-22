@@ -95,17 +95,14 @@ class TopicController {
         }
     }
 
-//    def trendingTopic() {
-//        List<Topic> topicList = []
-//        int offset =params.int("offset")
-//        int max = params.int("max")
-//        List<Object> objectList = tagService.trendingTopic(offset, max)
-//        objectList.collect(topicList) {
-//            it[0]
-//        }
-//        int totalCount = objectList.totalCount
-//        render(template: "/topic/trendingTopicDisplay", model: [topicList: topicList, total: totalCount])
-//    }
+    def publicTopicCreatedByUser() {
+        int offset =params.int("offset")
+        int max = params.int("max")
+        User user=User.get(params.int("userId"))
+        List<Topic> topicList = tagService.publicTopicCreatedByUser(user,offset, max)
+        int totalCount = topicList.totalCount
+        render(template: "/topic/publicTopicCreatedByUser", model: [topicList: topicList, total: totalCount,userId:user.id])
+    }
 
     def topicList() {
         int offset = params.int("offset")
