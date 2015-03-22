@@ -19,12 +19,12 @@ class ApplicationTagLib {
 
     def recentShare = { attrs ->
        List<Resource> resourceList=tagService.recentShare(0,5)
-        println(">>>>>>>>>>>>>>>>>>>in tagLibrary${resourceList.totalCount}")
         out << render(template: "/login/recentShare", model: [resourceList:resourceList ,total:resourceList.totalCount,max:5])
     }
 
     def topPost = { attr ->
-        out << render(template: "/login/topPost", model: [resourceList: tagService.topPost()])
+        List<Resource>resourceList=tagService.topPost(0,5)
+        out << render(template: "/login/topPost", model: [resourceList:resourceList,total:resourceList.totalCount,max: 5])
     }
 
     def user = { attr ->
