@@ -3,7 +3,6 @@ $(document).ready(function () {
         $("#sendInvitation").modal();
     });
     $(document).on('click', "#sendTopicInvitation", function () {
-        alert($("form#envelopForm").serialize());
         $.ajax({
             data: $("form#envelopForm").serialize(),
             url: sendMail
@@ -56,7 +55,6 @@ $(document).ready(function () {
             url = Subscription;
             text1 = "UnSubscribe";
             sendData = {topicId: topicId, seriousness: seriouness}
-            // alert(seriouness);
         }
         else {
             url = UnSubscription;
@@ -86,18 +84,17 @@ function setSeriousness(topicId, element) {
         url: SubscriptionUpdate
     }).done(function (data) {
         if (data == "true") {
-    var divObject=$("div#message");
-            $(document).ready(function(){
-        divObject.html("Seriouness has changed").css('background-color','yellow');
-            $(divObject).slideToggle();
-            setTimeout(function () {
-                divObject.slideUp();
-            }, 3000);
+            var divObject = $("div#message");
+            $(document).ready(function () {
+                divObject.html("Seriouness has changed").css('background-color', 'yellow');
+                $(divObject).slideToggle();
+                setTimeout(function () {
+                    divObject.slideUp();
+                }, 3000);
             });
         }
-        else
-        {
-         alert("please subscribed first");
+        else {
+            alert("please subscribed first");
         }
     });
 }
@@ -108,9 +105,9 @@ function setVisibility(topicId, element) {
         url: TopicVisibilityUpdate
     }).done(function (data) {
         if (data == "true") {
-            var divObject=$("div#message");
-            $(document).ready(function(){
-                divObject.html("Visibility has changed").css('background-color','yellow');
+            var divObject = $("div#message");
+            $(document).ready(function () {
+                divObject.html("Visibility has changed").css('background-color', 'yellow');
                 $(divObject).slideToggle();
                 setTimeout(function () {
                     divObject.slideUp();
@@ -160,7 +157,7 @@ function editTopic(topicId, element) {
     });
 }
 
-function sendInvitation(topicId,topicName) {
+function sendInvitation(topicId, topicName) {
     $('#sendInvitationOfTopic').modal();
     $("input#topic").val(topicName);
     $("input#topicId").val(topicId);
@@ -175,24 +172,24 @@ function sendInvitation(topicId,topicName) {
     });
 }
 
-$(document).on('click','.editResource',function(){
-   var modal=$(this).data('toggle');
-    $("#"+modal).modal();
+$(document).on('click', '.editResource', function () {
+    var modal = $(this).data('toggle');
+    $("#" + modal).modal();
 });
 
-$(document).on('click','.deleteResource',function(){
-    var object=$(this);
+$(document).on('click', '.deleteResource', function () {
+    var object = $(this);
     $('#deleteResource').modal();
-    $(document).on('click','.delete',function(){
-        var resourceId=object.data('resource-id');
+    $(document).on('click', '.delete', function () {
+        var resourceId = object.data('resource-id');
         $.ajax({
-            data:{resourceId:resourceId},
-            url:  resourceDelete
-        }).done(function(data){
+            data: {resourceId: resourceId},
+            url: resourceDelete
+        }).done(function (data) {
             $("div.resourceRating").slideUp().detach();
         });
     })
-    $(document).on('click','.cancel',function(){
+    $(document).on('click', '.cancel', function () {
         $('#deleteResource').modal('hide');
     })
 });

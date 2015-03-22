@@ -122,13 +122,13 @@ class ApplicationTagLib {
     }
     def publicTopicCreatedByUser = { attr ->
         User user = User.get(attr.userId)
-        List<Topic>topicList=tagService.publicTopicCreatedByUser(user,0,5)
-        out << render(template: '/topic/publicTopicCreatedByUser', model: [topicList:topicList,total:topicList.totalCount,max:5,userId:user.id])
+        List<Topic> topicList = tagService.publicTopicCreatedByUser(user, 0, 5)
+        out << render(template: '/topic/publicTopicCreatedByUser', model: [topicList: topicList, total: topicList.totalCount, max: 5, userId: user.id])
     }
     def publicPost = { attr ->
         User user = User.get(attr.userId)
-       List<Resource>resourceList= tagService.publicResourcesOfTopicCreatedByUser(user,0,5)
-        out << render(template: '/user/publicPost', model: [resourceList:resourceList,total:resourceList.totalCount,max:5,userId:attr.userId])
+        List<Resource> resourceList = tagService.publicResourcesOfTopicCreatedByUser(user, 0, 5)
+        out << render(template: '/user/publicPost', model: [resourceList: resourceList, total: resourceList.totalCount, max: 5, userId: attr.userId])
     }
     def topicSubscribedPost = { attr ->
         List<Resource> resourceList = tagService.userSubscribedResourceList("${session['username']}", 0, 10)
