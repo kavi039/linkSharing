@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <form id="formSendMail" class="form-group">
                     <label for="email">Email</label>
-                    <g:textField name="email" class="form-control" required="true"/>
+                    <input type="email"  id="email" class="form-control" required="true"/>
                     <label for="topic">Topic</label>
                     <g:hiddenField name="topicId" />
                     <input type="text" name="topic"  id="topic" readonly/>
