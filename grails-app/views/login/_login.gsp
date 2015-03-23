@@ -2,19 +2,19 @@
             <div class="panel-heading">Login</div>
 
             <div class="panel-body">
-<g:form role="form" controller="login" action="loginHandler">
+<form role="form" action="${createLink(controller: 'login',action: 'loginHandler')}" id="loginForm" method="post">
     <div class="form-group">
         <label for="email">Email/UserName:</label>
-        <g:textField name="email" id="email" class="form-control"/>
+        <input type="text" name="email" id="email" class="form-control" />
     </div>
 
     <div class="form-group">
         <label for="password">Password:</label>
-        <g:passwordField name="password" id="password" class="form-control"/>
+        <input type="password" name="password" id="password" class="form-control" required="true"/>
     </div>
 
-    <g:submitButton name="submit" class="btn btn-default" value="Login"/>
-</g:form>
+    <input type="submit" name="submit" class="btn btn-default" value="Login"/>
+</form>
 <a href="${createLink (controller:'login', action:'forgetPassword')}"
    title="Forget Password">Forget Password?</a>
 </div>

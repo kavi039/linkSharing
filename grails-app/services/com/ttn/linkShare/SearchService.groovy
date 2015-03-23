@@ -12,22 +12,26 @@ class SearchService {
         return topicList
     }
 
-    def fetchAllResourceByNameLikeAndVisibility(String nameLike, Visibility visibility, Long max = 10, Long offset = 0) {
-        List<Resource> resourceList
-        if (visibility) {
+    def fetchAllResourceByNameLikeAndVisibility(String nameLike, Visibility visibility, int max, int offset) {
+        List<Resource> resourceList=[]
+        resourceList = Resource.createCriteria().list(max: max, offset: offset) {
+            'topic' {
+                eq("visibility", visibility)
+                ilike("name", "%${nameLike}%")
+            }
+        }
+       if (!resourceList) {
             resourceList = Resource.createCriteria().list(max: max, offset: offset) {
                 'topic' {
                     eq("visibility", visibility)
                 }
                 ilike("description", "%${nameLike}%")
             }
-        } else {
-            resourceList = Resource.findAllByDescriptionIlike("%${nameLike}%")
-        }
+       }
         resourceList
     }
 
-    List<Topic> topicListByName(String name,String username) {
+    List<Topic> topicListByName(String name, String username) {
         println "name: $name"
         println "name: $name"
         println "name: $name"

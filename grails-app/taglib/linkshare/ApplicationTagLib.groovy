@@ -11,7 +11,7 @@ import com.ttn.linkShare.enums.Visibility
 
 class ApplicationTagLib {
 
-    def tagService,userService
+    def tagService,userService,searchService
 
     static defaultEncodeAs = 'raw'
 
@@ -145,4 +145,12 @@ class ApplicationTagLib {
         out<<render (template:"/user/userInfo", model:[userList:userList,total:userList.totalCount,max:10])
 
     }
-}
+   def  searchResult={attr->
+       println ">>>>>>>>>>>>>>"+attr.text
+       Visibility visibility = Visibility.PUBLIC
+       List<Resource> resourceList = searchService.fetchAllResourceByNameLikeAndVisibility(attr.text, visibility, params?.max ?:5, params?.offset ?: 0)
+       println("in tag lib"+resourceList)
+       out<<render (template: "/search/searchResult",model: [resourceList: resourceList,total:resourceList.totalCount,searchText:attr.text])
+   }
+
+   }

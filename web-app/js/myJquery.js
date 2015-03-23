@@ -195,3 +195,19 @@ $(document).on('click', '.deleteResource', function () {
 });
 
 
+$(document).ready(function(){
+    $("#loginForm").validate({
+        rules: {
+            email: {
+                email: true
+
+            }
+        },
+        messages: {
+            email: {
+                email: "We need your email address to contact you",
+
+            }
+        }
+    });
+});

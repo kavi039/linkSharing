@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <g:layoutHead/>
-
 </head>
 
 <body style="background-color: #31b0d5">
@@ -38,6 +37,7 @@
 </g:if>
 </div>
 <script src="${resource(dir: "/js", file: 'jquery.min.js')}"></script>
+<script src="${resource(dir: "/js", file: 'jquery.validate.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'bootstrap.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'bootstrap.js')}"></script>
 <script src="${resource(dir: "/js", file: 'myJquery.js')}"></script>
