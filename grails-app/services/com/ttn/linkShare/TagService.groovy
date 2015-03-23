@@ -18,16 +18,36 @@ class TagService {
     }
 
     def topPost(int offset, int max) {
-        List<Resource> resources = Resource.createCriteria().list(max: max, offset: offset) {
-            'topic' {
-                eq("visibility", Visibility.PUBLIC)
+        List<Object> object = ResourceRating.createCriteria().list(max: max, offset: offset) {
+            projections {
+                groupProperty("resourse")
+                avg("score", "scoreShorting")
             }
-            'resourceRatings' {
-                order("score", "desc")
+            "resourse" {
+                "topic" {
+                    eq("visibility", Visibility.PUBLIC)
+                }
+
             }
+            order("scoreShorting", "desc")
 
         }
-        return resources
+
+//        List<Resource> resources = Resource.createCriteria().list(max: max, offset: offset) {
+//            'topic' {
+//                eq("visibility", Visibility.PUBLIC)
+//            }
+//            'resourceRatings' {
+//                projections{
+//                    groupProperty("resourse")
+//                    avg("score","scoreAvg")
+//                }
+//                order("scoreAvg", "desc")
+//            }
+//
+//        }
+        // return resources
+        return object
 
     }
 
@@ -73,11 +93,11 @@ class TagService {
                 }
             }
         }
-        topicList=topicList.unique()
-        if(topicList.size()>5)
-        return topicList.subList(0,5)
+        topicList = topicList.unique()
+        if (topicList.size() > 5)
+            return topicList.subList(0, 5)
         else
-        return topicList
+            return topicList
     }
 
     List<Resource> inbox(User user, int offset, int max) {
@@ -137,7 +157,7 @@ class TagService {
     }
 
     def userPublicProfileInfo(User user, Boolean status) {
-        Integer subscriptionCount, topicCount =Topic.findAllByUser(user).size()
+        Integer subscriptionCount, topicCount = Topic.findAllByUser(user).size()
         List<Topic> topicList = Subscription.createCriteria().list() {
             projections {
                 property('topic')
@@ -145,7 +165,7 @@ class TagService {
         }
         subscriptionCount = topicList.size()
         if (!status) {
-            topicCount =Topic.findAllByUserAndVisibility(user,Visibility.PUBLIC).size()
+            topicCount = Topic.findAllByUserAndVisibility(user, Visibility.PUBLIC).size()
             subscriptionCount = topicList.findAll {
                 it.visibility.equals(Visibility.PUBLIC)
             }.size()
@@ -156,10 +176,10 @@ class TagService {
 
     }
 
-    List<Topic> publicTopicCreatedByUser(User user,int offset,int max) {
-        List<Topic> topicList =Topic.createCriteria().list(max:max,offset: offset){
-            eq('user',user)
-            eq('visibility',Visibility.PUBLIC)
+    List<Topic> publicTopicCreatedByUser(User user, int offset, int max) {
+        List<Topic> topicList = Topic.createCriteria().list(max: max, offset: offset) {
+            eq('user', user)
+            eq('visibility', Visibility.PUBLIC)
         }
         return topicList
     }
@@ -221,14 +241,15 @@ class TagService {
 
         return resourceList
     }
- List<Resource>   publicResourcesOfTopicCreatedByUser(User user,int offset,int max){
-       List<Resource>resourceList=Resource.createCriteria().list(offset:offset,max: max ){
-           'topic'{
-               eq('user',user)
-               eq('visibility',Visibility.PUBLIC)
-           }
-       }
-     return  resourceList
+
+    List<Resource> publicResourcesOfTopicCreatedByUser(User user, int offset, int max) {
+        List<Resource> resourceList = Resource.createCriteria().list(offset: offset, max: max) {
+            'topic' {
+                eq('user', user)
+                eq('visibility', Visibility.PUBLIC)
+            }
+        }
+        return resourceList
     }
 
 

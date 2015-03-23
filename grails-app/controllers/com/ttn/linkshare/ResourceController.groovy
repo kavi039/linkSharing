@@ -56,8 +56,11 @@ class ResourceController {
     def topPostAction() {
         int offset = params.offset ? params.int("offset") : 0
         int max = params.max ? params.int("max") : 5
-        List<Resource> resourceList = tagService.topPost(offset, max)
-        int totalCount = resourceList.totalCount
+        List<Object> objectList = tagService.topPost(0, 5)
+        List<Resource> resourceList = objectList.collect() { it[0] }
+//        List<Resource> resourceList = tagService.topPost(offset, max)
+//        int totalCount = resourceList.totalCount
+        int totalCount = objectList.totalCount
         render(template: "/login/topPost", model: [resourceList: resourceList, total: totalCount])
     }
 

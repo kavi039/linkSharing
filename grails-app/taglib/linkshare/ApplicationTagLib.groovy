@@ -11,7 +11,7 @@ import com.ttn.linkShare.enums.Visibility
 
 class ApplicationTagLib {
 
-    def tagService,userService,searchService
+    def tagService, userService, searchService
 
     static defaultEncodeAs = 'raw'
 
@@ -23,8 +23,9 @@ class ApplicationTagLib {
     }
 
     def topPost = { attr ->
-        List<Resource> resourceList = tagService.topPost(0, 5)
-        out << render(template: "/login/topPost", model: [resourceList: resourceList, total: resourceList.totalCount, max: 5])
+        List<Object> objectList = tagService.topPost(0, 5)
+        List<Resource> resourceList = objectList.collect() { it[0] }
+        out << render(template: "/login/topPost", model: [resourceList: resourceList, total: objectList.totalCount, max: 5])
     }
 
     def user = { attr ->
@@ -103,6 +104,7 @@ class ApplicationTagLib {
         out << render(template: '/topic/topicsSubscription', model: [topicList: topicList, total: topicList.totalCount], max: 10)
     }
     def dateFormat = { attr ->
+        Date date = attr.type
         out << attr.type?.format("hh:mm:ss dd/MM/yyyy")
     }
     def adminOrCreatorOfResource = { attr ->
@@ -140,17 +142,15 @@ class ApplicationTagLib {
         List<User> userList = tagService.userSubscriptionByTopic(attr.topic, 0, 5)
         out << render(template: "/user/userSubscriptionList", model: [userList: userList, total: userList.totalCount, max: 5, topicId: attr.topic.id])
     }
-    def listOfUser={attr->
-        List<User>userList=userService.listOfUser(0,10)
-        out<<render (template:"/user/userInfo", model:[userList:userList,total:userList.totalCount,max:10])
+    def listOfUser = { attr ->
+        List<User> userList = userService.listOfUser(0, 10)
+        out << render(template: "/user/userInfo", model: [userList: userList, total: userList.totalCount, max: 10])
 
     }
-   def  searchResult={attr->
-       println ">>>>>>>>>>>>>>"+attr.text
-       Visibility visibility = Visibility.PUBLIC
-       List<Resource> resourceList = searchService.fetchAllResourceByNameLikeAndVisibility(attr.text, visibility, params?.max ?:5, params?.offset ?: 0)
-       println("in tag lib"+resourceList)
-       out<<render (template: "/search/searchResult",model: [resourceList: resourceList,total:resourceList.totalCount,searchText:attr.text])
-   }
+    def searchResult = { attr ->
+        Visibility visibility = Visibility.PUBLIC
+        List<Resource> resourceList = searchService.fetchAllResourceByNameLikeAndVisibility(attr.text, visibility, params?.max ?: 5, params?.offset ?: 0)
+        out << render(template: "/search/searchResult", model: [resourceList: resourceList, total: resourceList.totalCount, searchText: attr.text])
+    }
 
-   }
+}

@@ -18,7 +18,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            logSql=true
+//            logSql=true
             pooled = true
             driverClassName = "com.mysql.jdbc.Driver"
             password = "igdefault"
