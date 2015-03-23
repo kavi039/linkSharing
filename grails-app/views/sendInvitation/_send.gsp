@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <form id="envelopForm" class="form-group">
                     <label for="email">Email</label>
-                    <g:textField name="email" class="form-control"/>
+                    <g:textField name="email" class="form-control" required="true"/>
                     <label for="topicId">Topic</label>
                     <g:select name="topicId"
                               from="${com.ttn.linkShare.Topic.topicListSubscribedByCurrentUser(''+session['username'])}" optionKey="id" optionValue="name">

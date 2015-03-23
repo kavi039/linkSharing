@@ -2,7 +2,7 @@
     <div class="panel-heading">Register</div>
 
     <div class="panel-body">
-        <g:uploadForm role="form" controller="user" action="registerHandler">
+        <form enctype="multipart/form-data" role="form" action="${createLink(controller:"user" ,action:"registerHandler" )}" id="registerForm">
             <div class="form-group">
                 <label for="firstName">First Name:</label>
                 <g:textField name="firstName" class="form-control"/>
@@ -39,6 +39,6 @@
             </div>
             <g:submitButton name="submit" class="btn btn-default" value="SignUp"/>
 
-        </g:uploadForm>
+        </form>
     </div>
 </div>

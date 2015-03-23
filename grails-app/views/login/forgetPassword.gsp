@@ -36,13 +36,13 @@
             </div>
         </div>
 <div class="col-lg-5">
-<g:form role="form" controller="login" action="forgetPasswordAction">
+<form role="form" controller="login" action="forgetPasswordAction" id="forgetPassword">
     <div class="form-group">
         <label for="email">Email/UserName:</label>
-        <g:textField name="email" id="email" class="form-control"/>
+        <g:textField name="email" id="email" class="form-control" />
     </div>
     <g:submitButton name="submit" class="btn btn-default" value="Reset"/>
-    </g:form>
+    </form>
     </div>
 
     </div>

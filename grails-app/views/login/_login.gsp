@@ -4,12 +4,12 @@
             <div class="panel-body">
 <form role="form" action="${createLink(controller: 'login',action: 'loginHandler')}" id="loginForm" method="post">
     <div class="form-group">
-        <label for="email">Email/UserName:</label>
+        <label for="email" >Email/UserName:</label>
         <input type="text" name="email" id="email" class="form-control" />
     </div>
 
     <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password" >Password:</label>
         <input type="password" name="password" id="password" class="form-control" required="true"/>
     </div>
 

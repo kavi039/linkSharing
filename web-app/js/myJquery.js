@@ -195,19 +195,73 @@ $(document).on('click', '.deleteResource', function () {
 });
 
 
-$(document).ready(function(){
-    $("#loginForm").validate({
+$(document).ready(function () {
+    $("form#loginForm").validate({
         rules: {
+            password: {
+                required: true,
+                minlength: 4
+            },
             email: {
-                email: true
-
+                required: true
             }
         },
         messages: {
+            password: {
+                required: "please enter your password",
+                minlength: jQuery.format("At least {0} characters required! and Maximum 10")
+            },
             email: {
-                email: "We need your email address to contact you",
-
+                required: "Your UserName Or Email Address Can not be empty"
             }
         }
     });
+    $("form#registerForm").validate({
+        rules: {
+            password: {
+                required: true,
+                minlength: 4
+            },
+            confirmPassword: {
+                required: true,
+                minlength: 4,
+                equalTo: "#password"
+            },
+            email: {
+                required: true
+            },
+            username: {
+                required: true
+            }
+        },
+        messages: {
+            password: {
+                required: "please enter your password",
+                minlength: jQuery.format("At least {0} characters required! and Maximum 10")
+            },
+            email: {
+                required: "Your UserName Or Email Address Can not be empty"
+            },
+            username: {
+                required: "Username can not be empty"
+            },
+            confirmPassword: {
+                required: "can not be empty",
+                minlength: jQuery.format("At least {0} characters required! and Maximum 10"),
+                equalTo: "value must be equal to password"
+            }
+        }
+    });
+    $("form#forgetPassword").validate({
+        rules:{
+            email:{
+                required:true
+            }
+        },
+        messages:{
+            email: {
+                required: "enter valid email/username"
+            }
+        }
+    })
 });
