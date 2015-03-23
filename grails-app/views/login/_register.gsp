@@ -2,7 +2,7 @@
     <div class="panel-heading">Register</div>
 
     <div class="panel-body">
-        <form enctype="multipart/form-data" role="form" action="${createLink(controller:"user" ,action:"registerHandler" )}" id="registerForm">
+        <form enctype="multipart/form-data" role="form" action="${createLink(controller:"user" ,action:"registerHandler" )}" id="registerForm" method="post">
             <div class="form-group">
                 <label for="firstName">First Name:</label>
                 <g:textField name="firstName" class="form-control"/>

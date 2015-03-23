@@ -6,8 +6,13 @@ $(document).ready(function () {
         $.ajax({
             data: $("form#envelopForm").serialize(),
             url: sendMail
-        }).always(function () {
-            alert('message has been send');
+        }).always(function (data) {
+            if(data=="false"){
+                alert('message has not  send');
+            }
+            else {
+                alert('message has been send');
+            }
         });
     });
     $("a[title='comment']").on('click', function () {
@@ -162,12 +167,16 @@ function sendInvitation(topicId, topicName) {
     $("input#topic").val(topicName);
     $("input#topicId").val(topicId);
     $(document).on('click', "#sendMail", function () {
-        alert($("form#formSendMail").serialize());
         $.ajax({
             data: $("form#formSendMail").serialize(),
             url: sendMail
-        }).always(function () {
-            alert('message has been send');
+        }).always(function (data) {
+            if(data=="false"){
+                alert('message has not  send');
+            }
+            else {
+                alert('message has been send');
+            }
         });
     });
 }
@@ -224,11 +233,11 @@ $(document).ready(function () {
             },
             confirmPassword: {
                 required: true,
-                minlength: 4,
-                equalTo: "#password"
+                minlength: 4
             },
             email: {
-                required: true
+                required: true,
+                email:true
             },
             username: {
                 required: true
@@ -240,7 +249,8 @@ $(document).ready(function () {
                 minlength: jQuery.format("At least {0} characters required! and Maximum 10")
             },
             email: {
-                required: "Your UserName Or Email Address Can not be empty"
+                required: "Your UserName Or Email Address Can not be empty",
+                email:"kindly enter valid emailAddress"
             },
             username: {
                 required: "Username can not be empty"
@@ -248,7 +258,6 @@ $(document).ready(function () {
             confirmPassword: {
                 required: "can not be empty",
                 minlength: jQuery.format("At least {0} characters required! and Maximum 10"),
-                equalTo: "value must be equal to password"
             }
         }
     });
