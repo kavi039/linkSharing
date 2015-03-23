@@ -10,6 +10,10 @@ import com.ttn.linkShare.User
 class ResourceController {
     def tagService
 
+    def index() {
+
+    }
+
     def downloadAction(Long resourceId) {
         Resource resource = DocumentResource.get(resourceId)
         File file = new File(resource.filePath)
@@ -82,12 +86,12 @@ class ResourceController {
     }
 
     def publicResourceListCreatedByUser() {
-        int offset =params.int("offset")
+        int offset = params.int("offset")
         int max = params.int("max")
-        User user=User.get(params.int("userId"))
-        List<Resource> resourceList = tagService.publicResourcesOfTopicCreatedByUser(user,offset, max)
+        User user = User.get(params.int("userId"))
+        List<Resource> resourceList = tagService.publicResourcesOfTopicCreatedByUser(user, offset, max)
         int totalCount = resourceList.totalCount
-        render(template: "/user/publicPost", model: [resourceList: resourceList, total: totalCount,userId:user.id])
+        render(template: "/user/publicPost", model: [resourceList: resourceList, total: totalCount, userId: user.id])
     }
 
 }

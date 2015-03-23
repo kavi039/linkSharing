@@ -5,6 +5,10 @@ import com.ttn.linkShare.Resource
 class ReadingItemController {
     def readingItemService
 
+    def index() {
+
+    }
+
     def markAsRead(Long resourceId) {
         Boolean resourceUpdated = readingItemService.updateResource(resourceId, "${session['username']}")
         if (resourceUpdated) {

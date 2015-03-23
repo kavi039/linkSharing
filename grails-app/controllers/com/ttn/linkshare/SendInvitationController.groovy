@@ -17,4 +17,9 @@ class SendInvitationController {
             render false
         }
     }
+
+    def index() {
+
+    }
+
 }

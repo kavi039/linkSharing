@@ -4,19 +4,21 @@ import com.ttn.linkShare.LinkCO
 
 
 class LinkResourceController {
-     def linkResourceService
+    def linkResourceService
+
+    def index() {
+
+    }
+
     def saveLink(LinkCO linkCO) {
 
-       Boolean b= linkResourceService.save(linkCO,"${session['username']}")
-        if(b)
-        {
-            flash.error="link resource added"
+        Boolean b = linkResourceService.save(linkCO, "${session['username']}")
+        if (b) {
+            flash.error = "link resource added"
+        } else {
+            flash.error = "link resource not added"
         }
-        else
-        {
-            flash.error="link resource not added"
-        }
-       redirect(controller: 'user',action: 'dashBoard')
+        redirect(controller: 'user', action: 'dashBoard')
     }
 
 }

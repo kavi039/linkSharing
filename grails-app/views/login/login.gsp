@@ -24,12 +24,13 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">TopPost
-                    <select name="date" style="margin-left: 87%; margin-top: -2%;">
+                    <select name="date" style="margin-left: 87%; margin-top: -2%;" class="creatingOrder" onchange="topPostOnDateCratedBases(this)">
                         <option>Today</option>
                         <option>1week</option>
                         <option>1year</option>
                         <option>1month</option>
-                    </select></div>
+                    </select>
+                </div>
 
                 <div class="panel-body"  style="overflow-y: scroll;height:500px ">
                     <div id="topPostDiv">

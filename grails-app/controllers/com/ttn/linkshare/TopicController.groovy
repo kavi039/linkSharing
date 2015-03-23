@@ -12,6 +12,11 @@ class TopicController {
     def topicService
     def tagService
 
+    def index() {
+
+    }
+
+
     def create() {
 
     }
@@ -96,12 +101,12 @@ class TopicController {
     }
 
     def publicTopicCreatedByUser() {
-        int offset =params.int("offset")
+        int offset = params.int("offset")
         int max = params.int("max")
-        User user=User.get(params.int("userId"))
-        List<Topic> topicList = tagService.publicTopicCreatedByUser(user,offset, max)
+        User user = User.get(params.int("userId"))
+        List<Topic> topicList = tagService.publicTopicCreatedByUser(user, offset, max)
         int totalCount = topicList.totalCount
-        render(template: "/topic/publicTopicCreatedByUser", model: [topicList: topicList, total: totalCount,userId:user.id])
+        render(template: "/topic/publicTopicCreatedByUser", model: [topicList: topicList, total: totalCount, userId: user.id])
     }
 
     def topicList() {
@@ -111,7 +116,8 @@ class TopicController {
         int totalCount = topicList.totalCount
         render(template: "/topic/topicsSubscription", model: [topicList: topicList, total: totalCount])
     }
-    def topicCreatedByUser(){
+
+    def topicCreatedByUser() {
         int offset = params.offset as Integer
         int max = params.max as Integer
         List<Topic> topicList = tagService.topicCreatedByUser("${session['username']}", offset, max)

@@ -11,6 +11,9 @@ class UserController {
     def userService
     def tagService
 
+    def index() {
+
+    }
 
     def dashBoard() {
 
@@ -24,7 +27,8 @@ class UserController {
     def editProfilePage() {
 
     }
-    def user(){
+
+    def user() {
 
     }
 
@@ -56,9 +60,9 @@ class UserController {
         Boolean userStatus = userService.updateProfile(userUpdateCO, "${session['username']}")
         if (userStatus) {
             session['username'] = userUpdateCO.username
-           redirect(controller: 'user', action: 'editProfilePage')
+            redirect(controller: 'user', action: 'editProfilePage')
         } else {
-                flash.error="Updation is not done"
+            flash.error = "Updation is not done"
             redirect(controller: 'user', action: 'editProfilePage')
         }
     }
@@ -66,34 +70,36 @@ class UserController {
     def updateUserPassword(UserPasswordCO userPasswordCO) {
         Boolean userStatus = userService.updatePassword(userPasswordCO, "${session['username']}")
         if (userStatus) {
-            flash.message="Password updated"
+            flash.message = "Password updated"
         } else {
             flash.error = "Password is invalid"
         }
         redirect(controller: 'user', action: 'editProfilePage')
     }
 
-    def inboxPagination(){
-        int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):5
-        List<Resource>resourceList=tagService.inbox(User.findByUsername("${session['username']}"),offset,max)
-        int totalCount=resourceList.totalCount
-        render (template: "/user/inbox" ,model: [resourceList:resourceList,total:totalCount])
+    def inboxPagination() {
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 5
+        List<Resource> resourceList = tagService.inbox(User.findByUsername("${session['username']}"), offset, max)
+        int totalCount = resourceList.totalCount
+        render(template: "/user/inbox", model: [resourceList: resourceList, total: totalCount])
     }
-    def userList(){
-        Topic topic=Topic.get(params.int("topicId"))
-        int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):10
-        List<User>userList=tagService.userSubscriptionByTopic(topic,offset,max)
-        int totalCount=userList.totalCount
-        render (template: "/user/userSubscriptionList" ,model: [userList:userList,total:totalCount,topicId:topic.id])
+
+    def userList() {
+        Topic topic = Topic.get(params.int("topicId"))
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 10
+        List<User> userList = tagService.userSubscriptionByTopic(topic, offset, max)
+        int totalCount = userList.totalCount
+        render(template: "/user/userSubscriptionList", model: [userList: userList, total: totalCount, topicId: topic.id])
     }
-    def userListPagination(){
-        int offset=params.offset?params.int("offset"):0
-        int max=params.max?params.int("max"):2
-        List<User>userList=userService.listOfUser(offset,max)
-        int totalCount=userList.totalCount
-        render (template: "/user/userInfo" ,model: [userList:userList,total:totalCount])
+
+    def userListPagination() {
+        int offset = params.offset ? params.int("offset") : 0
+        int max = params.max ? params.int("max") : 2
+        List<User> userList = userService.listOfUser(offset, max)
+        int totalCount = userList.totalCount
+        render(template: "/user/userInfo", model: [userList: userList, total: totalCount])
     }
 
 }

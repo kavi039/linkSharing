@@ -4,6 +4,9 @@ import com.ttn.linkShare.DocumentCO
 
 class DocumentResourceController {
     def documentResourceService
+    def index(){
+
+    }
 
     def saveDocument(DocumentCO documentCO) {
     Boolean b= documentResourceService.save(documentCO,"${session['username']}")

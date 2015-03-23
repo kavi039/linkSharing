@@ -7,6 +7,11 @@ import org.springframework.web.multipart.MultipartFile
 class LoginController {
     def loginService
 
+    def index() {
+
+    }
+
+
     def login() {
 
     }
@@ -39,12 +44,12 @@ class LoginController {
 
     def forgetPasswordAction() {
 
-            User status = loginService.forgetPasswordAction(params.email)
-            if (status) {
-                session['username'] = status.username
-                flash.message = "password is reset and send to You "
-            } else
-                flash.error = "Invalid Username/Password"
+        User status = loginService.forgetPasswordAction(params.email)
+        if (status) {
+            session['username'] = status.username
+            flash.message = "password is reset and send to You "
+        } else
+            flash.error = "Invalid Username/Password"
 
         redirect(controller: 'user', action: 'dashBoard')
 
