@@ -27,6 +27,7 @@ class TagService {
                 "topic" {
                     eq("visibility", Visibility.PUBLIC)
                 }
+              //  le("dateCreated",date)
 
             }
             order("scoreShorting", "desc")
@@ -251,7 +252,6 @@ class TagService {
         }
         return resourceList
     }
-
 
 
 }

@@ -7,6 +7,8 @@ import com.ttn.linkShare.ResourceRating
 import com.ttn.linkShare.Topic
 import com.ttn.linkShare.User
 
+import java.text.SimpleDateFormat
+
 class ResourceController {
     def tagService
 

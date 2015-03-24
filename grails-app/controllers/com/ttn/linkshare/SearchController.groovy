@@ -6,7 +6,7 @@ import com.ttn.linkShare.User
 import com.ttn.linkShare.enums.Visibility
 
 class SearchController {
-    def searchService
+    def searchService, tagService
 
     List<Resource> searchPaginationOnText() {
         String searchText = params.searchText
@@ -44,8 +44,19 @@ class SearchController {
         render(template: '/topic/topicSubscribedPost', model: [resourceList: resourceList, total: resourceList.size()])
     }
 
-    List<Resource> searchTopPostOnDateCreatedBases() {
+    List<Resource> searchTopPostByDateCreated(String dateOnWhichData) {
+        Date date = new Date()
+        if (dateOnWhichData.equals("1week"))
+            date = date - 7
+        else if (dateOnWhichData.equals(" 1month"))
+            date = date - 30
+        else
+            date = date - 365
+//        List<Object> objectList = tagService.topPost(0, 5,new Date())
+//        List<Resource> resourceList = objectList.collect() { it[0] }
+       // out << render(template: "/login/topPost", model: [resourceList: resourceList, total: objectList.totalCount, max: 5])
 
+        //render d
     }
 
     def index() {

@@ -24,7 +24,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">TopPost
-                    <select name="date" style="margin-left: 87%; margin-top: -2%;" class="creatingOrder" onchange="topPostOnDateCratedBases(this)">
+                    <select name="date" style="margin-left: 87%; margin-top: -2%;" class="creatingOrder">
                         <option>Today</option>
                         <option>1week</option>
                         <option>1year</option>
