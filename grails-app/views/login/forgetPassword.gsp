@@ -36,7 +36,7 @@
             </div>
         </div>
 <div class="col-lg-5">
-<form role="form" controller="login" action="forgetPasswordAction" id="forgetPassword">
+<form role="form" action="${createLink(controller:'login', action:'forgetPasswordAction')}" id="forgetPassword">
     <div class="form-group">
         <label for="email">Email/UserName:</label>
         <g:textField name="email" id="email" class="form-control" />
