@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ttn.linkShare.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>User public profile</title>
@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<%com.ttn.linkShare.User user=com.ttn.linkShare.User.get(params.int("id"))%>
 <div class="container">
 
     <div class="row">
@@ -18,7 +19,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Topics
+                <div class="panel-heading">Topics Created By ${user?.name?.toUpperCase()}
                     %{--<div style="float: right">--}%
                         %{--<g:form name="search" class="form-group" controller="search" action="search">--}%
                             %{--<g:textField name="searchText" placeholder="search"/>--}%
@@ -35,7 +36,7 @@
         </div>
        <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Posts
+            <div class="panel-heading">Posts Created By ${user?.name?.toUpperCase()}
                 %{--<div style="float: right">--}%
                     %{--<g:form name="search" class="form-group" controller="search" action="search">--}%
                         %{--<g:textField name="searchText" placeholder="search"/>--}%
