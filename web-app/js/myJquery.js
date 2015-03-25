@@ -205,7 +205,6 @@ $(document).on('click', '.deleteResource', function () {
     })
     $(document).on('click', '.cancel', function () {
         $('#deleteResource').modal('hide');
-        window.location.reload(dashboard);
     })
 });
 
