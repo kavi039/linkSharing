@@ -147,6 +147,7 @@ class TagService {
             projections {
                 property('topic')
             }
+             eq('user',user)
         }
         subscriptionCount = topicList.size()
         if (!status) {
