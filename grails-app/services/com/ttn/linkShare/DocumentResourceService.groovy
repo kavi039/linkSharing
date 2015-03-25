@@ -15,8 +15,7 @@ class DocumentResourceService {
         String name = file.getOriginalFilename()
         documentCO.user = User.findByUsername(username)
         if (name) {
-            // File newFileDir = new File("/home/intelligrape/Project/Document/${documentCO.user.username}")
-            String filePath=grailsApplication.config.documentFolderPath+documentCO.user.username
+            String filePath = grailsApplication.config.documentFolderPath + documentCO.user.username
             File newFileDir = new File(filePath)
             newFileDir.mkdirs()
             newFile = new File("$newFileDir/$name")

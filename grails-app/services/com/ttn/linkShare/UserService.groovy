@@ -50,7 +50,6 @@ class UserService {
         MultipartFile file = userCO.photo
         String name = file.getOriginalFilename()
         if (name) {
-//            String filePath = '/home/intelligrape/Project/Userfolder/' + userCO.username
             String filePath = grailsApplication.config.userFolderPath + userCO.username
             File photoFileDir = new File(filePath)
             photoFileDir.mkdirs()
@@ -92,8 +91,4 @@ class UserService {
 
     }
 
-
-    def checkNull(def userCO, User user) {
-
-    }
 }

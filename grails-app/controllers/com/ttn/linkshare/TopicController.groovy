@@ -28,11 +28,9 @@ class TopicController {
     def saveTopic(TopicCo topicCO) {
 
         if (topicService.create(topicCO, "${session['username']}")) {
-            flash.error = "Topic created"
-            println(">>>>>>>>>>>>>>>>>>>>>$params")
             render(view: "/topic/topicShow", model: [topic: topicCO.topic])
         } else {
-            flash.error = "Topic Not Created"
+            flash.error = "Topic name Should be unique"
             redirect(controller: "user", action: "dashBoard")
         }
 
@@ -49,21 +47,18 @@ class TopicController {
 
     def topicSubscription(Long topicId, String seriousness) {
         Integer count = topicService.topicSubscription(topicId, seriousness, "${session['username']}")
-        println "in topic controller $count"
         render([count: count] as JSON)
 
 
     }
 
     def topicUnSubscription(Long topicId) {
-        println "*************$topicId"
         Integer count = topicService.topicUnSubscription(topicId, "${session['username']}")
         render model: [count: count] as JSON
 
     }
 
     def topicSubscriptionUpdate(Long topicId, String seriousness) {
-        println ">><><><><In topicsubscription+$topicId+$seriousness"
         Boolean isUpdated = topicService.topicSubscriptionUpdate(topicId, "${session['username']}", seriousness)
         if (isUpdated) {
             render true

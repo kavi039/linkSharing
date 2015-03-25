@@ -27,27 +27,11 @@ class TagService {
                 "topic" {
                     eq("visibility", Visibility.PUBLIC)
                 }
-              //  le("dateCreated",date)
 
             }
             order("scoreShorting", "desc")
 
         }
-
-//        List<Resource> resources = Resource.createCriteria().list(max: max, offset: offset) {
-//            'topic' {
-//                eq("visibility", Visibility.PUBLIC)
-//            }
-//            'resourceRatings' {
-//                projections{
-//                    groupProperty("resourse")
-//                    avg("score","scoreAvg")
-//                }
-//                order("scoreAvg", "desc")
-//            }
-//
-//        }
-        // return resources
         return object
 
     }

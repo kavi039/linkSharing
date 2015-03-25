@@ -37,17 +37,14 @@ class TopicService {
         Integer count = 0
         User user = User.findByUsername(username)
         Topic topic = Topic.findById(topicId)
-        println "***********${topic.resources*.id}"
         Subscription subscription = new Subscription(user: user, topic: topic, seriousness: seriousness)
         if (subscription.save(flush: true)) {
-            println("********$seriousness")
             Set<Resource> resourceList = topic.resources
             resourceList.each {
                 ReadingItem readingItem = new ReadingItem(resource: it, isRead: false, user: user)
                 readingItem.save(flush: true)
             }
             count = Subscription.countByTopic(topic)
-//            count = Subscription.countByUser(user)
             return count
 
         } else {
@@ -61,10 +58,7 @@ class TopicService {
         Subscription subscription = Subscription.findByTopicAndUser(topic, user)
         List<ReadingItem> readingItemList = ReadingItem.findAllByResourceInListAndUser(topic.resources as List, user)
         ReadingItem.deleteAll(readingItemList)
-        println("**********" + subscription)
         subscription?.delete(flush: true)
-        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + Subscription.countByTopic(topic))
-        println("After unsubscribe" + ReadingItem.findAllByUser(user))
         return Subscription.countByTopic(topic)
 
     }

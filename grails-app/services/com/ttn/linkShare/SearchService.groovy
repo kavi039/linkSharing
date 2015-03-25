@@ -13,31 +13,26 @@ class SearchService {
     }
 
     def fetchAllResourceByNameLikeAndVisibility(String nameLike, Visibility visibility, int max, int offset) {
-        List<Resource> resourceList=[]
+        List<Resource> resourceList = []
         resourceList = Resource.createCriteria().list(max: max, offset: offset) {
             'topic' {
                 eq("visibility", visibility)
                 ilike("name", "%${nameLike}%")
             }
         }
-       if (!resourceList) {
+        if (!resourceList) {
             resourceList = Resource.createCriteria().list(max: max, offset: offset) {
                 'topic' {
                     eq("visibility", visibility)
                 }
                 ilike("description", "%${nameLike}%")
             }
-       }
+        }
         resourceList
     }
 
     List<Topic> topicListByName(String name, String username) {
-        println "name: $name"
-        println "name: $name"
-        println "name: $name"
-        println "name: $name"
         List<Topic> topicList = tagService.userTopicSubscribed(username)
-        println topicList*.name
         topicList.findAll {
             it?.name?.contains(name)
         }
