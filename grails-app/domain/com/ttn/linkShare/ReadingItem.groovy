@@ -8,4 +8,6 @@ class ReadingItem {
 
                 }
      static belongsTo = [resource:Resource]
+
+
 }

@@ -1,4 +1,4 @@
-<%@ page import="com.ttn.linkShare.DocumentResource" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.ttn.linkShare.ResourceRating; com.ttn.linkShare.DocumentResource" contentType="text/html;charset=UTF-8" %>
 <%
     def myService = grailsApplication.mainContext.getBean("tagService");
 %>
@@ -29,7 +29,7 @@
                     <span>${"@${resourceInstance?.user?.firstName?.toLowerCase()}"}</span>
                     <span style="float: right"><ls:dateFormat type="${resourceInstance?.dateCreated}"/></span>
 
-                    <div class="rating-select parent" data-resource-Id="${resourceInstance.id}">
+                    <div class="rating-select parent" data-resource-Id="${resourceInstance.id}" title="Average rating: ${com.ttn.linkShare.ResourceRating.getScore(resourceInstance)}">
                         <a href="javascript:void(0)" class="rating" data-rating="1"><span
                                 class="glyphicon glyphicon-star-empty"></span></a>
                         <a href="javascript:void(0)" class="rating" data-rating="2"><span
@@ -88,7 +88,7 @@
     });
     jQuery(document).ready(function () {
         %{--ratingFun(${com.ttn.linkShare.ResourceRating.findByResourse(resourceInstance).score});--}%
-        ratingFun(${myService.getScore(resourceInstance)});
+        ratingFun(${com.ttn.linkShare.ResourceRating.getScore(resourceInstance)});
     });
     function ratingFun(score) {
 
