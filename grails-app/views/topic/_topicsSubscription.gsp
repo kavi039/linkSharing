@@ -2,7 +2,7 @@
     <g:each in="${topicList}" var="topic">
 
         <p>
-            <a href="javascript:void(0)" class="topicToResource" data-topic-id="${topic.id}"
+            <a href="javascript:void(0)" class="topicToResource" data-topic-id="${topic.id}" title="click here to search post of the topic"
                data-topic-name="${topic.name}">
                 ${topic?.name}(${topic?.visibility})
             </a>

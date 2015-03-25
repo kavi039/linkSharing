@@ -8,7 +8,7 @@
                         aria-hidden="true">×
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    Subscription
+                    Send Invitation
                 </h4>
             </div>
 

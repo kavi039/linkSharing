@@ -5,10 +5,10 @@
     </div>
 
     <div class="media-body">
-        <span style="float: right">${resourceInstance.topic.name}</span>
-        <span>${resourceInstance?.user?.name}</span>
+        <span style="float: right">${resourceInstance?.topic?.name}</span>
+        <span>${resourceInstance?.user?.name?.toUpperCase()}</span>
         <br>
-        <span>${"@${resourceInstance?.user?.firstName}"}</span>
+        <span>${"@${resourceInstance?.user?.firstName?.toLowerCase()}"}</span>
         <br>
         <span>${resourceInstance?.description}
             <br>
@@ -20,7 +20,7 @@
         <g:if test="${session['username']}">
         <ls:markAsRead type="${resourceInstance}"/>
         </g:if>
-            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance?.id])}">ViewPosts</a>
+            <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance?.id])}" title="details of post">ViewPosts</a>
         </div>
 
     </div>

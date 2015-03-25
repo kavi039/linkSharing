@@ -21,12 +21,12 @@
                     </div>
 
                     <div class="media-body">
-                        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.id])}"><span
+                        <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName: resourceInstance?.topic?.id])}" title="click here to show topic"><span
                         style="float: right">${resourceInstance?.topic?.name}</span></a>
 
-                    <span>${resourceInstance?.user?.name}</span>
+                    <span>${resourceInstance?.user?.name?.toUpperCase()}</span>
                     <br>
-                    <span>${"@${resourceInstance?.user?.firstName}"}</span>
+                    <span>${"@${resourceInstance?.user?.firstName?.toLowerCase()}"}</span>
                     <span style="float: right"><ls:dateFormat type="${resourceInstance?.dateCreated}"/></span>
 
                     <div class="rating-select parent" data-resource-Id="${resourceInstance.id}">
@@ -84,7 +84,7 @@
 </div>
 <script>
     $("a.navbar-brand").click(function () {
-        $(this).attr('href', "${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+        $(this).attr('href', "${createLink(controller:'login',action: 'login',absolute: true)}");
     });
     jQuery(document).ready(function () {
         %{--ratingFun(${com.ttn.linkShare.ResourceRating.findByResourse(resourceInstance).score});--}%

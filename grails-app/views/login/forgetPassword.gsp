@@ -49,7 +49,7 @@
 </div>
 <script>
     $("a.navbar-brand").click(function(){
-        $(this).attr('href',"${createLink(controller:'user',action: 'dashBoard',absolute: true)}");
+        $(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");
     });
 </script>
 </body>

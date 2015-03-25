@@ -8,11 +8,12 @@ $(document).ready(function () {
             url: sendMail
         }).always(function (data) {
             if(data=="false"){
-                alert('message has not  send');
+                alert('message has not  sent');
             }
             else {
-                alert('message has been send');
+                alert('message has been sent');
             }
+            $('#sendInvitationOfTopic').hide();
         });
     });
     $("a[title='comment']").on('click', function () {
@@ -28,21 +29,29 @@ $(document).ready(function () {
         $("#trendingTopic").modal();
     });
 
-    $(".isRead").on('click', function () {
+    $(document).on('click',".isRead" ,function () {
         var obj = $(this);
         var url;
+        var objectText=obj.text().trim();
         var resourceId = $(this).data('resource-id');
-        if (obj.text().trim() == "Mark as Unread") {
+        if (objectText== "Mark as Unread") {
             url = MarkAsUnread;
+            title="mark as read only if you have subscribed the topic";
         }
         else {
             url = MarkAsRead;
+            title="mark as unread";
         }
         $.ajax({
             data: {resourceId: resourceId},
             url: url
         }).done(function (data) {
-            obj.text(data);
+            if(data.trim()==objectText){
+                alert("subscribe topic first");
+                  }
+                obj.text(data);
+                obj.attr('title',title);
+
         });
     });
 
@@ -91,11 +100,7 @@ function setSeriousness(topicId, element) {
         if (data == "true") {
             var divObject = $("div#message");
             $(document).ready(function () {
-                divObject.html("Seriouness has changed").css('background-color', 'yellow');
-                $(divObject).slideToggle();
-                setTimeout(function () {
-                    divObject.slideUp();
-                }, 3000);
+               alert("seriousness has changed");
             });
         }
         else {
@@ -112,11 +117,8 @@ function setVisibility(topicId, element) {
         if (data == "true") {
             var divObject = $("div#message");
             $(document).ready(function () {
-                divObject.html("Visibility has changed").css('background-color', 'yellow');
-                $(divObject).slideToggle();
-                setTimeout(function () {
-                    divObject.slideUp();
-                }, 3000);
+                alert("visibility has changed");
+                window.location.reload();
             });
         }
         else
@@ -159,6 +161,7 @@ function editTopic(topicId, element) {
     });
     $(document).on('click', '#closeEdit', function () {
         $('.editable', parentObject).parent().html(htmlOfElement);
+       window.location.reload();
     });
 }
 
@@ -172,11 +175,13 @@ function sendInvitation(topicId, topicName) {
             url: sendMail
         }).always(function (data) {
             if(data=="false"){
-                alert('message has not  send');
+                alert('message has not  sent');
+                $('#sendInvitationOfTopic').hide();
             }
             else {
-                alert('message has been send');
+                alert('message has been sent');
             }
+
         });
     });
 }

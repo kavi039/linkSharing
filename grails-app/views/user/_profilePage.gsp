@@ -7,7 +7,7 @@
 
     <div class="media-body">
         <h4 class="media-heading"><a href="${createLink(controller: 'user', action: 'user', params: [id: userPublicProfileDTO?.user?.id])}">${userPublicProfileDTO?.user?.getName()}</a></h4>
-        <span>${"@${userPublicProfileDTO?.user?.username}"}</span>
+        <span>${"@${userPublicProfileDTO?.user?.username?.toLowerCase()}"}</span>
 
         <div class="col-md-12">
             <div class="col-md-6">

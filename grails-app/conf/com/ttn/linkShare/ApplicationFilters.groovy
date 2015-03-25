@@ -22,7 +22,7 @@ class ApplicationFilters {
             before = {
                 if (!session.getAttribute('username')) {
                     println "************in secure filter ${controllerName}/${actionName}"
-                    flash.error = "Please login "
+                    flash.error = "login first to view this page "
                     redirect(controller: "login", action: "login")
                 }
             }

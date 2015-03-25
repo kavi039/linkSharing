@@ -6,8 +6,8 @@
     </div>
     <div class="media-body" >
         <a href="${createLink(controller: 'topic', action: 'topicShow', params: [topicName:resourceInstance?.topic?.id])}" style="display:block;">  <span  style="float: right">${resourceInstance?.topic?.name}</span></a>
-        <p>${resourceInstance?.user?.name}</p>
-        <p>${"@${resourceInstance?.user?.firstName}"}</p>
+        <p>${resourceInstance?.user?.name?.toUpperCase()}</p>
+        <p>${"@${resourceInstance?.user?.firstName?.toLowerCase()}"}</p>
         <br>
         <p>
             ${resourceInstance?.description}

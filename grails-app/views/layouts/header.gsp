@@ -15,7 +15,7 @@
     <ul class="nav navbar-nav">
         <li class="active"><div>
             <g:form name="search" class="form-group" controller="search" action="search">
-                <g:textField name="searchText" placeholder="search"/>
+                <g:textField name="searchText" placeholder="search here" title="only public topic and its posts are searchable"/>
                 <g:submitButton name="finder" value="search"/>
             </g:form>
         </div></li>
@@ -25,7 +25,6 @@
         </g:if>
     </ul>
 </nav>
-<div id="message" style="display: none"></div>
 <g:if test="${session['username']}">
     <g:render template="/sendInvitation/send"></g:render>
     <g:render template="/topic/createTopic"></g:render>
@@ -36,6 +35,7 @@
 
 </g:if>
 </div>
+<div id="message" style="display: none"></div>
 <script src="${resource(dir: "/js", file: 'jquery.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'jquery.validate.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'bootstrap.min.js')}"></script>

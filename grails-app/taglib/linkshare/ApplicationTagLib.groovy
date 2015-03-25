@@ -105,7 +105,7 @@ class ApplicationTagLib {
     }
     def dateFormat = { attr ->
         Date date = attr.type
-        out << attr.type?.format("hh:mm:ss dd/MM/yyyy")
+        out << attr.type?.format("dd/MM/yyyy")
     }
     def adminOrCreatorOfResource = { attr ->
         User user = User.findByUsername("${session['username']}")

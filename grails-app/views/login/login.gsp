@@ -15,7 +15,7 @@
         <div class="col-md-7">
             <%--recentshare--%>
             <div class="panel panel-default">
-                <div class="panel-heading">RecentShare</div>
+                <div class="panel-heading">Recent Share</div>
 
                 <div class="panel-body" id="recentShare" style="overflow-y: scroll;height:500px ">
                     <ls:recentShare/>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">TopPost
+                <div class="panel-heading">Top Post
                     <select name="date" style="margin-left: 87%; margin-top: -2%;" class="creatingOrder">
                         <option>Today</option>
                         <option>1week</option>

@@ -6,8 +6,8 @@
         </div>
 
         <div class="media-body">
-            <h4 class="media-heading"><a href="${createLink(controller: 'user', action: 'user', params: [id:userInfo?.id])}">${userInfo?.getName()}</a></h4>
-            <span>${"@${userInfo?.username}"}</span>
+            <h4 class="media-heading"><a href="${createLink(controller: 'user', action: 'user', params: [id:userInfo?.id])}">${userInfo?.getName()?.toUpperCase()}</a></h4>
+            <span>${"@${userInfo?.username?.toLowerCase()}"}</span>
 
             <div class="col-md-12">
                 <div class="col-md-6">

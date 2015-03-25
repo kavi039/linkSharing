@@ -11,7 +11,7 @@
     <b class="caret" id="caret1"></b>
 </a>
 <ul class="dropdown-menu">
-    <li><a href="${createLink(controller: 'user', action: 'editProfilePage')}">Profile</a></li>
+    <li><a href="${createLink(controller: 'user', action: 'editProfilePage')}" title="user public profile">Profile</a></li>
     <g:if test="${isAdmin}">
         <li><a href="${createLink(controller: 'user', action: 'listOfUser')}">Users</a></li>
         <li><a href="${createLink(controller: 'topic', action: 'subscription')}">Topics</a></li>
