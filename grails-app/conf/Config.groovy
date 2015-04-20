@@ -74,7 +74,7 @@ grails {
 
 }
 
-
+grails.config.locations = ['classpath:messages.properties']
 
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration

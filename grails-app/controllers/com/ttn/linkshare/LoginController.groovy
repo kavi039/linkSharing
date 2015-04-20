@@ -26,7 +26,7 @@ class LoginController {
             session["username"] = userCO.username
             redirect(controller: 'user', action: 'dashBoard')
         } else {
-            flash.error = "User not Found."
+            flash.error = "User not Found"
             redirect(controller: "login", action: "login")
         }
     }

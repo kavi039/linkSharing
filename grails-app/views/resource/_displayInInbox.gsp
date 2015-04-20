@@ -22,7 +22,7 @@
         </g:if>
             <a href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance?.id])}" title="details of post">ViewPosts</a>
         </div>
-
+        <div class="fb-share-button" data-href="${createLink(controller: 'resource',action: 'post',params: [resourceId:resourceInstance?.id])}" data-layout="icon_link"></div>
     </div>
     <hr/>
 </div>

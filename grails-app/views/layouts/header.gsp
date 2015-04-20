@@ -6,9 +6,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <g:layoutHead/>
 </head>
-
-<body style="background-color: #31b0d5">
-<nav class="navbar navbar-default" role="navigation">
+<body style="background-color: #31b0d5 ">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<nav class="navbar navbar-default" role="navigation" >
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0)">LinkSharing</a>
     </div>

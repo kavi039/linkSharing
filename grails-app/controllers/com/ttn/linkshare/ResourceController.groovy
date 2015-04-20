@@ -95,5 +95,10 @@ class ResourceController {
         int totalCount = resourceList.totalCount
         render(template: "/user/publicPost", model: [resourceList: resourceList, total: totalCount, userId: user.id])
     }
+    def action(){
+        def v=Resource.load(20)
+       println (">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+v)
+        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+v.resourceRatings)
+    }
 
 }

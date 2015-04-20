@@ -66,6 +66,7 @@ grails.project.dependency.resolution = {
         compile ":simian:0.1-SNAPSHOT"
         compile ":gmetrics:0.3.1"
         compile ":mail:1.0.7"
+        compile ":console:1.5.4"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.13" // or ":hibernate4:4.3.5.1"
         runtime ":database-migration:1.4.0"

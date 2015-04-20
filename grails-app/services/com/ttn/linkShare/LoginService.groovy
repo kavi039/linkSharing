@@ -13,6 +13,7 @@ class LoginService {
             userCO.username = user.username
             return true
         } else {
+
             return false
 
         }
@@ -21,11 +22,10 @@ class LoginService {
     User forgetPasswordAction(String email) {
         User user = User.findByEmailOrUsername(email, email)
         if (user) {
-            String password=user.password
+            String password = user.password
             user.properties = [password: "${password.hashCode()}"]
-            user.save(flush: true) ? sendMail(user) :null
-        }
-        else null
+            user.save(flush: true) ? sendMail(user) : null
+        } else null
 
     }
 

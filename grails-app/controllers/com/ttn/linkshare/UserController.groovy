@@ -6,6 +6,7 @@ import com.ttn.linkShare.User
 import com.ttn.linkShare.UserCO
 import com.ttn.linkShare.UserPasswordCO
 import com.ttn.linkShare.UserUpdateCO
+import sun.security.provider.MD5
 
 class UserController {
     def userService
@@ -37,9 +38,11 @@ class UserController {
             session['username'] = userCO.username
             redirect(controller: 'user', action: 'dashBoard')
         } else {
-            flash.error = "Kindly enter valid data"
-            redirect(controller: "login", action: "login")
+            //flash.error = "Kindly enter valid data"
+
+            redirect(controller: "login", action: "login",params: errors)
         }
+
 
     }
 

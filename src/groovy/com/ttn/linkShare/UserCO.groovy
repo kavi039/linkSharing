@@ -3,6 +3,8 @@ package com.ttn.linkShare
 import grails.validation.Validateable
 import org.springframework.web.multipart.MultipartFile
 
+import javax.validation.Validation
+
 
 @Validateable
 class UserCO {
@@ -31,7 +33,7 @@ class UserCO {
 
         username(validator: { value, object ->
             print("username: ${User.findByUsername(value) ? false : true}")
-            User.findByUsername(value) ? false:true
+            User.findByUsername(value) ? false : true
         })
     }
 
