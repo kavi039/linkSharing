@@ -86,8 +86,8 @@ $(document).ready(function () {
 
         });
     });
-    $('#caret1').on('mouseenter mouseleave', function () {
-        $('.dropdown-menu').slideToggle(500);
+    $('#caret1').on('click', function () {
+        $('.dropdown-menu').Toggle(500);
     });
 });
 
