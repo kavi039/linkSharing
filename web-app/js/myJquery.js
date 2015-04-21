@@ -7,7 +7,7 @@ $(document).ready(function () {
             data: $("form#envelopForm").serialize(),
             url: sendMail
         }).always(function (data) {
-            if(data=="false"){
+            if (data == "false") {
                 alert('message has not  sent');
             }
             else {
@@ -29,28 +29,28 @@ $(document).ready(function () {
         $("#trendingTopic").modal();
     });
 
-    $(document).on('click',".isRead" ,function () {
+    $(document).on('click', ".isRead", function () {
         var obj = $(this);
         var url;
-        var objectText=obj.text().trim();
+        var objectText = obj.text().trim();
         var resourceId = $(this).data('resource-id');
-        if (objectText== "Mark as Unread") {
+        if (objectText == "Mark as Unread") {
             url = MarkAsUnread;
-            title="mark as read only if you have subscribed the topic";
+            title = "mark as read only if you have subscribed the topic";
         }
         else {
             url = MarkAsRead;
-            title="mark as unread";
+            title = "mark as unread";
         }
         $.ajax({
             data: {resourceId: resourceId},
             url: url
         }).done(function (data) {
-            if(data.trim()==objectText){
+            if (data.trim() == objectText) {
                 alert("subscribe topic first");
-                  }
-                obj.text(data);
-                obj.attr('title',title);
+            }
+            obj.text(data);
+            obj.attr('title', title);
 
         });
     });
@@ -86,8 +86,8 @@ $(document).ready(function () {
 
         });
     });
-    $('#caret1').on('click', function () {
-        $('.dropdown-menu').toggle();
+    $('#caret1').on('mouseenter mouseleave', function () {
+        $('.dropdown-menu').slideToggle(500);
     });
 });
 
@@ -100,7 +100,7 @@ function setSeriousness(topicId, element) {
         if (data == "true") {
             var divObject = $("div#message");
             $(document).ready(function () {
-               alert("seriousness has changed");
+                alert("seriousness has changed");
             });
         }
         else {
@@ -161,7 +161,7 @@ function editTopic(topicId, element) {
     });
     $(document).on('click', '#closeEdit', function () {
         $('.editable', parentObject).parent().html(htmlOfElement);
-       window.location.reload();
+        window.location.reload();
     });
 }
 
@@ -174,7 +174,7 @@ function sendInvitation(topicId, topicName) {
             data: $("form#formSendMail").serialize(),
             url: sendMail
         }).always(function (data) {
-            if(data=="false"){
+            if (data == "false") {
                 alert('message has not  sent');
                 $('#sendInvitationOfTopic').hide();
             }
@@ -202,7 +202,7 @@ $(document).on('click', '.deleteResource', function () {
         }).done(function (data) {
             $("div.resourceRating").slideUp().detach();
         });
-    })
+    });
     $(document).on('click', '.cancel', function () {
         $('#deleteResource').modal('hide');
     })
@@ -211,6 +211,10 @@ $(document).on('click', '.deleteResource', function () {
 
 $(document).ready(function () {
     $("form#loginForm").validate({
+        errorPlacement:function(error,element){
+            error.css('color','red');
+            error.insertBefore(element);
+        },
         rules: {
             password: {
                 required: true,
@@ -230,52 +234,60 @@ $(document).ready(function () {
             }
         }
     });
-    //$("form#registerForm").validate({
-    //    rules: {
-    //        password: {
-    //            required: true,
-    //            minlength: 4
-    //        },
-    //        confirmPassword: {
-    //            required: true,
-    //            minlength: 4
-    //        },
-    //        email: {
-    //            required: true,
-    //            email:true
-    //        },
-    //        username: {
-    //            required: true
-    //        }
-    //    },
-    //    messages: {
-    //        password: {
-    //            required: "please enter your password",
-    //            minlength: jQuery.format("At least {0} characters required! and Maximum 10")
-    //        },
-    //        email: {
-    //            required: "Your UserName Or Email Address Can not be empty",
-    //            email:"kindly enter valid emailAddress"
-    //        },
-    //        username: {
-    //            required: "Username can not be empty"
-    //        },
-    //        confirmPassword: {
-    //            required: "can not be empty",
-    //            minlength: jQuery.format("At least {0} characters required! and Maximum 10"),
-    //        }
-    //    }
-    //});
-    $("form#forgetPassword").validate({
-        rules:{
-            email:{
-                required:true
+    $("form#registerForm").validate({
+        errorPlacement:function(error,element){
+            error.css('color','red');
+            error.insertBefore(element);
+        },
+        rules: {
+            password: {
+                required: true,
+                minlength: 4
+            },
+            confirmPassword: {
+                required: true,
+                minlength: 4
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            username: {
+                required: true
             }
         },
-        messages:{
+        messages: {
+            password: {
+                required: "please enter your password",
+                minlength: jQuery.format("At least {0} characters required! and Maximum 10")
+            },
+            email: {
+                required: "Your UserName Or Email Address Can not be empty",
+                email: "kindly enter valid emailAddress"
+            },
+            username: {
+                required: "Username can not be empty"
+            },
+            confirmPassword: {
+                required: "can not be empty",
+                minlength: jQuery.format("At least {0} characters required! and Maximum 10"),
+            }
+        }
+    });
+    $("form#forgetPassword").validate({
+        errorPlacement:function(error,element){
+            error.css('color','red');
+            error.insertBefore(element);
+        },
+        rules: {
+            email: {
+                required: true
+            }
+        },
+        messages: {
             email: {
                 required: "enter valid email/username"
             }
         }
-    })
+    });
 });
