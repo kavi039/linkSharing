@@ -87,7 +87,7 @@ $(document).ready(function () {
         });
     });
     $('#caret1').on('click', function () {
-        $('.dropdown-menu').Toggle(500);
+        $('.dropdown-menu').toggle();
     });
 });
 
