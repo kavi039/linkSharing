@@ -183,9 +183,9 @@ function sendInvitation(topicId, topicName) {
             }
 
         });
+
     });
 }
-
 $(document).on('click', '.editResource', function () {
     var modal = $(this).data('toggle');
     $("#" + modal).modal();
@@ -207,6 +207,7 @@ $(document).on('click', '.deleteResource', function () {
         $('#deleteResource').modal('hide');
     })
 });
+
 
 
 $(document).ready(function () {
