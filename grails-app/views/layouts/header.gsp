@@ -16,6 +16,7 @@
     js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
     fjs.parentNode.insertBefore(js, fjs);
+    $(".innerWrap").val("hello..............");
 }(document, 'script', 'facebook-jssdk'));</script>
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
