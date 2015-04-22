@@ -10,5 +10,4 @@ class SendInvitationCO {
     static constraints={
         email email: true
     }
-
 }

@@ -104,5 +104,8 @@ class UserController {
         int totalCount = userList.totalCount
         render(template: "/user/userInfo", model: [userList: userList, total: totalCount])
     }
+    def uniqueEmailChecker(String email){
+        render false
+    }
 
 }
