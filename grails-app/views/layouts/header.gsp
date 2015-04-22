@@ -55,22 +55,73 @@
 <g:layoutBody/>
 
 <script>
-    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate, sendMail, topicNameUpdate, resourceRatingUpdate;
+    var MarkAsRead, MarkAsUnread, ResourceByList, deleteTopicDetail, TopicVisibilityUpdate, sendMail, topicNameUpdate, resourceRatingUpdate, emailUniquenessCheck;
     $(document).ready(function () {
         MarkAsUnread = "${createLink(controller: "readingItem", action: "markAsUnRead")}";
         MarkAsRead = "${createLink(controller: "readingItem", action: "markAsRead")}";
-        Subscription = "${createLink(controller: "topic",action: 'topicSubscription')}"
-        UnSubscription = "${createLink(controller: "topic",action: 'topicUnSubscription')}"
-        SubscriptionUpdate = "${createLink(controller: "topic",action: 'topicSubscriptionUpdate')}"
-        TopicVisibilityUpdate = "${createLink(controller: "topic",action: 'topicVisibilityUpdate')}"
-        deleteTopicDetail = "${createLink(controller: "topic",action: 'deleteTopic')}"
-        sendMail = "${createLink(controller:'sendInvitation',action:'sendEmail')}"
-        topicNameUpdate = "${createLink(controller:'topic',action:'updateTopicName')}"
-        resourceRatingUpdate = "${createLink(controller: 'resource',action: 'resourceRating')}"
-        resourceDelete = "${createLink(controller: 'resource',action: 'deleteResource')}"
-        dashboard = "${createLink(controller: 'user',action: 'dashBoard',absolute: true)}"
-        documentController = "${createLink(controller:'documentResource' ,action:'saveDocument')}"
-        emailUniquenessCheck="${createLink(controller: 'user',action: 'uniqueEmailChecker')}"
+        Subscription = "${createLink(controller: "topic",action: 'topicSubscription')}";
+        UnSubscription = "${createLink(controller: "topic",action: 'topicUnSubscription')}";
+        SubscriptionUpdate = "${createLink(controller: "topic",action: 'topicSubscriptionUpdate')}";
+        TopicVisibilityUpdate = "${createLink(controller: "topic",action: 'topicVisibilityUpdate')}";
+        deleteTopicDetail = "${createLink(controller: "topic",action: 'deleteTopic')}";
+        sendMail = "${createLink(controller:'sendInvitation',action:'sendEmail')}";
+        topicNameUpdate = "${createLink(controller:'topic',action:'updateTopicName')}";
+        resourceRatingUpdate = "${createLink(controller: 'resource',action: 'resourceRating')}";
+        resourceDelete = "${createLink(controller: 'resource',action: 'deleteResource')}";
+        dashboard = "${createLink(controller: 'user',action: 'dashBoard',absolute: true)}";
+        documentController = "${createLink(controller:'documentResource' ,action:'saveDocument')}";
+        emailUniquenessCheck = "${createLink(controller: 'user',action:'uniqueEmailCheckerOrUsername')}";
+
+        $("form#registerForm").validate({
+            errorPlacement:function(error,element){
+                error.css('color','red');
+                error.insertBefore(element);
+            },
+            rules: {
+                password: {
+                    required: true,
+                    minlength: 4
+                },
+                confirmPassword: {
+                    required: true,
+                    minlength: 4
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    remote:{
+                        url:emailUniquenessCheck
+                    }
+                },
+                username: {
+                    required: true,
+                    remote:{
+                        url:emailUniquenessCheck
+                    }
+                }
+            },
+            messages: {
+                password: {
+                    required: "please enter your password",
+                    minlength: jQuery.format("At least {0} characters required! and Maximum 10")
+                },
+                email: {
+                    required: "Your UserName Or Email Address Can not be empty",
+                    email: "kindly enter valid emailAddress",
+                    remote:"this email address is already taken"
+
+                },
+                username: {
+                    required: "Username can not be empty",
+                    remote:"this username is already taken"
+                },
+                confirmPassword: {
+                    required: "can not be empty",
+                    minlength: jQuery.format("At least {0} characters required! and Maximum 10")
+                }
+            }
+        });
+
 
     });
 </script>

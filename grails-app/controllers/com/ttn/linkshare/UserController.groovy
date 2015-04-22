@@ -40,7 +40,7 @@ class UserController {
         } else {
             //flash.error = "Kindly enter valid data"
 
-            redirect(controller: "login", action: "login",params: errors)
+            redirect(controller: "login", action: "login", params: errors)
         }
 
 
@@ -104,8 +104,16 @@ class UserController {
         int totalCount = userList.totalCount
         render(template: "/user/userInfo", model: [userList: userList, total: totalCount])
     }
-    def uniqueEmailChecker(String email){
-        render false
+
+    def uniqueEmailCheckerOrUsername(String email,String username) {
+        Boolean status=false
+        User user=User.findByUsernameOrEmail(username,email)
+        if(!user)
+        {
+            status=true
+        }
+        render status
+
     }
 
 }

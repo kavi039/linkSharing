@@ -235,46 +235,6 @@ $(document).ready(function () {
             }
         }
     });
-    $("form#registerForm").validate({
-        errorPlacement:function(error,element){
-            error.css('color','red');
-            error.insertBefore(element);
-        },
-        rules: {
-            password: {
-                required: true,
-                minlength: 4
-            },
-            confirmPassword: {
-                required: true,
-                minlength: 4
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            username: {
-                required: true
-            }
-        },
-        messages: {
-            password: {
-                required: "please enter your password",
-                minlength: jQuery.format("At least {0} characters required! and Maximum 10")
-            },
-            email: {
-                required: "Your UserName Or Email Address Can not be empty",
-                email: "kindly enter valid emailAddress"
-            },
-            username: {
-                required: "Username can not be empty"
-            },
-            confirmPassword: {
-                required: "can not be empty",
-                minlength: jQuery.format("At least {0} characters required! and Maximum 10"),
-            }
-        }
-    });
     $("form#forgetPassword").validate({
         errorPlacement:function(error,element){
             error.css('color','red');
