@@ -13,6 +13,7 @@ class LoginController {
 
 
     def login() {
+        render(view: "/login/login")
 
     }
 

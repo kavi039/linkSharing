@@ -53,8 +53,8 @@
        </div>
     </div>
 </div>
-<script> $("a.navbar-brand").click(function(){
-    $(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");
-});</script>
+%{--<script> $("a.navbar-brand").click(function(){--}%
+    %{--$(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");--}%
+%{--});</script>--}%
 </body>
 </html>

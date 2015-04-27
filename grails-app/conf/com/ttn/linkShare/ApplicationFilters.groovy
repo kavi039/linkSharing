@@ -21,12 +21,23 @@ class ApplicationFilters {
         secureAction(controller: '*', action: '*', actionExclude: "login|loginHandler|registerHandler|forgetPassword|forgetPasswordAction|post|renderImage|user|downloadAction|viewFullSite|recentShare|topPostAction|publicTopicCreatedByUser|publicResourceListCreatedByUser|search|searchPaginationOnText|uniqueEmailCheckerOrUsername") {
             before = {
                 if (!session.getAttribute('username')) {
-                    println "************in secure filter ${controllerName}/${actionName}"
-                    flash.error = "login first to view this page "
+//                    println "************in secure filter ${controllerName}/${actionName}"
+//                    flash.error = "login first to view this page "
                     redirect(controller: "login", action: "login")
                 }
             }
+
         }
+                loginHandler(controller: 'login',action: 'login'){
+                    before={
+                        if (session.getAttribute('username')) {
+//                    println "************in secure filter ${controllerName}/${actionName}"
+//                    flash.error = "login first to view this page "
+                            redirect(controller: "user", action: "dashBoard")
+                        }
+                    }
+                }
+
 
     }
 

@@ -83,9 +83,9 @@
 
 </div>
 <script>
-    $("a.navbar-brand").click(function () {
-        $(this).attr('href', "${createLink(controller:'login',action: 'login',absolute: true)}");
-    });
+    %{--$("a.navbar-brand").click(function () {--}%
+        %{--$(this).attr('href', "${createLink(controller:'login',action: 'login',absolute: true)}");--}%
+    %{--});--}%
     jQuery(document).ready(function () {
         %{--ratingFun(${com.ttn.linkShare.ResourceRating.findByResourse(resourceInstance).score});--}%
         ratingFun(${com.ttn.linkShare.ResourceRating.getScore(resourceInstance)});

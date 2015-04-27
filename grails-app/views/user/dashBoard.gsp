@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-
     <meta name="layout" content="header"/>
     <title>Dashboard</title>
 </head>
@@ -54,9 +53,9 @@
     </div>
 </div>
 <script>
-    $("a.navbar-brand").click(function(){
-        $(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");
-    });
+    %{--$("a.navbar-brand").click(function(){--}%
+        %{--$(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");--}%
+    %{--});--}%
 </script>
 </body>
 

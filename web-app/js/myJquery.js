@@ -8,11 +8,14 @@ $(document).ready(function () {
             url: sendMail
         }).always(function (data) {
             if (data == "false") {
-                alert('message has not  sent');
+                $("strong").html('message has not  sent');
             }
             else {
-                alert('message has been sent');
+                $("strong").html('message has been sent');
             }
+            $('.alert').slideDown(400,function(){
+                $(this).slideUp();
+            });
             $('#sendInvitationOfTopic').hide();
         });
     });
@@ -47,7 +50,8 @@ $(document).ready(function () {
             url: url
         }).done(function (data) {
             if (data.trim() == objectText) {
-                alert("subscribe topic first");
+                $("strong").html("seriousness has changed");
+                $(".alert").slideDown(800,function(){$(this).slideUp()});
             }
             obj.text(data);
             obj.attr('title', title);
@@ -100,12 +104,13 @@ function setSeriousness(topicId, element) {
         if (data == "true") {
             var divObject = $("div#message");
             $(document).ready(function () {
-                alert("seriousness has changed");
+                $("strong").html("seriousness has changed");
             });
         }
         else {
-            alert("please subscribed first");
+            $("strong").html("please subscribed first");
         }
+        $(".alert").show();
     });
 }
 function setVisibility(topicId, element) {
@@ -117,8 +122,9 @@ function setVisibility(topicId, element) {
         if (data == "true") {
             var divObject = $("div#message");
             $(document).ready(function () {
-                alert("visibility has changed");
-                window.location.reload();
+                $("strong").html("visibility has changed");
+                $(".alert").show();
+               // window.location.reload();
             });
         }
         else
@@ -175,12 +181,13 @@ function sendInvitation(topicId, topicName) {
             url: sendMail
         }).always(function (data) {
             if (data == "false") {
-                alert('message has not  sent');
+                $("strong").html('message has not  sent');
                 $('#sendInvitationOfTopic').hide();
             }
             else {
-                alert('message has been sent');
+                $("strong").html('message has been sent');
             }
+            $(".alert").show();
 
         });
 

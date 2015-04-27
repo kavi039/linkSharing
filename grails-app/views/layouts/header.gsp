@@ -17,22 +17,22 @@
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" >
     <div class="navbar-header">
-        <a class="navbar-brand" href="javascript:void(0)">LinkSharing</a>
+        <a class="navbar-brand" href="javascript:void(0)"  onclick="clickEventOnHeader(this)"><h2 style="margin: 0 auto;color: #550000">LinkSharing</h2></a>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="active"><div>
-            <g:form name="search" class="form-group" controller="search" action="search">
+    <ul class="nav navbar-nav" style="float: right" >
+
+        <g:if test="${session['username']}">
+            <ls:isAdmin username="${session['username']}"/>
+        </g:if>
+        <li class="active" ><div>
+            <g:form name="search" class="navbar-form navbar-right" controller="search" action="search" style="float: right" >
                 <g:textField name="searchText" placeholder="search here"
                              title="only public topic and its posts are searchable"/>
                 <g:submitButton name="finder" value="search"/>
             </g:form>
         </div></li>
-
-        <g:if test="${session['username']}">
-            <ls:isAdmin username="${session['username']}"/>
-        </g:if>
     </ul>
 </nav>
 <g:if test="${session['username']}">
@@ -45,7 +45,10 @@
 
 </g:if>
 </div>
-<div id="message" style="display: none"></div>
+<div class="alert alert-warning" style="display: none">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Success!</strong>
+</div>
 <script src="${resource(dir: "/js", file: 'jquery.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'jquery.validate.min.js')}"></script>
 <script src="${resource(dir: "/js", file: 'bootstrap.min.js')}"></script>
@@ -124,6 +127,14 @@
 
 
     });
+    function clickEventOnHeader(element){
+        var sessionAttribute="${session.getAttribute('username')}";
+     if(sessionAttribute!=null)
+     window.location.replace("${createLink(controller: 'user',action: 'dashBoard',absolute: true)}");
+        else
+         window.location.replace("${createLink(controller: 'login',action: 'login',absolute: true)}");
+    }
+
 </script>
 </body>
 </html>

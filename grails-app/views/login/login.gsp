@@ -10,8 +10,23 @@
 
 <div class="container">
     <div class="row" >
-        <g:if test="${flash.error}"><script>alert("${flash.error}");</script></g:if>
-        <g:if test="${flash.message}"><script>alert("${flash.message}");</script></g:if>
+<g:if test="${flash.message}">
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Success!</strong>  ${flash.message}
+            </div>
+</g:if>
+<g:if test="${flash.error}">
+        <div class="alert alert-error" style="background-color:#999999;color: #ff0000">
+
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+
+            <strong>Error!</strong> ${flash.error}
+
+        </div>
+
+</g:if>
+
         <div class="col-md-7">
             <%--recentshare--%>
             <div class="panel panel-default">
@@ -49,9 +64,9 @@
     </div>
 </div>
 <script>
-    $("a.navbar-brand").click(function(){
-        $(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");
-    });
+    %{--$("a.navbar-brand").click(function(){--}%
+        %{--$(this).attr('href',"${createLink(controller:'login',action: 'login',absolute: true)}");--}%
+    %{--});--}%
 </script>
 </body>
 </html>
